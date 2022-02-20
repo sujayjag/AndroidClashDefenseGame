@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfigScreen">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/clash_background" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingTop="20pt"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/configuration"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:fontFamily="@font/you_blockhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="35dp"
+            android:textColor="#000000"
+            android:text="Configuration" />
+
+        <TextView
+            android:id="@+id/warningMessage"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textColor="#D0342C"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="" />
+
+
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="300dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Name"
+            android:textColorHint="#282828"
+            android:textSize="15dp"
+            android:fontFamily="@font/you_blockhead"
+            android:inputType="textPersonName" />
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="220dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/difficulty"
+                android:layout_width="194dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#C8C8C8"
+                android:fontFamily="@font/you_blockhead"
+                android:text="Difficulty: " />
+
+            <Spinner
+                android:id="@+id/difficultyInput"
+                android:layout_width="135dp"
+                android:gravity="center"
+                android:layout_height="wrap_content" />
+            <Space
+                android:layout_width="180dp"
+                android:layout_height="1dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="200dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/you_blockhead"
+            android:background="@drawable/rounded_rectangle"
+            android:text="Submit" />
+    </LinearLayout>
+</RelativeLayout>
