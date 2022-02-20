@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,11 @@ public class ConfigScreen extends AppCompatActivity {
 
     public void openGameScreen(){
         Intent intent = new Intent(this, GameScreen.class);
+        intent.putExtra("difficulty", getDifficulty());
         startActivity(intent);
+    }
+
+    public String getDifficulty() {
+        return difficulty.getSelectedItem().toString();
     }
 }
