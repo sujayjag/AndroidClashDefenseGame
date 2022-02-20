@@ -49,10 +49,10 @@ public class ConfigScreen extends AppCompatActivity {
             public void onClick(View v) {
                 String selected = difficulty.getSelectedItem().toString();
                 String nameInputted = text.getText().toString();
-                if (nameInputted != null && !nameInputted.trim().isEmpty()){
-                    openGameScreen();
-                } else {
+                if (nameInputted.trim().isEmpty()){
                     warning.setText("Please Enter a Valid Name!");
+                } else {
+                    openGameScreen();
                 }
             }
         });
