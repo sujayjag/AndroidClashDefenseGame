@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,25 +50,21 @@ public class ConfigScreen extends AppCompatActivity {
             public void onClick(View v) {
                 String selected = difficulty.getSelectedItem().toString();
                 String nameInputted = text.getText().toString();
-                if (nameInputted.trim().isEmpty()){
+                if (nameInputted.trim().isEmpty()) {
                     warning.setText("Please Enter a Valid Name!");
                 } else {
-                    openGameScreen();
+                    if (selected.equals("Easy")) {
+                        openEasyScreen();
+                    } else if (selected.equals("Medium")) {
+                        openMediumScreen();
+                    } else {
+                        openHardScreen();
+                    }
                 }
             }
         });
     }
 
-<<<<<<< Updated upstream
-    public void openGameScreen(){
-        Intent intent = new Intent(this, GameScreen.class);
-        intent.putExtra("difficulty", getDifficulty());
-        startActivity(intent);
-    }
-
-    public String getDifficulty() {
-        return difficulty.getSelectedItem().toString();
-=======
     public void openEasyScreen() {
         Intent intent1 = new Intent(this, EasyScreen.class);
         startActivity(intent1);
@@ -83,6 +78,5 @@ public class ConfigScreen extends AppCompatActivity {
     public void openHardScreen() {
         Intent intent3 = new Intent(this, HardScreen.class);
         startActivity(intent3);
->>>>>>> Stashed changes
     }
 }
