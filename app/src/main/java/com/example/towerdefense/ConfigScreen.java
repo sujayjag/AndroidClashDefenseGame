@@ -1,7 +1,5 @@
 package com.example.towerdefense;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,36 +30,53 @@ public class ConfigScreen extends AppCompatActivity {
         );
         setContentView(R.layout.activity_config_screen);
 
-        submit = (Button) findViewById(R.id.submitButton);
-        difficulty = (Spinner) findViewById(R.id.difficultyInput);
+        submit = findViewById(R.id.submitButton);
+        difficulty = findViewById(R.id.difficultyInput);
         List<String> spinnerArray = new ArrayList<>();
         spinnerArray.add("Easy");
         spinnerArray.add("Medium");
         spinnerArray.add("Hard");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, spinnerArray);
         difficulty.setAdapter(adapter);
 
-        EditText text = (EditText)findViewById(R.id.nameInput);
+        EditText text = findViewById(R.id.nameInput);
 
-        TextView warning = (TextView)findViewById(R.id.warningMessage);
+        TextView warning = findViewById(R.id.warningMessage);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String selected = difficulty.getSelectedItem().toString();
                 String nameInputted = text.getText().toString();
-                if (nameInputted != null && !nameInputted.trim().isEmpty()){
-                    openGameScreen();
-                } else {
+                if (nameInputted.trim().isEmpty()) {
                     warning.setText("Please Enter a Valid Name!");
+                } else {
+                    if (selected.equals("Easy")) {
+                        openEasyScreen();
+                    } else if (selected.equals("Medium")) {
+                        openMediumScreen();
+                    } else {
+                        openHardScreen();
+                    }
                 }
             }
         });
     }
 
-    public void openGameScreen(){
-        Intent intent = new Intent(this, GameScreen.class);
-        startActivity(intent);
+    public void openEasyScreen() {
+        Intent intent1 = new Intent(this, EasyScreen.class);
+        startActivity(intent1);
+    }
+
+    public void openMediumScreen() {
+        Intent intent2 = new Intent(this, MediumScreen.class);
+        startActivity(intent2);
+    }
+
+    public void openHardScreen() {
+        Intent intent3 = new Intent(this, HardScreen.class);
+        startActivity(intent3);
     }
 }

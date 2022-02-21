@@ -1,14 +1,13 @@
 package com.example.towerdefense;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private Button start;
@@ -24,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
         );
         setContentView(R.layout.activity_main);
 
-        start = (Button) findViewById(R.id.button2);
-        start.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        start = findViewById(R.id.button2);
+        start.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 openConfigScreen();
             }
         });
-        quit = (Button) findViewById(R.id.button);
+        quit = findViewById(R.id.button);
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
