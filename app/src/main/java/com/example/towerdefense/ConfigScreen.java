@@ -49,17 +49,31 @@ public class ConfigScreen extends AppCompatActivity {
             public void onClick(View v) {
                 String selected = difficulty.getSelectedItem().toString();
                 String nameInputted = text.getText().toString();
-                if (nameInputted != null && !nameInputted.trim().isEmpty()){
-                    openGameScreen();
-                } else {
+                if (nameInputted.trim().isEmpty()) {
                     warning.setText("Please Enter a Valid Name!");
+                } else {
+                    if (selected.equals("Easy")) {
+                        openEasyScreen();
+                    } else if (selected.equals("Medium")) {
+                        openMediumScreen();
+                    } else {
+                        openHardScreen();
+                    }
                 }
             }
         });
     }
 
-    public void openGameScreen(){
-        Intent intent = new Intent(this, GameScreen.class);
-        startActivity(intent);
+    public void openEasyScreen(){
+        Intent intent1 = new Intent(this, EasyScreen.class);
+        startActivity(intent1);
+    }
+    public void openMediumScreen(){
+        Intent intent2 = new Intent(this, MediumScreen.class);
+        startActivity(intent2);
+    }
+    public void openHardScreen(){
+        Intent intent3 = new Intent(this, HardScreen.class);
+        startActivity(intent3);
     }
 }
