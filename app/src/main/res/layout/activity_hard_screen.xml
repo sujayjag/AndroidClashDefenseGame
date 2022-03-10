@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<<<<<<< Updated upstream
     <ImageView
         android:id="@+id/imageView5"
         android:scaleType="fitXY"
@@ -16,29 +17,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/hard" />
+=======
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#42AD0F"
+        android:orientation="horizontal">
+>>>>>>> Stashed changes
 
-    <TextView
-        android:id="@+id/money3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="29dp"
-        android:text="Money:"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="599dp"
+            android:layout_height="fill_parent"
+            app:srcCompat="@drawable/hard" />
 
-    <TextView
-        android:id="@+id/health3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginBottom="25dp"
-        android:text="Monument Health:"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:fontFamily="@font/you_blockhead"
+                android:id="@+id/health3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="20dp"
+                android:text="Monument Health:"
+                android:textSize="15sp" />
+
+            <TextView
+                android:fontFamily="@font/you_blockhead"
+                android:id="@+id/money3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="10dp"
+                android:text="Money:"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

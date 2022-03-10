@@ -25,4 +25,6 @@ public class EasyScreen extends AppCompatActivity {
         money.setText("Money: $500");
         health.setText("Monument Health: 100");
     }
+
+
 }
