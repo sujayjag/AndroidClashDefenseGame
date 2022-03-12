@@ -186,6 +186,7 @@ public class HardScreen extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Insufficient Funds to Buy Tower", Toast.LENGTH_LONG).show();
     }
 
+    //comment
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);
     }
