@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -157,7 +158,7 @@ public class HardScreen extends AppCompatActivity {
     }
 
     private void insufficientFunds () {
-        //create insufficient funds dialog
+        Toast.makeText(getApplicationContext(), "Insufficient Funds to Buy Tower", Toast.LENGTH_LONG).show();
     }
 }
 
