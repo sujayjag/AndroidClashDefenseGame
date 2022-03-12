@@ -78,6 +78,7 @@ public class HardScreen extends AppCompatActivity {
             public void onClick(View v) {
                 if (Shop.buyTower(cannon1Object, player)) {
                     placement(R.drawable.cannon1new);
+                    updateMoney(player.balance);
                 } else {
                     insufficientFunds();
                 }
@@ -88,6 +89,7 @@ public class HardScreen extends AppCompatActivity {
             public void onClick(View v) {
                 if (Shop.buyTower(cannon2Object, player)) {
                     placement(R.drawable.cannon2new);
+                    updateMoney(player.balance);
                 } else {
                     insufficientFunds();
                 }
@@ -99,6 +101,7 @@ public class HardScreen extends AppCompatActivity {
             public void onClick(View v) {
                 if (Shop.buyTower(cannon3Object, player)) {
                     placement(R.drawable.cannon3new);
+                    updateMoney(player.balance);
                 } else {
                     insufficientFunds();
                 }
@@ -159,5 +162,11 @@ public class HardScreen extends AppCompatActivity {
     private void insufficientFunds () {
         //create insufficient funds dialog
     }
+
+    private void updateMoney(int mon) {
+        money.setText("Money: " + mon);
+    }
+
+
 }
 
