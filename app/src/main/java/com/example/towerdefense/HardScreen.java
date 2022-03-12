@@ -23,10 +23,12 @@ public class HardScreen extends AppCompatActivity {
     private ImageButton place1ImageButton;
     private ImageButton place2ImageButton;
     private ImageButton place3ImageButton;
+    private Button cancelButton;
     private ArrayList<Place> places;
     private Place place1;
     private Place place2;
     private Place place3;
+    private Tower cannonSelected;
 
 
     @Override
@@ -54,6 +56,9 @@ public class HardScreen extends AppCompatActivity {
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
         cannon3 = (ImageButton) findViewById(R.id.cannon3);
 
+        cancelButton = (Button) findViewById(R.id.cancel);
+        cancelButton.setVisibility(View.GONE);
+
         Cannon1 cannon1Object = new Cannon1(player, cannon1);
         Cannon2 cannon2Object = new Cannon2(player, cannon2);
         Cannon3 cannon3Object = new Cannon3(player, cannon3);
@@ -79,6 +84,7 @@ public class HardScreen extends AppCompatActivity {
                 if (Shop.buyTower(cannon1Object, player)) {
                     placement(R.drawable.cannon1new);
                     updateMoney(player.balance);
+                    cannonSelected = cannon1Object;
                 } else {
                     insufficientFunds();
                 }
@@ -90,6 +96,7 @@ public class HardScreen extends AppCompatActivity {
                 if (Shop.buyTower(cannon2Object, player)) {
                     placement(R.drawable.cannon2new);
                     updateMoney(player.balance);
+                    cannonSelected = cannon2Object;
                 } else {
                     insufficientFunds();
                 }
@@ -102,6 +109,7 @@ public class HardScreen extends AppCompatActivity {
                 if (Shop.buyTower(cannon3Object, player)) {
                     placement(R.drawable.cannon3new);
                     updateMoney(player.balance);
+                    cannonSelected = cannon3Object;
                 } else {
                     insufficientFunds();
                 }
@@ -109,6 +117,15 @@ public class HardScreen extends AppCompatActivity {
         });
 
 
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cannonSelected != null) {
+                    player.balance += cannonSelected.cost;
+                    visibilityOff();
+                }
+            }
+        });
     }
 
     public void placement (int imgRes){
@@ -118,6 +135,7 @@ public class HardScreen extends AppCompatActivity {
                 b.visible = true;
             }
         }
+        cancelButton.setVisibility(View.VISIBLE);
 
         place1ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +175,7 @@ public class HardScreen extends AppCompatActivity {
 
     private void placeTower (ImageButton button, int imgRes){
         button.setImageResource(imgRes);
+        cancelButton.setVisibility(View.GONE);
     }
 
     private void insufficientFunds () {
