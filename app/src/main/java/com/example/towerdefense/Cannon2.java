@@ -1,9 +1,13 @@
 package com.example.towerdefense;
 
+import android.media.Image;
+import android.widget.ImageButton;
+
 public class Cannon2 extends Tower {
     public Player player;
-    public Cannon2(Player player) {
+    public Cannon2(Player player, ImageButton button) {
         this.player = player;
+        this.button = button;
         int cost = 75;
         double upgradeMultiplier = 1;
 

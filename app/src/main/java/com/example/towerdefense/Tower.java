@@ -1,5 +1,8 @@
 package com.example.towerdefense;
 
+import android.media.Image;
+import android.widget.ImageButton;
+
 public abstract class Tower {
     public int cost;
     public int level;
@@ -8,6 +11,7 @@ public abstract class Tower {
     public int attackDamage;
     public String location;
     public String imageString;
+    public ImageButton button;
 
     public Tower(int cost, int level, double upgradeMultiplier, int attackSpeed, int attackDamage, String location, String imageString) {
         this.cost = cost;

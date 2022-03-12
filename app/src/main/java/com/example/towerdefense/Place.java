@@ -12,5 +12,6 @@ public class Place {
     Place(ImageButton place) {
         this.place = place;
         visible = false;
+        place.setVisibility(View.GONE);
     }
 }
