@@ -30,7 +30,10 @@ public class HardScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        String nameInputted = getIntent().getStringExtra("nameInputted");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -41,6 +44,8 @@ public class HardScreen extends AppCompatActivity {
         health = findViewById(R.id.health3);
         money.setText("Money: $1000");
         health.setText("Monument Health: 80");
+
+        Player player = new Player("hard", nameInputted);
 
         ImageButton cannon1place1 = (ImageButton) findViewById(R.id.cannon1place1);
         ImageButton cannon2place1 = (ImageButton) findViewById(R.id.cannon2place1);
