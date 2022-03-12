@@ -25,6 +25,9 @@ public class HardScreen extends AppCompatActivity {
     private ImageButton place2ImageButton;
     private ImageButton place3ImageButton;
     private ArrayList<Place> places;
+    private Place place1;
+    private Place place2;
+    private Place place3;
 
 
     @Override
@@ -52,14 +55,19 @@ public class HardScreen extends AppCompatActivity {
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
         cannon3 = (ImageButton) findViewById(R.id.cannon3);
 
+        Cannon1 cannon1Object = new Cannon1(player, cannon1);
+        Cannon2 cannon2Object = new Cannon2(player, cannon2);
+        Cannon3 cannon3Object = new Cannon3(player, cannon3);
+
         place1ImageButton = (ImageButton) findViewById(R.id.place1);
         place2ImageButton = (ImageButton) findViewById(R.id.place2);
         place3ImageButton = (ImageButton) findViewById(R.id.place3);
 
-        Place place1 = new Place(place1ImageButton);
-        Place place2 = new Place(place2ImageButton);
-        Place place3 = new Place(place3ImageButton);
+        place1 = new Place(place1ImageButton);
+        place2 = new Place(place2ImageButton);
+        place3 = new Place(place3ImageButton);
 
+        places = new ArrayList<>();
         places.add(place1);
         places.add(place2);
         places.add(place3);
@@ -69,7 +77,7 @@ public class HardScreen extends AppCompatActivity {
         //change later
         cannon1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (Shop.buyTower(cannon1, player)) {
+                if (Shop.buyTower(cannon1Object, player)) {
                     placement(R.drawable.cannon1new);
                 } else {
                     insufficientFunds();
@@ -79,7 +87,7 @@ public class HardScreen extends AppCompatActivity {
 
         cannon2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (Shop.buyTower(cannon2, player)) {
+                if (Shop.buyTower(cannon2Object, player)) {
                     placement(R.drawable.cannon2new);
                 } else {
                     insufficientFunds();
@@ -90,7 +98,7 @@ public class HardScreen extends AppCompatActivity {
 
         cannon3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (Shop.buyTower(cannon3, player)) {
+                if (Shop.buyTower(cannon3Object, player)) {
                     placement(R.drawable.cannon3new);
                 } else {
                     insufficientFunds();
@@ -112,6 +120,7 @@ public class HardScreen extends AppCompatActivity {
         place1ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                places.remove(place1);
                 visibilityOff();
                 placeTower(place1ImageButton, imgRes);
             }
@@ -120,6 +129,7 @@ public class HardScreen extends AppCompatActivity {
         place2ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                places.remove(place2);
                 visibilityOff();
                 placeTower(place2ImageButton, imgRes);
             }
@@ -128,6 +138,7 @@ public class HardScreen extends AppCompatActivity {
         place3ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                places.remove(place3);
                 visibilityOff();
                 placeTower(place3ImageButton, imgRes);
             }
