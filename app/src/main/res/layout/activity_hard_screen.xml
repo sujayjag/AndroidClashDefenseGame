@@ -82,132 +82,29 @@
 
         </LinearLayout>
 
-        <Button
+        <ImageButton
             android:id="@+id/place1"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="10dp"
-            android:text="Place"
             android:layout_weight="1" />
 
-
         <ImageButton
-            android:id="@+id/cannon1place1"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/cannon1new" />
-
-        <ImageButton
-            android:id="@+id/cannon2place1"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/cannon2new" />
-
-        <ImageButton
-            android:id="@+id/cannon3place1"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/cannon3new" />
-
-        <Button
             android:id="@+id/place2"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginLeft="300dp"
             android:layout_marginTop="230dp"
-            android:text="Place"
             android:layout_weight="1" />
 
         <ImageButton
-            android:id="@+id/cannon1place2"
-            android:layout_marginTop="230dp"
-            android:layout_marginLeft="300dp"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/cannon1new" />
-
-        <ImageButton
-            android:id="@+id/cannon2place2"
-            android:layout_marginTop="230dp"
-            android:layout_marginLeft="300dp"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/cannon2new" />
-
-        <ImageButton
-            android:id="@+id/cannon3place2"
-            android:layout_marginTop="230dp"
-            android:layout_marginLeft="300dp"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/cannon3new" />
-
-        <Button
             android:id="@+id/place3"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginTop="100dp"
             android:layout_marginLeft="150dp"
-            android:text="Place"
             android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/cannon1place3"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="150dp"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/cannon1new" />
-
-        <ImageButton
-            android:id="@+id/cannon2place3"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="150dp"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/cannon2new" />
-
-        <ImageButton
-            android:id="@+id/cannon3place3"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="150dp"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/cannon3new" />
 
     </RelativeLayout>
 
