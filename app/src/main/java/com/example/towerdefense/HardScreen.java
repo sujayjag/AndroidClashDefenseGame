@@ -30,6 +30,7 @@ public class HardScreen extends AppCompatActivity {
     private Place place2;
     private Place place3;
     private Tower cannonSelected;
+    private Player player;
 
 
     @Override
@@ -48,7 +49,7 @@ public class HardScreen extends AppCompatActivity {
         health = findViewById(R.id.health3);
 
 
-        Player player = new Player("hard", nameInputted);
+        player = new Player("hard", nameInputted);
 
         money.setText("Money: " +  player.balance);
         health.setText("Monument Health: 80");
@@ -122,9 +123,9 @@ public class HardScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (cannonSelected != null) {
-                    player.balance += cannonSelected.cost;
                     visibilityOff();
                 }
+                cancelButton.setVisibility(View.GONE);
             }
         });
     }
@@ -177,6 +178,8 @@ public class HardScreen extends AppCompatActivity {
     private void placeTower (ImageButton button, int imgRes){
         button.setImageResource(imgRes);
         cancelButton.setVisibility(View.GONE);
+        player.updateBalance(-1*cannonSelected.cost);
+        updateMoney(player.balance);
     }
 
     private void insufficientFunds () {
