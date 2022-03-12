@@ -22,7 +22,7 @@
                 app:srcCompat="@drawable/hard" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="128dp"
                 android:layout_height="match_parent"
                 android:background="#FFFFFF"
                 android:orientation="vertical">
@@ -36,7 +36,7 @@
                     android:layout_marginTop="25dp"
                     android:layout_marginBottom="20dp"
                     android:fontFamily="@font/you_blockhead"
-                    android:text="Monument Health:"
+                    android:text="Health: "
                     android:textSize="15sp" />
 
                 <TextView

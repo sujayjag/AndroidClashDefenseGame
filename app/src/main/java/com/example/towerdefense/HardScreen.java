@@ -52,7 +52,7 @@ public class HardScreen extends AppCompatActivity {
         player = new Player("hard", nameInputted);
 
         money.setText("Money: " +  player.balance);
-        health.setText("Monument Health: 80");
+        health.setText("Health: 80");
 
         cannon1 = (ImageButton) findViewById(R.id.cannon1);
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
