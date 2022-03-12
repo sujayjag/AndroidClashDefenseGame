@@ -23,7 +23,7 @@ public class EasyScreen extends AppCompatActivity {
         money = findViewById(R.id.money1);
         health = findViewById(R.id.health1);
         money.setText("Money: $500");
-        health.setText("Monument Health: 100");
+        health.setText("Health: 100");
         String nameInputted = getIntent().getStringExtra("nameInputted");
 
         Player player = new Player("easy", nameInputted);

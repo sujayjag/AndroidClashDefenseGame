@@ -23,7 +23,7 @@ public class MediumScreen extends AppCompatActivity {
         money = findViewById(R.id.money2);
         health = findViewById(R.id.health2);
         money.setText("Money: $750");
-        health.setText("Monument Health: 90");
+        health.setText("Health: 90");
         String nameInputted = getIntent().getStringExtra("nameInputted");
 
         Player player = new Player("medium", nameInputted);

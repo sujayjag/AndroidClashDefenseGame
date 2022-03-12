@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,10 +80,12 @@ public class HardScreen extends AppCompatActivity {
         places.add(place3);
 
 
-        //cannon1 in buyTower and placement refers to cannon1 class, not cannon1 imagebutton
-        //change later
         cannon1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (places.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "All Places are Filled", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (Shop.buyTower(cannon1Object, player)) {
                     placement(R.drawable.cannon1new);
                     updateMoney(player.balance);
@@ -95,6 +98,10 @@ public class HardScreen extends AppCompatActivity {
 
         cannon2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (places.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "All Places are Filled", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (Shop.buyTower(cannon2Object, player)) {
                     placement(R.drawable.cannon2new);
                     updateMoney(player.balance);
@@ -108,6 +115,10 @@ public class HardScreen extends AppCompatActivity {
 
         cannon3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (places.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "All Places are Filled", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (Shop.buyTower(cannon3Object, player)) {
                     placement(R.drawable.cannon3new);
                     updateMoney(player.balance);
@@ -131,6 +142,7 @@ public class HardScreen extends AppCompatActivity {
     }
 
     public void placement (int imgRes){
+        Toast.makeText(getApplicationContext(), "Select Location", Toast.LENGTH_SHORT).show();
         for (Place b : places) {
             if (!b.visible) {
                 b.place.setVisibility(View.VISIBLE);
@@ -177,6 +189,7 @@ public class HardScreen extends AppCompatActivity {
 
     private void placeTower (ImageButton button, int imgRes){
         button.setImageResource(imgRes);
+        button.setScaleType(ImageView.ScaleType.FIT_START);
         cancelButton.setVisibility(View.GONE);
         player.updateBalance(-1*cannonSelected.cost);
         updateMoney(player.balance);
