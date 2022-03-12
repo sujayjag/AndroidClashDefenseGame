@@ -26,6 +26,6 @@ public class Cannon2 extends Tower {
         this.attackSpeed = 7;
         this.attackDamage = 5;
         this.location = "";
-        this.imageString = "../../../../res/drawable/Cannon2new.jpg";
+        this.imageString = "../../../../res/drawable/cannon2new.jpg";
     }
 }
