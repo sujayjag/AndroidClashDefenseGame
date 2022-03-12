@@ -17,5 +17,9 @@ public class Player {
         }
     }
 
+    public void updateBalance(int balance) {
+        this.balance += balance;
+    }
+
 
 }
