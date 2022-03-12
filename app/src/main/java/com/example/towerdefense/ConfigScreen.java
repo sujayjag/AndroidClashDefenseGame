@@ -54,32 +54,29 @@ public class ConfigScreen extends AppCompatActivity {
                     warning.setText("Please Enter a Valid Name!");
                 } else {
                     if (selected.equals("Easy")) {
-                        openEasyScreen(nameInputted);
+                        openEasyScreen();
                     } else if (selected.equals("Medium")) {
-                        openMediumScreen(nameInputted);
+                        openMediumScreen();
                     } else {
-                        openHardScreen(nameInputted);
+                        openHardScreen();
                     }
                 }
             }
         });
     }
 
-    public void openEasyScreen(String nameInputted) {
+    public void openEasyScreen() {
         Intent intent1 = new Intent(this, EasyScreen.class);
-        intent1.putExtra("nameInputted", nameInputted);
         startActivity(intent1);
     }
 
-    public void openMediumScreen(String nameInputted) {
+    public void openMediumScreen() {
         Intent intent2 = new Intent(this, MediumScreen.class);
-        intent2.putExtra("nameInputted", nameInputted);
         startActivity(intent2);
     }
 
-    public void openHardScreen(String nameInputted) {
+    public void openHardScreen() {
         Intent intent3 = new Intent(this, HardScreen.class);
-        intent3.putExtra("nameInputted", nameInputted);
         startActivity(intent3);
     }
 }
