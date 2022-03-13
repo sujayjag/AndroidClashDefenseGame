@@ -27,44 +27,44 @@ public class TestingM3 {
 
     @Test
     public void diffInitialBalance() {
-        assertTrue(getEasyPlayer().getBalance() != getMediumPlayer().getBalance() &&
-                getMediumPlayer().getBalance() != getHardPlayer().getBalance() &&
-                getEasyPlayer().getBalance() != getHardPlayer().getBalance());
+        assertTrue(getEasyPlayer().getBalance() != getMediumPlayer().getBalance()
+            && getMediumPlayer().getBalance() != getHardPlayer().getBalance()
+            && getEasyPlayer().getBalance() != getHardPlayer().getBalance());
     }
 
     @Test
     public void diffMonumentHealth() {
-        assertTrue(getEasyPlayer().getMonumentHealth() != getMediumPlayer().getMonumentHealth() &&
-                getMediumPlayer().getMonumentHealth() != getHardPlayer().getMonumentHealth() &&
-                getEasyPlayer().getMonumentHealth() != getHardPlayer().getMonumentHealth());
+        assertTrue(getEasyPlayer().getMonumentHealth() != getMediumPlayer().getMonumentHealth()
+            && getMediumPlayer().getMonumentHealth() != getHardPlayer().getMonumentHealth()
+            && getEasyPlayer().getMonumentHealth() != getHardPlayer().getMonumentHealth());
     }
 
     @Test
     public void diffDifficulty() {
         assertTrue(getEasyPlayer().getDifficulty() != getMediumPlayer().getDifficulty()
-                && getMediumPlayer().getDifficulty() != getHardPlayer().getDifficulty()
-                && getEasyPlayer().getDifficulty() != getHardPlayer().getDifficulty());
+            && getMediumPlayer().getDifficulty() != getHardPlayer().getDifficulty()
+            && getEasyPlayer().getDifficulty() != getHardPlayer().getDifficulty());
     }
 
     @Test
     public void diffCannon1InitialCosts() {
         assertTrue(getEasyCannon1().getCost() != getMediumCannon1().getCost()
-                && getEasyCannon1().getCost() != getHardCannon1().getCost()
-                && getMediumCannon1().getCost() != getHardCannon1().getCost());
+            && getEasyCannon1().getCost() != getHardCannon1().getCost()
+            && getMediumCannon1().getCost() != getHardCannon1().getCost());
     }
 
     @Test
     public void diffCannon2InitialCosts() {
         assertTrue(getEasyCannon2().getCost() != getMediumCannon2().getCost()
-                && getEasyCannon2().getCost() != getHardCannon2().getCost()
-                && getMediumCannon2().getCost() != getHardCannon2().getCost());
+            && getEasyCannon2().getCost() != getHardCannon2().getCost()
+            && getMediumCannon2().getCost() != getHardCannon2().getCost());
     }
 
     @Test
     public void diffCannon3InitialCosts() {
         assertTrue(getEasyCannon3().getCost() != getMediumCannon3().getCost()
-                && getEasyCannon3().getCost() != getHardCannon3().getCost()
-                && getMediumCannon3().getCost() != getHardCannon3().getCost());
+            && getEasyCannon3().getCost() != getHardCannon3().getCost()
+            && getMediumCannon3().getCost() != getHardCannon3().getCost());
     }
 
     @Test
@@ -79,41 +79,67 @@ public class TestingM3 {
 
     @Test
     public void diffCannonsUpgradeMultipliers() {
-        assertTrue(getEasyCannon1().getUpgradeMultiplier() != getMediumCannon1().getUpgradeMultiplier() &&
-                getEasyCannon1().getUpgradeMultiplier() != getHardCannon1().getUpgradeMultiplier() &&
-                getMediumCannon1().getUpgradeMultiplier() != getHardCannon1().getUpgradeMultiplier() &&
-                getEasyCannon2().getUpgradeMultiplier() != getMediumCannon2().getUpgradeMultiplier() &&
-                getEasyCannon2().getUpgradeMultiplier() != getHardCannon2().getUpgradeMultiplier() &&
-                getMediumCannon2().getUpgradeMultiplier() != getHardCannon2().getUpgradeMultiplier() &&
-                getEasyCannon3().getUpgradeMultiplier() != getMediumCannon3().getUpgradeMultiplier() &&
-                getEasyCannon3().getUpgradeMultiplier() != getHardCannon3().getUpgradeMultiplier() &&
-                getMediumCannon3().getUpgradeMultiplier() != getHardCannon3().getUpgradeMultiplier());
+        assertTrue(
+            getEasyCannon1().getUpgradeMultiplier() != getMediumCannon1().getUpgradeMultiplier()
+                && getEasyCannon1().getUpgradeMultiplier()
+                != getHardCannon1().getUpgradeMultiplier()
+                && getMediumCannon1().getUpgradeMultiplier()
+                != getHardCannon1().getUpgradeMultiplier()
+                && getEasyCannon2().getUpgradeMultiplier()
+                != getMediumCannon2().getUpgradeMultiplier()
+                && getEasyCannon2().getUpgradeMultiplier()
+                != getHardCannon2().getUpgradeMultiplier()
+                && getMediumCannon2().getUpgradeMultiplier()
+                != getHardCannon2().getUpgradeMultiplier()
+                && getEasyCannon3().getUpgradeMultiplier()
+                != getMediumCannon3().getUpgradeMultiplier()
+                && getEasyCannon3().getUpgradeMultiplier()
+                != getHardCannon3().getUpgradeMultiplier()
+                && getMediumCannon3().getUpgradeMultiplier()
+                != getHardCannon3().getUpgradeMultiplier());
     }
 
     @Test
     public void diffCannonsAttackSpeeds() {
-        assertTrue(getEasyCannon1().getAttackSpeed() != getEasyCannon2().getAttackSpeed() &&
-                getEasyCannon1().getAttackSpeed() != getEasyCannon3().getAttackSpeed() &&
-                getEasyCannon2().getAttackSpeed() != getEasyCannon3().getAttackSpeed() &&
-                getMediumCannon1().getAttackSpeed() != getMediumCannon2().getAttackSpeed() &&
-                getMediumCannon1().getAttackSpeed() != getMediumCannon3().getAttackSpeed() &&
-                getMediumCannon2().getAttackSpeed() != getMediumCannon3().getAttackSpeed() &&
-                getHardCannon1().getAttackSpeed() != getHardCannon2().getAttackSpeed() &&
-                getHardCannon1().getAttackSpeed() != getHardCannon3().getAttackSpeed() &&
-                getHardCannon2().getAttackSpeed() != getHardCannon3().getAttackSpeed());
+        assertTrue(getEasyCannon1().getAttackSpeed() != getEasyCannon2().getAttackSpeed()
+            && getEasyCannon1().getAttackSpeed()
+            != getEasyCannon3().getAttackSpeed()
+            && getEasyCannon2().getAttackSpeed()
+            != getEasyCannon3().getAttackSpeed()
+            && getMediumCannon1().getAttackSpeed()
+            != getMediumCannon2().getAttackSpeed()
+            && getMediumCannon1().getAttackSpeed()
+            != getMediumCannon3().getAttackSpeed()
+            && getMediumCannon2().getAttackSpeed()
+            != getMediumCannon3().getAttackSpeed()
+            && getHardCannon1().getAttackSpeed()
+            != getHardCannon2().getAttackSpeed()
+            && getHardCannon1().getAttackSpeed()
+            != getHardCannon3().getAttackSpeed()
+            && getHardCannon2().getAttackSpeed()
+            != getHardCannon3().getAttackSpeed());
     }
 
     @Test
     public void diffCannonsAttackDamage() {
-        assertTrue(getEasyCannon1().getAttackDamage() != getEasyCannon2().getAttackDamage() &&
-                getEasyCannon1().getAttackDamage() != getEasyCannon3().getAttackDamage() &&
-                getEasyCannon2().getAttackDamage() != getEasyCannon3().getAttackDamage() &&
-                getMediumCannon1().getAttackDamage() != getMediumCannon2().getAttackDamage() &&
-                getMediumCannon1().getAttackDamage() != getMediumCannon3().getAttackDamage() &&
-                getMediumCannon2().getAttackDamage() != getMediumCannon3().getAttackDamage() &&
-                getHardCannon1().getAttackDamage() != getHardCannon2().getAttackDamage() &&
-                getHardCannon1().getAttackDamage() != getHardCannon3().getAttackDamage() &&
-                getHardCannon2().getAttackDamage() != getHardCannon3().getAttackDamage());
+        assertTrue(getEasyCannon1().getAttackDamage()
+            != getEasyCannon2().getAttackDamage()
+            && getEasyCannon1().getAttackDamage()
+            != getEasyCannon3().getAttackDamage()
+            && getEasyCannon2().getAttackDamage()
+            != getEasyCannon3().getAttackDamage()
+            && getMediumCannon1().getAttackDamage()
+            != getMediumCannon2().getAttackDamage()
+            && getMediumCannon1().getAttackDamage()
+            != getMediumCannon3().getAttackDamage()
+            && getMediumCannon2().getAttackDamage()
+            != getMediumCannon3().getAttackDamage()
+            && getHardCannon1().getAttackDamage()
+            != getHardCannon2().getAttackDamage()
+            && getHardCannon1().getAttackDamage()
+            != getHardCannon3().getAttackDamage()
+            && getHardCannon2().getAttackDamage()
+            != getHardCannon3().getAttackDamage());
     }
 
     public Player getEasyPlayer() {
