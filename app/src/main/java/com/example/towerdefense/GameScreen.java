@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class HardScreen extends AppCompatActivity {
+public class GameScreen extends AppCompatActivity {
     private TextView money;
     private TextView health;
     private ImageButton cannon1;
