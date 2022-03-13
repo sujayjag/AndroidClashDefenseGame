@@ -1,5 +1,6 @@
 package com.example.towerdefense;
 
+import android.graphics.Color;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
@@ -87,7 +88,7 @@ public class HardScreen extends AppCompatActivity {
                     return;
                 }
                 if (Shop.buyTower(cannon1Object, player)) {
-                    placement(R.drawable.cannon1new);
+                    placement(R.drawable.cannon1newnew);
                     updateMoney(player.balance);
                     cannonSelected = cannon1Object;
                 } else {
@@ -103,7 +104,7 @@ public class HardScreen extends AppCompatActivity {
                     return;
                 }
                 if (Shop.buyTower(cannon2Object, player)) {
-                    placement(R.drawable.cannon2new);
+                    placement(R.drawable.cannon2newnew);
                     updateMoney(player.balance);
                     cannonSelected = cannon2Object;
                 } else {
@@ -188,6 +189,7 @@ public class HardScreen extends AppCompatActivity {
     }
 
     private void placeTower (ImageButton button, int imgRes){
+        button.setBackgroundColor(Color.TRANSPARENT);
         button.setImageResource(imgRes);
         button.setScaleType(ImageView.ScaleType.FIT_START);
         cancelButton.setVisibility(View.GONE);
@@ -199,7 +201,6 @@ public class HardScreen extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Insufficient Funds to Buy Tower", Toast.LENGTH_LONG).show();
     }
 
-    //comment
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);
     }
