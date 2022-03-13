@@ -1,5 +1,6 @@
 package com.example.towerdefense;
 
+import android.graphics.Color;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +34,6 @@ public class HardScreen extends AppCompatActivity {
     private Tower cannonSelected;
     private Player player;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,11 +49,10 @@ public class HardScreen extends AppCompatActivity {
         money = findViewById(R.id.money3);
         health = findViewById(R.id.health3);
 
-
         player = new Player("hard", nameInputted);
 
         money.setText("Money: " +  player.balance);
-        health.setText("Monument Health: 80");
+        health.setText("Health: " + player.monumentHealth);
 
         cannon1 = (ImageButton) findViewById(R.id.cannon1);
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
@@ -79,21 +79,16 @@ public class HardScreen extends AppCompatActivity {
         places.add(place3);
 
 
-
-
-        //cannon1 in buyTower and placement refers to cannon1 class, not cannon1 imagebutton
-        //change later
         cannon1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (places.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "All Places are Filled", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (Shop.buyTower(cannon1Object, player)) {
-                    try {
-                        placement(R.drawable.cannon1new);
-                        updateMoney(player.balance);
-                        cannonSelected = cannon1Object;
-                    } catch (Exception e) {
-                        towerAlreadyExists();
-                    }
-
+                    placement(R.drawable.cannon1newnew);
+                    updateMoney(player.balance);
+                    cannonSelected = cannon1Object;
                 } else {
                     insufficientFunds();
                 }
@@ -102,14 +97,14 @@ public class HardScreen extends AppCompatActivity {
 
         cannon2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (places.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "All Places are Filled", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (Shop.buyTower(cannon2Object, player)) {
-                    try {
-                        placement(R.drawable.cannon2new);
-                        updateMoney(player.balance);
-                        cannonSelected = cannon2Object;
-                    } catch (Exception e) {
-                        towerAlreadyExists();
-                    }
+                    placement(R.drawable.cannon2newnew);
+                    updateMoney(player.balance);
+                    cannonSelected = cannon2Object;
                 } else {
                     insufficientFunds();
                 }
@@ -119,15 +114,14 @@ public class HardScreen extends AppCompatActivity {
 
         cannon3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (places.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "All Places are Filled", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (Shop.buyTower(cannon3Object, player)) {
-                    try {
-                        placement(R.drawable.cannon3new);
-                        updateMoney(player.balance);
-                        cannonSelected = cannon3Object;
-                    } catch (Exception e) {
-                        towerAlreadyExists();
-                    }
-
+                    placement(R.drawable.cannon3new);
+                    updateMoney(player.balance);
+                    cannonSelected = cannon3Object;
                 } else {
                     insufficientFunds();
                 }
@@ -147,6 +141,7 @@ public class HardScreen extends AppCompatActivity {
     }
 
     public void placement (int imgRes){
+        Toast.makeText(getApplicationContext(), "Select Location", Toast.LENGTH_SHORT).show();
         for (Place b : places) {
             if (!b.visible) {
                 b.place.setVisibility(View.VISIBLE);
@@ -181,6 +176,7 @@ public class HardScreen extends AppCompatActivity {
                 placeTower(place3ImageButton, imgRes);
             }
         });
+
     }
 
     private void visibilityOff () {
@@ -190,34 +186,23 @@ public class HardScreen extends AppCompatActivity {
         }
     }
 
-    private boolean placeTower (ImageButton button, int imgRes){
-        Integer resource = (Integer)button.getTag();
-        if(resource != null) {
-            towerAlreadyExists();
-            return false;
-        }
-        System.out.println(resource);
-        //Toast.makeText(getApplicationContext(), resource, Toast.LENGTH_LONG).show();
+    private void placeTower (ImageButton button, int imgRes){
+        button.setBackgroundColor(Color.TRANSPARENT);
         button.setImageResource(imgRes);
-        button.setTag(imgRes);
+        button.setScaleType(ImageView.ScaleType.FIT_START);
         cancelButton.setVisibility(View.GONE);
         player.updateBalance(-1*cannonSelected.cost);
         updateMoney(player.balance);
-        return true;
     }
 
     private void insufficientFunds () {
         Toast.makeText(getApplicationContext(), "Insufficient Funds to Buy Tower", Toast.LENGTH_LONG).show();
     }
 
-    private void towerAlreadyExists () {
-        Toast.makeText(getApplicationContext(), "Tower already exists in this place!", Toast.LENGTH_LONG).show();
-    }
-
-    //comment
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);
     }
+
 
 }
 

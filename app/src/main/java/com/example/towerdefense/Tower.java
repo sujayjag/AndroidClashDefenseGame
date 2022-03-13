@@ -1,6 +1,5 @@
 package com.example.towerdefense;
 
-import android.media.Image;
 import android.widget.ImageButton;
 
 public abstract class Tower {
