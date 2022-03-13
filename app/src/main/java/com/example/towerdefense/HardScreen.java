@@ -208,9 +208,10 @@ public class HardScreen extends AppCompatActivity {
             towerAlreadyExists();
             return false;
         }
-        System.out.println(resource);
-        //Toast.makeText(getApplicationContext(), resource, Toast.LENGTH_LONG).show();
+
+        button.setBackgroundColor(Color.TRANSPARENT);
         button.setImageResource(imgRes);
+        button.setScaleType(ImageView.ScaleType.FIT_START);
         button.setTag(imgRes);
         cancelButton.setVisibility(View.GONE);
         player.updateBalance(-1*cannonSelected.cost);
