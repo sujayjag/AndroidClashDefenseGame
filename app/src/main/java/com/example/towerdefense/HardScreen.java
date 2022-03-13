@@ -49,11 +49,10 @@ public class HardScreen extends AppCompatActivity {
         money = findViewById(R.id.money3);
         health = findViewById(R.id.health3);
 
-
         player = new Player("hard", nameInputted);
 
         money.setText("Money: " +  player.balance);
-        health.setText("Health: 80");
+        health.setText("Health: " + player.monumentHealth);
 
         cannon1 = (ImageButton) findViewById(R.id.cannon1);
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
