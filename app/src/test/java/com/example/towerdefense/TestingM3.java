@@ -1,129 +1,214 @@
 package com.example.towerdefense;
 
-import org.junit.Test;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.TextView;
+
+import org.junit.Test;
 
 public class TestingM3 {
 
-    Player easyPlayer = new Player("easy", "easy player");
-    Player mediumPlayer = new Player("medium", "medium player");
-    Player hardPlayer = new Player("hard", "hard player");
+    private Player easyPlayer = new Player("easy", "easy player");
+    private Player mediumPlayer = new Player("medium", "medium player");
+    private Player hardPlayer = new Player("hard", "hard player");
 
     private ImageButton imageButton1;
+    private Cannon1 easyCannon1 = new Cannon1(getEasyPlayer(), imageButton1);
+    private Cannon1 mediumCannon1 = new Cannon1(getMediumPlayer(), imageButton1);
+    private Cannon1 hardCannon1 = new Cannon1(getHardPlayer(), imageButton1);
     private ImageButton imageButton2;
+    private Cannon2 easyCannon2 = new Cannon2(getEasyPlayer(), imageButton2);
+    private Cannon2 mediumCannon2 = new Cannon2(getMediumPlayer(), imageButton2);
+    private Cannon2 hardCannon2 = new Cannon2(getHardPlayer(), imageButton2);
     private ImageButton imageButton3;
-
-    Cannon1 easyCannon1 = new Cannon1(easyPlayer, imageButton1);
-    Cannon1 mediumCannon1 = new Cannon1(mediumPlayer, imageButton1);
-    Cannon1 hardCannon1 = new Cannon1(hardPlayer, imageButton1);
-
-    Cannon2 easyCannon2 = new Cannon2(easyPlayer, imageButton2);
-    Cannon2 mediumCannon2 = new Cannon2(mediumPlayer, imageButton2);
-    Cannon2 hardCannon2 = new Cannon2(hardPlayer, imageButton2);
-
-    Cannon3 easyCannon3 = new Cannon3(easyPlayer, imageButton3);
-    Cannon3 mediumCannon3 = new Cannon3(mediumPlayer, imageButton3);
-    Cannon3 hardCannon3 = new Cannon3(hardPlayer, imageButton3);
+    private Cannon3 easyCannon3 = new Cannon3(getEasyPlayer(), imageButton3);
+    private Cannon3 mediumCannon3 = new Cannon3(getMediumPlayer(), imageButton3);
+    private Cannon3 hardCannon3 = new Cannon3(getHardPlayer(), imageButton3);
 
     @Test
     public void diffInitialBalance() {
-        assertTrue(easyPlayer.getBalance() != mediumPlayer.getBalance() &&
-                mediumPlayer.getBalance() != hardPlayer.getBalance() &&
-                easyPlayer.getBalance() != hardPlayer.getBalance());
+        assertTrue(getEasyPlayer().getBalance() != getMediumPlayer().getBalance() &&
+                getMediumPlayer().getBalance() != getHardPlayer().getBalance() &&
+                getEasyPlayer().getBalance() != getHardPlayer().getBalance());
     }
 
     @Test
     public void diffMonumentHealth() {
-        assertTrue(easyPlayer.getMonumentHealth() != mediumPlayer.getMonumentHealth() &&
-                mediumPlayer.getMonumentHealth() != hardPlayer.getMonumentHealth() &&
-                easyPlayer.getMonumentHealth() != hardPlayer.getMonumentHealth());
+        assertTrue(getEasyPlayer().getMonumentHealth() != getMediumPlayer().getMonumentHealth() &&
+                getMediumPlayer().getMonumentHealth() != getHardPlayer().getMonumentHealth() &&
+                getEasyPlayer().getMonumentHealth() != getHardPlayer().getMonumentHealth());
     }
 
     @Test
     public void diffDifficulty() {
-        assertTrue(easyPlayer.getDifficulty() != mediumPlayer.getDifficulty() &&
-                mediumPlayer.getDifficulty() != hardPlayer.getDifficulty() &&
-                easyPlayer.getDifficulty() != hardPlayer.getDifficulty());
+        assertTrue(getEasyPlayer().getDifficulty() != getMediumPlayer().getDifficulty()
+                && getMediumPlayer().getDifficulty() != getHardPlayer().getDifficulty()
+                && getEasyPlayer().getDifficulty() != getHardPlayer().getDifficulty());
     }
 
     @Test
     public void diffCannon1InitialCosts() {
-        assertTrue(easyCannon1.getCost() != mediumCannon1.getCost() &&
-                easyCannon1.getCost() != hardCannon1.getCost() &&
-                mediumCannon1.getCost() != hardCannon1.getCost());
+        assertTrue(getEasyCannon1().getCost() != getMediumCannon1().getCost()
+                && getEasyCannon1().getCost() != getHardCannon1().getCost()
+                && getMediumCannon1().getCost() != getHardCannon1().getCost());
     }
 
     @Test
     public void diffCannon2InitialCosts() {
-        assertTrue(easyCannon2.getCost() != mediumCannon2.getCost() &&
-                easyCannon2.getCost() != hardCannon2.getCost() &&
-                mediumCannon2.getCost() != hardCannon2.getCost());
+        assertTrue(getEasyCannon2().getCost() != getMediumCannon2().getCost()
+                && getEasyCannon2().getCost() != getHardCannon2().getCost()
+                && getMediumCannon2().getCost() != getHardCannon2().getCost());
     }
 
     @Test
     public void diffCannon3InitialCosts() {
-        assertTrue(easyCannon3.getCost() != mediumCannon3.getCost() &&
-                easyCannon3.getCost() != hardCannon3.getCost() &&
-                mediumCannon3.getCost() != hardCannon3.getCost());
+        assertTrue(getEasyCannon3().getCost() != getMediumCannon3().getCost()
+                && getEasyCannon3().getCost() != getHardCannon3().getCost()
+                && getMediumCannon3().getCost() != getHardCannon3().getCost());
     }
 
     @Test
     public void testBuyTower() {
-        boolean greater = Shop.buyTower(easyCannon1, easyPlayer);
-        easyPlayer.updateBalance(-1 * 450);
-        boolean equals = Shop.buyTower(easyCannon1, easyPlayer);
-        easyPlayer.updateBalance(-1 * 10);
-        boolean less = Shop.buyTower(easyCannon1, easyPlayer);
+        boolean greater = Shop.buyTower(getEasyCannon1(), getEasyPlayer());
+        getEasyPlayer().updateBalance(-1 * 450);
+        boolean equals = Shop.buyTower(getEasyCannon1(), getEasyPlayer());
+        getEasyPlayer().updateBalance(-1 * 10);
+        boolean less = Shop.buyTower(getEasyCannon1(), getEasyPlayer());
         assertTrue(greater == equals && greater != less && equals != less);
     }
 
     @Test
     public void diffCannonsUpgradeMultipliers() {
-        assertTrue(easyCannon1.getUpgradeMultiplier() != mediumCannon1.getUpgradeMultiplier() &&
-                easyCannon1.getUpgradeMultiplier() != hardCannon1.getUpgradeMultiplier() &&
-                mediumCannon1.getUpgradeMultiplier() != hardCannon1.getUpgradeMultiplier() &&
-                easyCannon2.getUpgradeMultiplier() != mediumCannon2.getUpgradeMultiplier() &&
-                easyCannon2.getUpgradeMultiplier() != hardCannon2.getUpgradeMultiplier() &&
-                mediumCannon2.getUpgradeMultiplier() != hardCannon2.getUpgradeMultiplier() &&
-                easyCannon3.getUpgradeMultiplier() != mediumCannon3.getUpgradeMultiplier() &&
-                easyCannon3.getUpgradeMultiplier() != hardCannon3.getUpgradeMultiplier() &&
-                mediumCannon3.getUpgradeMultiplier() != hardCannon3.getUpgradeMultiplier());
+        assertTrue(getEasyCannon1().getUpgradeMultiplier() != getMediumCannon1().getUpgradeMultiplier() &&
+                getEasyCannon1().getUpgradeMultiplier() != getHardCannon1().getUpgradeMultiplier() &&
+                getMediumCannon1().getUpgradeMultiplier() != getHardCannon1().getUpgradeMultiplier() &&
+                getEasyCannon2().getUpgradeMultiplier() != getMediumCannon2().getUpgradeMultiplier() &&
+                getEasyCannon2().getUpgradeMultiplier() != getHardCannon2().getUpgradeMultiplier() &&
+                getMediumCannon2().getUpgradeMultiplier() != getHardCannon2().getUpgradeMultiplier() &&
+                getEasyCannon3().getUpgradeMultiplier() != getMediumCannon3().getUpgradeMultiplier() &&
+                getEasyCannon3().getUpgradeMultiplier() != getHardCannon3().getUpgradeMultiplier() &&
+                getMediumCannon3().getUpgradeMultiplier() != getHardCannon3().getUpgradeMultiplier());
     }
 
     @Test
     public void diffCannonsAttackSpeeds() {
-        assertTrue(easyCannon1.getAttackSpeed() != easyCannon2.getAttackSpeed() &&
-                easyCannon1.getAttackSpeed() != easyCannon3.getAttackSpeed() &&
-                easyCannon2.getAttackSpeed() != easyCannon3.getAttackSpeed() &&
-                mediumCannon1.getAttackSpeed() != mediumCannon2.getAttackSpeed() &&
-                mediumCannon1.getAttackSpeed() != mediumCannon3.getAttackSpeed() &&
-                mediumCannon2.getAttackSpeed() != mediumCannon3.getAttackSpeed() &&
-                hardCannon1.getAttackSpeed() != hardCannon2.getAttackSpeed() &&
-                hardCannon1.getAttackSpeed() != hardCannon3.getAttackSpeed() &&
-                hardCannon2.getAttackSpeed() != hardCannon3.getAttackSpeed());
+        assertTrue(getEasyCannon1().getAttackSpeed() != getEasyCannon2().getAttackSpeed() &&
+                getEasyCannon1().getAttackSpeed() != getEasyCannon3().getAttackSpeed() &&
+                getEasyCannon2().getAttackSpeed() != getEasyCannon3().getAttackSpeed() &&
+                getMediumCannon1().getAttackSpeed() != getMediumCannon2().getAttackSpeed() &&
+                getMediumCannon1().getAttackSpeed() != getMediumCannon3().getAttackSpeed() &&
+                getMediumCannon2().getAttackSpeed() != getMediumCannon3().getAttackSpeed() &&
+                getHardCannon1().getAttackSpeed() != getHardCannon2().getAttackSpeed() &&
+                getHardCannon1().getAttackSpeed() != getHardCannon3().getAttackSpeed() &&
+                getHardCannon2().getAttackSpeed() != getHardCannon3().getAttackSpeed());
     }
 
     @Test
     public void diffCannonsAttackDamage() {
-        assertTrue(easyCannon1.getAttackDamage() != easyCannon2.getAttackDamage() &&
-                easyCannon1.getAttackDamage() != easyCannon3.getAttackDamage() &&
-                easyCannon2.getAttackDamage() != easyCannon3.getAttackDamage() &&
-                mediumCannon1.getAttackDamage() != mediumCannon2.getAttackDamage() &&
-                mediumCannon1.getAttackDamage() != mediumCannon3.getAttackDamage() &&
-                mediumCannon2.getAttackDamage() != mediumCannon3.getAttackDamage() &&
-                hardCannon1.getAttackDamage() != hardCannon2.getAttackDamage() &&
-                hardCannon1.getAttackDamage() != hardCannon3.getAttackDamage() &&
-                hardCannon2.getAttackDamage() != hardCannon3.getAttackDamage());
+        assertTrue(getEasyCannon1().getAttackDamage() != getEasyCannon2().getAttackDamage() &&
+                getEasyCannon1().getAttackDamage() != getEasyCannon3().getAttackDamage() &&
+                getEasyCannon2().getAttackDamage() != getEasyCannon3().getAttackDamage() &&
+                getMediumCannon1().getAttackDamage() != getMediumCannon2().getAttackDamage() &&
+                getMediumCannon1().getAttackDamage() != getMediumCannon3().getAttackDamage() &&
+                getMediumCannon2().getAttackDamage() != getMediumCannon3().getAttackDamage() &&
+                getHardCannon1().getAttackDamage() != getHardCannon2().getAttackDamage() &&
+                getHardCannon1().getAttackDamage() != getHardCannon3().getAttackDamage() &&
+                getHardCannon2().getAttackDamage() != getHardCannon3().getAttackDamage());
+    }
+
+    public Player getEasyPlayer() {
+        return easyPlayer;
+    }
+
+    public void setEasyPlayer(Player easyPlayer) {
+        this.easyPlayer = easyPlayer;
+    }
+
+    public Player getMediumPlayer() {
+        return mediumPlayer;
+    }
+
+    public void setMediumPlayer(Player mediumPlayer) {
+        this.mediumPlayer = mediumPlayer;
+    }
+
+    public Player getHardPlayer() {
+        return hardPlayer;
+    }
+
+    public void setHardPlayer(Player hardPlayer) {
+        this.hardPlayer = hardPlayer;
+    }
+
+    public Cannon1 getEasyCannon1() {
+        return easyCannon1;
+    }
+
+    public void setEasyCannon1(Cannon1 easyCannon1) {
+        this.easyCannon1 = easyCannon1;
+    }
+
+    public Cannon1 getMediumCannon1() {
+        return mediumCannon1;
+    }
+
+    public void setMediumCannon1(Cannon1 mediumCannon1) {
+        this.mediumCannon1 = mediumCannon1;
+    }
+
+    public Cannon1 getHardCannon1() {
+        return hardCannon1;
+    }
+
+    public void setHardCannon1(Cannon1 hardCannon1) {
+        this.hardCannon1 = hardCannon1;
+    }
+
+    public Cannon2 getEasyCannon2() {
+        return easyCannon2;
+    }
+
+    public void setEasyCannon2(Cannon2 easyCannon2) {
+        this.easyCannon2 = easyCannon2;
+    }
+
+    public Cannon2 getMediumCannon2() {
+        return mediumCannon2;
+    }
+
+    public void setMediumCannon2(Cannon2 mediumCannon2) {
+        this.mediumCannon2 = mediumCannon2;
+    }
+
+    public Cannon2 getHardCannon2() {
+        return hardCannon2;
+    }
+
+    public void setHardCannon2(Cannon2 hardCannon2) {
+        this.hardCannon2 = hardCannon2;
+    }
+
+    public Cannon3 getEasyCannon3() {
+        return easyCannon3;
+    }
+
+    public void setEasyCannon3(Cannon3 easyCannon3) {
+        this.easyCannon3 = easyCannon3;
+    }
+
+    public Cannon3 getMediumCannon3() {
+        return mediumCannon3;
+    }
+
+    public void setMediumCannon3(Cannon3 mediumCannon3) {
+        this.mediumCannon3 = mediumCannon3;
+    }
+
+    public Cannon3 getHardCannon3() {
+        return hardCannon3;
+    }
+
+    public void setHardCannon3(Cannon3 hardCannon3) {
+        this.hardCannon3 = hardCannon3;
     }
 }
