@@ -212,6 +212,7 @@ public class HardScreen extends AppCompatActivity {
         cancelButton.setVisibility(View.GONE);
         player.updateBalance(-1*cannonSelected.cost);
         updateMoney(player.balance);
+        return true;
     }
 
     private void insufficientFunds () {
