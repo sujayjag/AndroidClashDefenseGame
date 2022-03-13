@@ -131,9 +131,14 @@ public class HardScreen extends AppCompatActivity {
                     return;
                 }
                 if (Shop.buyTower(cannon3Object, player)) {
-                    placement(R.drawable.cannon3new);
-                    updateMoney(player.balance);
-                    cannonSelected = cannon3Object;
+                    try {
+                        placement(R.drawable.cannon3new);
+                        updateMoney(player.balance);
+                        cannonSelected = cannon3Object;
+                    } catch (Exception e) {
+                        towerAlreadyExists();
+                    }
+
                 } else {
                     insufficientFunds();
                 }
@@ -188,7 +193,6 @@ public class HardScreen extends AppCompatActivity {
                 placeTower(place3ImageButton, imgRes);
             }
         });
-
     }
 
     private void visibilityOff () {
@@ -198,23 +202,33 @@ public class HardScreen extends AppCompatActivity {
         }
     }
 
-    private void placeTower (ImageButton button, int imgRes){
-        button.setBackgroundColor(Color.TRANSPARENT);
+    private boolean placeTower (ImageButton button, int imgRes){
+        Integer resource = (Integer)button.getTag();
+        if(resource != null) {
+            towerAlreadyExists();
+            return false;
+        }
+        System.out.println(resource);
+        //Toast.makeText(getApplicationContext(), resource, Toast.LENGTH_LONG).show();
         button.setImageResource(imgRes);
-        button.setScaleType(ImageView.ScaleType.FIT_START);
+        button.setTag(imgRes);
         cancelButton.setVisibility(View.GONE);
         player.updateBalance(-1*cannonSelected.cost);
         updateMoney(player.balance);
+        return true;
     }
 
     private void insufficientFunds () {
         Toast.makeText(getApplicationContext(), "Insufficient Funds to Buy Tower", Toast.LENGTH_LONG).show();
     }
 
+    private void towerAlreadyExists () {
+        Toast.makeText(getApplicationContext(), "Tower already exists in this place!", Toast.LENGTH_LONG).show();
+    }
+
+    //comment
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);
     }
 
-
 }
-
