@@ -34,7 +34,6 @@ public class HardScreen extends AppCompatActivity {
     private Tower cannonSelected;
     private Player player;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
