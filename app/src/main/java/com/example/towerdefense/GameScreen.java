@@ -1,6 +1,7 @@
 package com.example.towerdefense;
 
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -24,11 +25,15 @@ public class GameScreen extends AppCompatActivity {
     private ImageButton place1ImageButton;
     private ImageButton place2ImageButton;
     private ImageButton place3ImageButton;
+    private ImageButton place4ImageButton;
+    private ImageButton place5ImageButton;
     private Button cancelButton;
     private ArrayList<Place> places;
     private Place place1;
     private Place place2;
     private Place place3;
+    private Place place4;
+    private Place place5;
     private Tower cannonSelected;
     private Player player;
     private int layout;
@@ -78,15 +83,21 @@ public class GameScreen extends AppCompatActivity {
         place1ImageButton = (ImageButton) findViewById(R.id.place1);
         place2ImageButton = (ImageButton) findViewById(R.id.place2);
         place3ImageButton = (ImageButton) findViewById(R.id.place3);
+        place4ImageButton = (ImageButton) findViewById(R.id.place4);
+        place5ImageButton = (ImageButton) findViewById(R.id.place5);
 
         place1 = new Place(place1ImageButton);
         place2 = new Place(place2ImageButton);
         place3 = new Place(place3ImageButton);
+        place4 = new Place(place4ImageButton);
+        place5 = new Place(place5ImageButton);
 
         places = new ArrayList<>();
         places.add(place1);
         places.add(place2);
         places.add(place3);
+        places.add(place4);
+        places.add(place5);
 
 
         cannon1.setOnClickListener(new View.OnClickListener() {
@@ -188,6 +199,24 @@ public class GameScreen extends AppCompatActivity {
                 places.remove(place3);
                 visibilityOff();
                 placeTower(place3ImageButton, imgRes);
+            }
+        });
+
+        place4ImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                places.remove(place4);
+                visibilityOff();
+                placeTower(place4ImageButton, imgRes);
+            }
+        });
+
+        place5ImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                places.remove(place5);
+                visibilityOff();
+                placeTower(place5ImageButton, imgRes);
             }
         });
 

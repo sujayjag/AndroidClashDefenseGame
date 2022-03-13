@@ -95,7 +95,7 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginLeft="300dp"
-            android:layout_marginTop="230dp"
+            android:layout_marginTop="200dp"
             android:layout_weight="1" />
 
         <ImageButton
@@ -103,6 +103,22 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginTop="105dp"
+            android:layout_marginLeft="125dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/place4"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="105dp"
+            android:layout_marginLeft="300dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/place5"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="200dp"
             android:layout_marginLeft="125dp"
             android:layout_weight="1" />
 
