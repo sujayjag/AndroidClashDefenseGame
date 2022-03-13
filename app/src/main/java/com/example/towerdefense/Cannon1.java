@@ -24,8 +24,6 @@ public class Cannon1 extends Tower {
         this.setUpgradeMultiplier(upgradeMultiplier);
         this.setAttackSpeed(10);
         this.setAttackDamage(3);
-        this.setLocation("");
-        this.setImageString("../../../../res/drawable/cannon1new.jpg");
     }
 
     public Player getPlayer() {
