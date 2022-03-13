@@ -79,6 +79,8 @@ public class HardScreen extends AppCompatActivity {
         places.add(place3);
 
 
+
+
         //cannon1 in buyTower and placement refers to cannon1 class, not cannon1 imagebutton
         //change later
         cannon1.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +178,7 @@ public class HardScreen extends AppCompatActivity {
     }
 
     private void placeTower (ImageButton button, int imgRes){
+
         button.setImageResource(imgRes);
         cancelButton.setVisibility(View.GONE);
         player.updateBalance(-1*cannonSelected.cost);
@@ -189,6 +192,10 @@ public class HardScreen extends AppCompatActivity {
     //comment
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);
+    }
+
+    public boolean placeIsFree(Place p) {
+        return !p.visible;
     }
 
 
