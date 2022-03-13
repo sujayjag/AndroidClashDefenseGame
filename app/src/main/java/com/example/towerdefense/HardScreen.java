@@ -33,6 +33,7 @@ public class HardScreen extends AppCompatActivity {
     private Place place3;
     private Tower cannonSelected;
     private Player player;
+    private int layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +41,27 @@ public class HardScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         String nameInputted = getIntent().getStringExtra("nameInputted");
+        String difficulty = getIntent().getStringExtra("difficulty");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
-        setContentView(R.layout.activity_hard_screen);
+
+        player = new Player(difficulty, nameInputted);
+
+        if (player.difficulty.equals("easy")) {
+            layout = R.layout.activity_easy_screen;
+        } else if (player.difficulty.equals("medium")) {
+            layout = R.layout.activity_medium_screen;
+        } else {
+            layout = R.layout.activity_hard_screen;
+        }
+
+        setContentView(layout);
         money = findViewById(R.id.money3);
         health = findViewById(R.id.health3);
 
-        player = new Player("hard", nameInputted);
 
         money.setText("Money: " +  player.balance);
         health.setText("Health: " + player.monumentHealth);
@@ -186,10 +198,17 @@ public class HardScreen extends AppCompatActivity {
         }
     }
 
-    private void placeTower (ImageButton button, int imgRes){
+    private boolean placeTower (ImageButton button, int imgRes){
+        Integer resource = (Integer)button.getTag();
+        if(resource != null) {
+            towerAlreadyExists();
+            return false;
+        }
+
         button.setBackgroundColor(Color.TRANSPARENT);
         button.setImageResource(imgRes);
         button.setScaleType(ImageView.ScaleType.FIT_START);
+        button.setTag(imgRes);
         cancelButton.setVisibility(View.GONE);
         player.updateBalance(-1*cannonSelected.cost);
         updateMoney(player.balance);
@@ -199,10 +218,14 @@ public class HardScreen extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Insufficient Funds to Buy Tower", Toast.LENGTH_LONG).show();
     }
 
+    private void towerAlreadyExists () {
+        Toast.makeText(getApplicationContext(), "Tower already exists in this place!", Toast.LENGTH_LONG).show();
+    }
+
+    //hello
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);
     }
 
 
 }
-

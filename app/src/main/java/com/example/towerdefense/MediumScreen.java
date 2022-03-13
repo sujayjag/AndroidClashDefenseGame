@@ -20,8 +20,8 @@ public class MediumScreen extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_medium_screen);
-        money = findViewById(R.id.money2);
-        health = findViewById(R.id.health2);
+        money = findViewById(R.id.money3);
+        health = findViewById(R.id.health3);
         money.setText("Money: $750");
         health.setText("Health: 90");
         String nameInputted = getIntent().getStringExtra("nameInputted");
