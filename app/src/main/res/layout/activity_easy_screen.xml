@@ -106,6 +106,22 @@
             android:layout_marginLeft="175dp"
             android:layout_weight="1" />
 
+        <ImageButton
+            android:id="@+id/place4"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="240dp"
+            android:layout_marginLeft="175dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/place5"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="275dp"
+            android:layout_marginLeft="400dp"
+            android:layout_weight="1" />
+
         <Button
             android:id="@+id/cancel"
             android:layout_width="wrap_content"
