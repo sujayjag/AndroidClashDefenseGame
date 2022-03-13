@@ -227,7 +227,7 @@ public class HardScreen extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Tower already exists in this place!", Toast.LENGTH_LONG).show();
     }
 
-    //comment
+    //hello
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);
     }
