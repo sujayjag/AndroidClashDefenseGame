@@ -33,6 +33,7 @@ public class HardScreen extends AppCompatActivity {
     private Place place3;
     private Tower cannonSelected;
     private Player player;
+    private int layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +41,27 @@ public class HardScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         String nameInputted = getIntent().getStringExtra("nameInputted");
+        String difficulty = getIntent().getStringExtra("difficulty");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
-        setContentView(R.layout.activity_hard_screen);
+
+        player = new Player(difficulty, nameInputted);
+
+        if (player.difficulty.equals("easy")) {
+            layout = R.layout.activity_easy_screen;
+        } else if (player.difficulty.equals("medium")) {
+            layout = R.layout.activity_medium_screen;
+        } else {
+            layout = R.layout.activity_hard_screen;
+        }
+
+        setContentView(layout);
         money = findViewById(R.id.money3);
         health = findViewById(R.id.health3);
 
-        player = new Player("hard", nameInputted);
 
         money.setText("Money: " +  player.balance);
         health.setText("Health: " + player.monumentHealth);

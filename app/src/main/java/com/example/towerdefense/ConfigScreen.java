@@ -54,32 +54,35 @@ public class ConfigScreen extends AppCompatActivity {
                     warning.setText("Please Enter a Valid Name!");
                 } else {
                     if (selected.equals("Easy")) {
-                        openEasyScreen(nameInputted);
+                        openEasyScreen(nameInputted, selected.toLowerCase());
                     } else if (selected.equals("Medium")) {
-                        openMediumScreen(nameInputted);
+                        openMediumScreen(nameInputted, selected.toLowerCase());
                     } else {
-                        openHardScreen(nameInputted);
+                        openHardScreen(nameInputted, selected.toLowerCase());
                     }
                 }
             }
         });
     }
 
-    public void openEasyScreen(String nameInputted) {
-        Intent intent1 = new Intent(this, EasyScreen.class);
+    public void openEasyScreen(String nameInputted, String difficulty) {
+        Intent intent1 = new Intent(this, HardScreen.class);
         intent1.putExtra("nameInputted", nameInputted);
+        intent1.putExtra("difficulty", difficulty);
         startActivity(intent1);
     }
 
-    public void openMediumScreen(String nameInputted) {
-        Intent intent2 = new Intent(this, MediumScreen.class);
+    public void openMediumScreen(String nameInputted, String difficulty) {
+        Intent intent2 = new Intent(this, HardScreen.class);
         intent2.putExtra("nameInputted", nameInputted);
+        intent2.putExtra("difficulty", difficulty);
         startActivity(intent2);
     }
 
-    public void openHardScreen(String nameInputted) {
+    public void openHardScreen(String nameInputted, String difficulty) {
         Intent intent3 = new Intent(this, HardScreen.class);
         intent3.putExtra("nameInputted", nameInputted);
+        intent3.putExtra("difficulty", difficulty);
         startActivity(intent3);
     }
 }
