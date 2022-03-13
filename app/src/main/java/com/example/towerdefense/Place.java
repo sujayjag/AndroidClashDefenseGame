@@ -1,17 +1,31 @@
 package com.example.towerdefense;
 
-import android.media.Image;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 public class Place {
-    public ImageButton place;
-    public boolean visible;
+    private ImageButton place;
+    private boolean visible;
 
     Place(ImageButton place) {
-        this.place = place;
-        visible = false;
+        this.setPlace(place);
+        setVisible(false);
         place.setVisibility(View.GONE);
+    }
+
+    public ImageButton getPlace() {
+        return place;
+    }
+
+    public void setPlace(ImageButton place) {
+        this.place = place;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }

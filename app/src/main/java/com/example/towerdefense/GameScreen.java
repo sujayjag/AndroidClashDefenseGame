@@ -1,8 +1,6 @@
 package com.example.towerdefense;
 
 import android.graphics.Color;
-import android.media.Image;
-import android.media.ImageReader;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -50,9 +48,9 @@ public class GameScreen extends AppCompatActivity {
 
         player = new Player(difficulty, nameInputted);
 
-        if (player.difficulty.equals("easy")) {
+        if (player.getDifficulty().equals("easy")) {
             layout = R.layout.activity_easy_screen;
-        } else if (player.difficulty.equals("medium")) {
+        } else if (player.getDifficulty().equals("medium")) {
             layout = R.layout.activity_medium_screen;
         } else {
             layout = R.layout.activity_hard_screen;
@@ -63,8 +61,8 @@ public class GameScreen extends AppCompatActivity {
         health = findViewById(R.id.health3);
 
 
-        money.setText("Money: " +  player.balance);
-        health.setText("Health: " + player.monumentHealth);
+        money.setText("Money: " + player.getBalance());
+        health.setText("Health: " + player.getMonumentHealth());
 
         cannon1 = (ImageButton) findViewById(R.id.cannon1);
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
@@ -94,12 +92,13 @@ public class GameScreen extends AppCompatActivity {
         cannon1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (places.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "All Places are Filled", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "All Places are Filled",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (Shop.buyTower(cannon1Object, player)) {
                     placement(R.drawable.cannon1newnew);
-                    updateMoney(player.balance);
+                    updateMoney(player.getBalance());
                     cannonSelected = cannon1Object;
                 } else {
                     insufficientFunds();
@@ -110,12 +109,13 @@ public class GameScreen extends AppCompatActivity {
         cannon2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (places.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "All Places are Filled", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "All Places are Filled",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (Shop.buyTower(cannon2Object, player)) {
                     placement(R.drawable.cannon2newnew);
-                    updateMoney(player.balance);
+                    updateMoney(player.getBalance());
                     cannonSelected = cannon2Object;
                 } else {
                     insufficientFunds();
@@ -127,12 +127,13 @@ public class GameScreen extends AppCompatActivity {
         cannon3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (places.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "All Places are Filled", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "All Places are Filled",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (Shop.buyTower(cannon3Object, player)) {
                     placement(R.drawable.cannon3new);
-                    updateMoney(player.balance);
+                    updateMoney(player.getBalance());
                     cannonSelected = cannon3Object;
                 } else {
                     insufficientFunds();
@@ -152,12 +153,13 @@ public class GameScreen extends AppCompatActivity {
         });
     }
 
-    public void placement (int imgRes){
-        Toast.makeText(getApplicationContext(), "Select Location", Toast.LENGTH_SHORT).show();
+    public void placement(int imgRes) {
+        Toast.makeText(getApplicationContext(), "Select Location",
+                Toast.LENGTH_SHORT).show();
         for (Place b : places) {
-            if (!b.visible) {
-                b.place.setVisibility(View.VISIBLE);
-                b.visible = true;
+            if (!b.isVisible()) {
+                b.getPlace().setVisibility(View.VISIBLE);
+                b.setVisible(true);
             }
         }
         cancelButton.setVisibility(View.VISIBLE);
@@ -191,16 +193,16 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
-    private void visibilityOff () {
+    private void visibilityOff() {
         for (Place b : places) {
-            b.place.setVisibility(View.GONE);
-            b.visible = false;
+            b.getPlace().setVisibility(View.GONE);
+            b.setVisible(false);
         }
     }
 
-    private boolean placeTower (ImageButton button, int imgRes){
-        Integer resource = (Integer)button.getTag();
-        if(resource != null) {
+    private boolean placeTower(ImageButton button, int imgRes) {
+        Integer resource = (Integer) button.getTag();
+        if (resource != null) {
             towerAlreadyExists();
             return false;
         }
@@ -210,17 +212,19 @@ public class GameScreen extends AppCompatActivity {
         button.setScaleType(ImageView.ScaleType.FIT_START);
         button.setTag(imgRes);
         cancelButton.setVisibility(View.GONE);
-        player.updateBalance(-1*cannonSelected.cost);
-        updateMoney(player.balance);
+        player.updateBalance(-1 * cannonSelected.getCost());
+        updateMoney(player.getBalance());
         return true;
     }
 
-    private void insufficientFunds () {
-        Toast.makeText(getApplicationContext(), "Insufficient Funds to Buy Tower", Toast.LENGTH_LONG).show();
+    private void insufficientFunds() {
+        Toast.makeText(getApplicationContext(), "Insufficient Funds to Buy Tower",
+                Toast.LENGTH_LONG).show();
     }
 
-    private void towerAlreadyExists () {
-        Toast.makeText(getApplicationContext(), "Tower already exists in this place!", Toast.LENGTH_LONG).show();
+    private void towerAlreadyExists() {
+        Toast.makeText(getApplicationContext(), "Tower already exists in this place!",
+                Toast.LENGTH_LONG).show();
     }
 
     //hello
