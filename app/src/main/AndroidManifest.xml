@@ -13,7 +13,8 @@
         <activity android:name=".EasyScreen" />
         <activity android:name=".MediumScreen" />
         <activity android:name=".HardScreen" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
