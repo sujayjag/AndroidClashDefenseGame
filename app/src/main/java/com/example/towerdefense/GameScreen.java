@@ -19,6 +19,9 @@ import java.util.ArrayList;
 public class GameScreen extends AppCompatActivity {
     private TextView money;
     private TextView health;
+    private TextView cannon1Cost;
+    private TextView cannon2Cost;
+    private TextView cannon3Cost;
     private ImageButton cannon1;
     private ImageButton cannon2;
     private ImageButton cannon3;
@@ -80,6 +83,14 @@ public class GameScreen extends AppCompatActivity {
         Cannon2 cannon2Object = new Cannon2(player, cannon2);
         Cannon3 cannon3Object = new Cannon3(player, cannon3);
 
+        cannon1Cost = (TextView) findViewById(R.id.cannon1cost);
+        cannon2Cost = (TextView) findViewById(R.id.cannon2cost);
+        cannon3Cost = (TextView) findViewById(R.id.cannon3cost);
+
+        cannon1Cost.setText("Cost: " + cannon1Object.getCost());
+        cannon2Cost.setText("Cost: " + cannon2Object.getCost());
+        cannon3Cost.setText("Cost: " + cannon3Object.getCost());
+
         place1ImageButton = (ImageButton) findViewById(R.id.place1);
         place2ImageButton = (ImageButton) findViewById(R.id.place2);
         place3ImageButton = (ImageButton) findViewById(R.id.place3);
@@ -108,7 +119,7 @@ public class GameScreen extends AppCompatActivity {
                     return;
                 }
                 if (Shop.buyTower(cannon1Object, player)) {
-                    placement(R.drawable.cannon1newnew);
+                    placement(R.drawable.cannon1new);
                     updateMoney(player.getBalance());
                     cannonSelected = cannon1Object;
                 } else {
