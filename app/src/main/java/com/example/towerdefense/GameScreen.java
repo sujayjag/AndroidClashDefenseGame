@@ -266,6 +266,13 @@ public class GameScreen extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
+    private void endGame() {
+        
+
+        Toast.makeText(getApplicationContext(), "Monument is out of health! Game over!",
+            Toast.LENGTH_LONG).show();
+    }
+
     //hello
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);

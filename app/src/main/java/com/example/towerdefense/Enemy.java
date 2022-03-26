@@ -22,7 +22,7 @@ public abstract class Enemy {
         this(0, 0, 0, 0, false);
     }
 
-    
+
     public abstract void attack();
 
     public void deployEnemy() {
