@@ -24,6 +24,10 @@ public abstract class Enemy {
 
 
     public abstract void attack();
+    //use Player.setMonumentHealth based on tower's damage
+    //Update text
+    //Check if momnument is below 0, if it is endGame()
+    //Despawn the enemy object
 
     public void deployEnemy() {
         //Add enemy to screen and start moving

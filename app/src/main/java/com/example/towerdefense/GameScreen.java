@@ -232,6 +232,11 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
+    /*Start button on click:
+        deployEnemy every 5 seconds
+
+    */
+
     private void visibilityOff() {
         for (Place b : places) {
             b.getPlace().setVisibility(View.GONE);
@@ -267,8 +272,8 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void endGame() {
-        
 
+        //make it not a toast
         Toast.makeText(getApplicationContext(), "Monument is out of health! Game over!",
             Toast.LENGTH_LONG).show();
     }
