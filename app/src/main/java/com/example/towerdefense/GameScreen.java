@@ -1,6 +1,9 @@
 package com.example.towerdefense;
 
+import android.animation.ObjectAnimator;
 import android.graphics.Color;
+import android.graphics.Path;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -39,6 +42,8 @@ public class GameScreen extends AppCompatActivity {
     private Tower cannonSelected;
     private Player player;
     private int layout;
+
+    private ImageView testCannon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +113,28 @@ public class GameScreen extends AppCompatActivity {
         places.add(place3);
         places.add(place4);
         places.add(place5);
+
+
+        testCannon = (ImageView) findViewById(R.id.testcannon);
+        int x = 0;
+        int y = 0;
+        //path
+        Path path = new Path();
+        path.moveTo(x, y);
+
+        y += 200;
+        path.lineTo(x, y);
+
+        x += 800;
+        path.lineTo(x, y);
+
+        y += 200;
+        path.lineTo(x, y);
+
+        //path.arcTo(0f, 0f, 1000f, 1000f, 270f, -180f, true);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(testCannon, View.X, View.Y, path);
+        animator.setDuration(2000);
+        animator.start();
 
 
         cannon1.setOnClickListener(new View.OnClickListener() {
@@ -266,7 +293,6 @@ public class GameScreen extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
-    //hello
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);
     }
