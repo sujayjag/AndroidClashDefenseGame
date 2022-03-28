@@ -6,6 +6,7 @@ import android.widget.ImageButton;
 public class Place {
     private ImageButton place;
     private boolean visible;
+    //add attribute of tower?
 
     Place(ImageButton place) {
         this.setPlace(place);
