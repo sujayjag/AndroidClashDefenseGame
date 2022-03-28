@@ -42,8 +42,9 @@ public class GameScreen extends AppCompatActivity {
     private Tower cannonSelected;
     private Player player;
     private int layout;
+    private Path path;
 
-    private ImageView testCannon;
+    private ImageView witch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +60,10 @@ public class GameScreen extends AppCompatActivity {
         );
 
         player = new Player(difficulty, nameInputted);
+        Difficulty difficultyObj = new Difficulty(player);
+        layout = difficultyObj.getLayout();
+        path = difficultyObj.getPath();
 
-        if (player.getDifficulty().equals("easy")) {
-            layout = R.layout.activity_easy_screen;
-        } else if (player.getDifficulty().equals("medium")) {
-            layout = R.layout.activity_medium_screen;
-        } else {
-            layout = R.layout.activity_hard_screen;
-        }
 
         setContentView(layout);
         money = findViewById(R.id.money3);
@@ -115,24 +112,10 @@ public class GameScreen extends AppCompatActivity {
         places.add(place5);
 
 
-        testCannon = (ImageView) findViewById(R.id.testcannon);
-        int x = 0;
-        int y = 0;
-        //path
-        Path path = new Path();
-        path.moveTo(x, y);
+        witch = (ImageView) findViewById(R.id.witch);
 
-        y += 200;
-        path.lineTo(x, y);
-
-        x += 800;
-        path.lineTo(x, y);
-
-        y += 200;
-        path.lineTo(x, y);
-
-        //path.arcTo(0f, 0f, 1000f, 1000f, 270f, -180f, true);
-        ObjectAnimator animator = ObjectAnimator.ofFloat(testCannon, View.X, View.Y, path);
+        //when we clidck button
+        ObjectAnimator animator = ObjectAnimator.ofFloat(witch, View.X, View.Y, path);
         animator.setDuration(2000);
         animator.start();
 
