@@ -1,6 +1,9 @@
 package com.example.towerdefense;
 
+import android.animation.ObjectAnimator;
 import android.graphics.Color;
+import android.graphics.Path;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -39,6 +42,9 @@ public class GameScreen extends AppCompatActivity {
     private Tower cannonSelected;
     private Player player;
     private int layout;
+    private Path path;
+
+    private ImageView witch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +60,10 @@ public class GameScreen extends AppCompatActivity {
         );
 
         player = new Player(difficulty, nameInputted);
+        Difficulty difficultyObj = new Difficulty(player);
+        layout = difficultyObj.getLayout();
+        path = difficultyObj.getPath();
 
-        if (player.getDifficulty().equals("easy")) {
-            layout = R.layout.activity_easy_screen;
-        } else if (player.getDifficulty().equals("medium")) {
-            layout = R.layout.activity_medium_screen;
-        } else {
-            layout = R.layout.activity_hard_screen;
-        }
 
         setContentView(layout);
         money = findViewById(R.id.money3);
@@ -110,6 +112,14 @@ public class GameScreen extends AppCompatActivity {
         places.add(place5);
 
 
+        witch = (ImageView) findViewById(R.id.witch);
+
+        //when we clidck button
+        ObjectAnimator animator = ObjectAnimator.ofFloat(witch, View.X, View.Y, path);
+        animator.setDuration(2000);
+        animator.start();
+
+
         cannon1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (places.isEmpty()) {
@@ -153,7 +163,7 @@ public class GameScreen extends AppCompatActivity {
                     return;
                 }
                 if (Shop.buyTower(cannon3Object, player)) {
-                    placement(R.drawable.cannon3newnew);
+                    placement(R.drawable.cannon3new);
                     updateMoney(player.getBalance());
                     cannonSelected = cannon3Object;
                 } else {
@@ -232,11 +242,6 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
-    /*Start button on click:
-        deployEnemy every 5 seconds
-
-    */
-
     private void visibilityOff() {
         for (Place b : places) {
             b.getPlace().setVisibility(View.GONE);
@@ -271,14 +276,6 @@ public class GameScreen extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
-    private void endGame() {
-
-        //make it not a toast
-        Toast.makeText(getApplicationContext(), "Monument is out of health! Game over!",
-            Toast.LENGTH_LONG).show();
-    }
-
-    //hello
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);
     }
