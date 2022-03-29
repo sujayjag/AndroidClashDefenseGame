@@ -33,6 +33,7 @@ public class GameScreen extends AppCompatActivity {
     private ImageButton place4ImageButton;
     private ImageButton place5ImageButton;
     private Button cancelButton;
+    private Button startCombatButton;
     private ArrayList<Place> places;
     private Place place1;
     private Place place2;
@@ -113,11 +114,17 @@ public class GameScreen extends AppCompatActivity {
 
 
         witch = (ImageView) findViewById(R.id.witch);
+        startCombatButton = (Button) findViewById(R.id.startCombat);
 
-        //when we clidck button
-        ObjectAnimator animator = ObjectAnimator.ofFloat(witch, View.X, View.Y, path);
-        animator.setDuration(2000);
-        animator.start();
+        startCombatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when we click button
+                ObjectAnimator animator = ObjectAnimator.ofFloat(witch, View.X, View.Y, path);
+                animator.setDuration(2000);
+                animator.start();
+            }
+        });
 
 
         cannon1.setOnClickListener(new View.OnClickListener() {

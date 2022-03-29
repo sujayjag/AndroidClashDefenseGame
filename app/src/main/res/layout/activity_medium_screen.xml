@@ -154,6 +154,14 @@
             android:text="Cancel"
             android:layout_alignParentBottom="true"/>
 
+        <Button
+            android:id="@+id/startCombat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Combat"
+            android:layout_marginLeft="420dp"
+            android:layout_alignParentBottom="true"/>
+
     </RelativeLayout>
 
 </RelativeLayout>
