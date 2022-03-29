@@ -133,13 +133,6 @@ public class GameScreen extends AppCompatActivity {
         places.add(place5);
 
 
-        witch = (ImageView) findViewById(R.id.witch);
-        witch.setVisibility(View.GONE);
-        wizard = (ImageView) findViewById(R.id.wizard);
-        wizard.setVisibility(View.GONE);
-        archer = (ImageView) findViewById(R.id.archer);
-        archer.setVisibility(View.GONE);
-
         layoutParent = (RelativeLayout) findViewById(R.id.RelativeLayout);
 
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -153,16 +146,26 @@ public class GameScreen extends AppCompatActivity {
                 startCombatButton.setVisibility(View.GONE);
                 //depends on level
                 int numOfEnemies = 10;
-                ArrayList<View> witches = new ArrayList<>();
+                ArrayList<Enemy> enemies = new ArrayList<>();
 
                 final Handler handler = new Handler();
                 Runnable task = new Runnable() {
                     int i = 0;
+                    String enemyType = "archer";
                     @Override
                     public void run() {
 
+                        if (i >= 0 && i < difficultyObj.getNumArchers()) {
+                            enemyType = "archer";
+                        } else if (i < difficultyObj.getNumArchers() + difficultyObj.getNumWitches()) {
+                            enemyType = "witch";
+                        } else {
+                            enemyType = "wizard";
+                        }
 
-                        newView = layoutInflater.inflate(R.layout.witch, null, false);
+                        Enemy temp = new Enemy(enemyType);
+
+                        newView = layoutInflater.inflate(temp.getLayout(), null, false);
                         newView.setLayoutParams(new RelativeLayout.LayoutParams(180, 200));
 
                         //hardcoded
@@ -172,26 +175,32 @@ public class GameScreen extends AppCompatActivity {
 
                         newView.setVisibility(View.VISIBLE);
                         layoutParent.addView(newView);
-                        witches.add(newView);
+                        temp.setView(newView);
+                        enemies.add(temp);
                         ObjectAnimator animator = ObjectAnimator.ofFloat(newView, View.X, View.Y, path);
+
                         //duration should be movementSpeed of enemy object
-                        animator.setDuration(500);
+                        animator.setDuration(1000);
                         animator.start();
                         // for each value in witches
                         // check if witch.x and witch.y is equal to end coordinates
                         // if code: delete witch from arraylist and reduce monument health
                         if (player.getMonumentHealth() > 0) {
-                            for (View witch: witches) {
-                                System.out.println(witch.getX() + " " + witch.getY());
-                                if (witch.getX() == 1242.0 && witch.getY() == 1215.0) {
+                            for (Enemy enemy: enemies) {
+                                if (player.getMonumentHealth() == 0) {
+                                    GameOver();
+                                }
+                                View enemyView = enemy.getView();
+                                System.out.println(enemyView.getX() + " " + enemyView.getY());
+                                if (enemyView.getX() == 1242.0 && enemyView.getY() == 1215.0) {
                                     System.out.println("a");
                                     //witches.remove(witch);
 
-                                    if (witch.getVisibility() == View.VISIBLE) {
+                                    if (enemyView.getVisibility() == View.VISIBLE) {
                                         player.setMonumentHealth(player.getMonumentHealth() - 10);
                                         health.setText("Health: "+player.getMonumentHealth());
                                     }
-                                    witch.setVisibility(View.GONE);
+                                    enemyView.setVisibility(View.GONE);
                                 }
                             }
                         } else {
@@ -200,8 +209,8 @@ public class GameScreen extends AppCompatActivity {
 
 
                         i++;
-                        if (i < numOfEnemies){
-                            handler.postDelayed(this, 1050);
+                        if (i < (difficultyObj.getNumArchers() + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())){
+                            handler.postDelayed(this, 2000);
                         }
                     }
                 };

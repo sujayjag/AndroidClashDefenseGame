@@ -1,15 +1,14 @@
 package com.example.towerdefense;
 
 import android.graphics.Path;
-import android.widget.ImageButton;
-import android.util.DisplayMetrics;
-import android.view.Display;
-import android.content.Context;
 
 
 public class Difficulty {
     private int layout;
     private Path path;
+    private int numWitches;
+    private int numWizards;
+    private int numArchers;
 //    private int width = 553;
 //    private int height = 311;
 
@@ -17,12 +16,21 @@ public class Difficulty {
         String difficulty = player.getDifficulty();
         if (difficulty.equals("easy")) {
             setLayout(R.layout.activity_easy_screen);
+            setNumArchers(2);
+            setNumWitches(2);
+            setNumWizards(2);
             //path.lineTo
         } else if (difficulty.equals("medium")) {
             setLayout(R.layout.activity_medium_screen);
+            setNumArchers(3);
+            setNumWitches(3);
+            setNumWizards(3);
             //path.lineTo
         } else {
             setLayout(R.layout.activity_hard_screen);
+            setNumArchers(3);
+            setNumWitches(4);
+            setNumWizards(4);
             //path.lineTo
 
             int width = 650;
@@ -78,5 +86,29 @@ public class Difficulty {
 
     public void setPath(Path path) {
         this.path = path;
+    }
+
+    public int getNumWitches() {
+        return numWitches;
+    }
+
+    public void setNumWitches(int numWitches) {
+        this.numWitches = numWitches;
+    }
+
+    public int getNumWizards() {
+        return numWizards;
+    }
+
+    public void setNumWizards(int numWizards) {
+        this.numWizards = numWizards;
+    }
+
+    public int getNumArchers() {
+        return numArchers;
+    }
+
+    public void setNumArchers(int numArchers) {
+        this.numArchers = numArchers;
     }
 }
