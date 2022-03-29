@@ -107,6 +107,13 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/witch"
+            android:layout_width="90dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/witch" />
+        
         <ImageButton
             android:id="@+id/place1"
             android:layout_width="75dp"
