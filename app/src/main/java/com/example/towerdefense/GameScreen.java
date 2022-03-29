@@ -36,6 +36,7 @@ public class GameScreen extends AppCompatActivity {
     private ImageButton place4ImageButton;
     private ImageButton place5ImageButton;
     private Button cancelButton;
+    private Button startCombatButton;
     private ArrayList<Place> places;
     private Place place1;
     private Place place2;
@@ -48,6 +49,8 @@ public class GameScreen extends AppCompatActivity {
     private Path path;
 
     private ImageView witch;
+    private ImageView wizard;
+    private ImageView archer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,9 @@ public class GameScreen extends AppCompatActivity {
         cannon1 = (ImageButton) findViewById(R.id.cannon1);
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
         cannon3 = (ImageButton) findViewById(R.id.cannon3);
+
+        ImageView img = (ImageView) findViewById(R.id.imageView5);
+        System.out.println(img.getDrawable().getIntrinsicWidth());
 
         cancelButton = (Button) findViewById(R.id.cancel);
         cancelButton.setVisibility(View.GONE);
@@ -120,11 +126,26 @@ public class GameScreen extends AppCompatActivity {
 
 
         witch = (ImageView) findViewById(R.id.witch);
+        witch.setVisibility(View.GONE);
+        wizard = (ImageView) findViewById(R.id.wizard);
+        wizard.setVisibility(View.GONE);
+        archer = (ImageView) findViewById(R.id.archer);
+        archer.setVisibility(View.GONE);
 
-        //when we clidck button
-        ObjectAnimator animator = ObjectAnimator.ofFloat(witch, View.X, View.Y, path);
-        animator.setDuration(2000);
-        animator.start();
+        startCombatButton = (Button) findViewById(R.id.startCombat);
+
+        startCombatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                witch.setVisibility(View.VISIBLE);
+                startCombatButton.setVisibility(View.GONE);
+                ObjectAnimator animator = ObjectAnimator.ofFloat(witch, View.X, View.Y, path);
+                //duration should be movementSpeed of enemy object
+                animator.setDuration(2000);
+                animator.start();
+            }
+        });
+
 
 
         cannon1.setOnClickListener(new View.OnClickListener() {

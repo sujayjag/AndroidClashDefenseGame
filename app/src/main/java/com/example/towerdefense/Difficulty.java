@@ -1,16 +1,13 @@
 package com.example.towerdefense;
 
 import android.graphics.Path;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
 
-import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class Difficulty {
     private int layout;
     private Path path;
-    public Difficulty (Player player, int width, int height) {
+    public Difficulty (Player player) {
         String difficulty = player.getDifficulty();
         if (difficulty.equals("easy")) {
             setLayout(R.layout.activity_easy_screen);
@@ -21,9 +18,10 @@ public class Difficulty {
         } else {
             setLayout(R.layout.activity_hard_screen);
             //path.lineTo
+            
             int x = 0;
             int y = 0;
-            
+            //path
             path = new Path();
             path.moveTo(x, y);
 
