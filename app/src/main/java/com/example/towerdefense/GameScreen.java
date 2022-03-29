@@ -1,6 +1,7 @@
 package com.example.towerdefense;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.media.Image;
@@ -30,6 +31,7 @@ public class GameScreen extends AppCompatActivity {
     private ImageButton cannon1;
     private ImageButton cannon2;
     private ImageButton cannon3;
+    private ImageView img;
     private ImageButton place1ImageButton;
     private ImageButton place2ImageButton;
     private ImageButton place3ImageButton;
@@ -70,9 +72,13 @@ public class GameScreen extends AppCompatActivity {
         );
 
         player = new Player(difficulty, nameInputted);
+        img = (ImageView) findViewById(R.id.imageView5);
 
 
+        //System.out.println(img.getDrawable().getIntrinsicWidth());
+        //Difficulty difficultyObj = new Difficulty(player, img.getDrawable().getIntrinsicWidth(), img.getDrawable().getIntrinsicHeight());
         Difficulty difficultyObj = new Difficulty(player);
+
         layout = difficultyObj.getLayout();
         path = difficultyObj.getPath();
 
@@ -89,9 +95,8 @@ public class GameScreen extends AppCompatActivity {
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
         cannon3 = (ImageButton) findViewById(R.id.cannon3);
 
-        //test
-        ImageView img = (ImageView) findViewById(R.id.imageView5);
-        System.out.println(img.getDrawable().getIntrinsicWidth());
+
+        //System.out.println(img.getDrawable().getIntrinsicWidth());
 
         cancelButton = (Button) findViewById(R.id.cancel);
         cancelButton.setVisibility(View.GONE);
