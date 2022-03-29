@@ -2,6 +2,7 @@ package com.example.towerdefense;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.media.Image;
@@ -174,7 +175,7 @@ public class GameScreen extends AppCompatActivity {
                         witches.add(newView);
                         ObjectAnimator animator = ObjectAnimator.ofFloat(newView, View.X, View.Y, path);
                         //duration should be movementSpeed of enemy object
-                        animator.setDuration(3000);
+                        animator.setDuration(500);
                         animator.start();
                         // for each value in witches
                         // check if witch.x and witch.y is equal to end coordinates
@@ -194,13 +195,13 @@ public class GameScreen extends AppCompatActivity {
                                 }
                             }
                         } else {
-                            // game screen
+                            GameOver();
                         }
 
 
                         i++;
                         if (i < numOfEnemies){
-                            handler.postDelayed(this, 3050);
+                            handler.postDelayed(this, 1050);
                         }
                     }
                 };
@@ -378,6 +379,11 @@ public class GameScreen extends AppCompatActivity {
         float dp = (float) d;
         float px = dp * (scale/160);
         return px;
+    }
+
+    public void GameOver() {
+        Intent intent = new Intent(this, activity_game_over.class);
+        startActivity(intent);
     }
 
 
