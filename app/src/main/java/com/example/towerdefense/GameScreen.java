@@ -1,16 +1,21 @@
 package com.example.towerdefense;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +32,7 @@ public class GameScreen extends AppCompatActivity {
     private ImageButton cannon1;
     private ImageButton cannon2;
     private ImageButton cannon3;
+    private ImageView img;
     private ImageButton place1ImageButton;
     private ImageButton place2ImageButton;
     private ImageButton place3ImageButton;
@@ -49,6 +55,10 @@ public class GameScreen extends AppCompatActivity {
     private ImageView wizard;
     private ImageView archer;
 
+    private RelativeLayout layoutParent;
+    private LayoutInflater layoutInflater;
+    private View newView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -63,7 +73,12 @@ public class GameScreen extends AppCompatActivity {
         );
 
         player = new Player(difficulty, nameInputted);
+        img = (ImageView) findViewById(R.id.imageView5);
+
+        //System.out.println(img.getDrawable().getIntrinsicWidth());
+        //Difficulty difficultyObj = new Difficulty(player, img.getDrawable().getIntrinsicWidth(), img.getDrawable().getIntrinsicHeight());
         Difficulty difficultyObj = new Difficulty(player);
+
         layout = difficultyObj.getLayout();
         path = difficultyObj.getPath();
 
@@ -79,6 +94,9 @@ public class GameScreen extends AppCompatActivity {
         cannon1 = (ImageButton) findViewById(R.id.cannon1);
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
         cannon3 = (ImageButton) findViewById(R.id.cannon3);
+
+
+        //System.out.println(img.getDrawable().getIntrinsicWidth());
 
         cancelButton = (Button) findViewById(R.id.cancel);
         cancelButton.setVisibility(View.GONE);
@@ -122,19 +140,78 @@ public class GameScreen extends AppCompatActivity {
         archer = (ImageView) findViewById(R.id.archer);
         archer.setVisibility(View.GONE);
 
+        layoutParent = (RelativeLayout) findViewById(R.id.RelativeLayout);
+
+        layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+
+
         startCombatButton = (Button) findViewById(R.id.startCombat);
 
         startCombatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                witch.setVisibility(View.VISIBLE);
                 startCombatButton.setVisibility(View.GONE);
-                ObjectAnimator animator = ObjectAnimator.ofFloat(witch, View.X, View.Y, path);
-                //duration should be movementSpeed of enemy object
-                animator.setDuration(2000);
-                animator.start();
-            }
+                //depends on level
+                int numOfEnemies = 10;
+                ArrayList<View> witches = new ArrayList<>();
+
+                final Handler handler = new Handler();
+                Runnable task = new Runnable() {
+                    int i = 0;
+                    @Override
+                    public void run() {
+
+
+                        newView = layoutInflater.inflate(R.layout.witch, null, false);
+                        newView.setLayoutParams(new RelativeLayout.LayoutParams(180, 200));
+
+                        //hardcoded
+                        newView.setX(280);
+                        newView.setY(60);
+
+
+                        newView.setVisibility(View.VISIBLE);
+                        layoutParent.addView(newView);
+                        witches.add(newView);
+                        ObjectAnimator animator = ObjectAnimator.ofFloat(newView, View.X, View.Y, path);
+                        //duration should be movementSpeed of enemy object
+                        animator.setDuration(500);
+                        animator.start();
+                        // for each value in witches
+                        // check if witch.x and witch.y is equal to end coordinates
+                        // if code: delete witch from arraylist and reduce monument health
+                        if (player.getMonumentHealth() > 0) {
+                            for (View witch: witches) {
+                                System.out.println(witch.getX() + " " + witch.getY());
+                                if (witch.getX() == 1242.0 && witch.getY() == 1215.0) {
+                                    System.out.println("a");
+                                    //witches.remove(witch);
+
+                                    if (witch.getVisibility() == View.VISIBLE) {
+                                        player.setMonumentHealth(player.getMonumentHealth() - 10);
+                                        health.setText("Health: "+player.getMonumentHealth());
+                                    }
+                                    witch.setVisibility(View.GONE);
+                                }
+                            }
+                        } else {
+                            GameOver();
+                        }
+
+
+                        i++;
+                        if (i < numOfEnemies){
+                            handler.postDelayed(this, 1050);
+                        }
+                    }
+                };
+                handler.post(task);
+
+
+                }
+
         });
+
 
 
         cannon1.setOnClickListener(new View.OnClickListener() {
@@ -295,6 +372,18 @@ public class GameScreen extends AppCompatActivity {
 
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);
+    }
+
+    public static float pxFromDp(double d) {
+        float scale = 432f;
+        float dp = (float) d;
+        float px = dp * (scale/160);
+        return px;
+    }
+
+    public void GameOver() {
+        Intent intent = new Intent(this, activity_game_over.class);
+        startActivity(intent);
     }
 
 
