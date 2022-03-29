@@ -5,7 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_config_screen.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_easy_screen.xml" value="0.25104166666666666" />
-        <entry key="app/src/main/res/layout/activity_game_over.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/activity_game_over.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_game_screen.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_hard_screen.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_medium_screen.xml" value="0.19610507246376813" />
