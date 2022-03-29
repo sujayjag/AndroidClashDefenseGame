@@ -181,6 +181,7 @@ public class GameScreen extends AppCompatActivity {
                 }
                 if (Shop.buyTower(cannon3Object, player)) {
                     placement(R.drawable.cannon3new);
+                    placement(R.drawable.cannon3newnew);
                     updateMoney(player.getBalance());
                     cannonSelected = cannon3Object;
                 } else {
