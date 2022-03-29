@@ -80,6 +80,9 @@ public class GameScreen extends AppCompatActivity {
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
         cannon3 = (ImageButton) findViewById(R.id.cannon3);
 
+        ImageView img = (ImageView) findViewById(R.id.imageView5);
+        System.out.println(img.getDrawable().getIntrinsicWidth());
+
         cancelButton = (Button) findViewById(R.id.cancel);
         cancelButton.setVisibility(View.GONE);
 
@@ -181,7 +184,7 @@ public class GameScreen extends AppCompatActivity {
                     return;
                 }
                 if (Shop.buyTower(cannon3Object, player)) {
-                    placement(R.drawable.cannon3new);
+                    placement(R.drawable.cannon3newnew);
                     updateMoney(player.getBalance());
                     cannonSelected = cannon3Object;
                 } else {
