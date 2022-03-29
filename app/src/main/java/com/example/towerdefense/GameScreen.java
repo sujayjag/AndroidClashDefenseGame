@@ -69,8 +69,10 @@ public class GameScreen extends AppCompatActivity {
         img = (ImageView) findViewById(R.id.imageView5);
 
 
-        //System.out.println(img.getHeight());
-        Difficulty difficultyObj = new Difficulty(player, img);
+        //System.out.println(img.getDrawable().getIntrinsicWidth());
+        //Difficulty difficultyObj = new Difficulty(player, img.getDrawable().getIntrinsicWidth(), img.getDrawable().getIntrinsicHeight());
+        Difficulty difficultyObj = new Difficulty(player);
+
         layout = difficultyObj.getLayout();
         path = difficultyObj.getPath();
 
@@ -87,8 +89,8 @@ public class GameScreen extends AppCompatActivity {
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
         cannon3 = (ImageButton) findViewById(R.id.cannon3);
 
-        ImageView img = (ImageView) findViewById(R.id.imageView5);
-        System.out.println(img.getDrawable().getIntrinsicWidth());
+
+        //System.out.println(img.getDrawable().getIntrinsicWidth());
 
         cancelButton = (Button) findViewById(R.id.cancel);
         cancelButton.setVisibility(View.GONE);
