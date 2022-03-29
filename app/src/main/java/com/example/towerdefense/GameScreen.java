@@ -5,12 +5,15 @@ import android.graphics.Color;
 import android.graphics.Path;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +52,10 @@ public class GameScreen extends AppCompatActivity {
     private ImageView wizard;
     private ImageView archer;
 
+    private RelativeLayout layoutParent;
+    private LayoutInflater layoutInflater;
+    private View newView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -63,6 +70,8 @@ public class GameScreen extends AppCompatActivity {
         );
 
         player = new Player(difficulty, nameInputted);
+
+
         Difficulty difficultyObj = new Difficulty(player);
         layout = difficultyObj.getLayout();
         path = difficultyObj.getPath();
@@ -80,6 +89,7 @@ public class GameScreen extends AppCompatActivity {
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
         cannon3 = (ImageButton) findViewById(R.id.cannon3);
 
+        //test
         ImageView img = (ImageView) findViewById(R.id.imageView5);
         System.out.println(img.getDrawable().getIntrinsicWidth());
 
@@ -125,18 +135,50 @@ public class GameScreen extends AppCompatActivity {
         archer = (ImageView) findViewById(R.id.archer);
         archer.setVisibility(View.GONE);
 
+        layoutParent = (RelativeLayout) findViewById(R.id.RelativeLayout);
+
+        layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+
+
         startCombatButton = (Button) findViewById(R.id.startCombat);
 
         startCombatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                witch.setVisibility(View.VISIBLE);
                 startCombatButton.setVisibility(View.GONE);
-                ObjectAnimator animator = ObjectAnimator.ofFloat(witch, View.X, View.Y, path);
-                //duration should be movementSpeed of enemy object
-                animator.setDuration(2000);
-                animator.start();
-            }
+                //depends on level
+                int numOfEnemies = 10;
+
+                final Handler handler = new Handler();
+                Runnable task = new Runnable() {
+                    int i = 0;
+                    @Override
+                    public void run() {
+                        newView = layoutInflater.inflate(R.layout.witch, null, false);
+                        newView.setLayoutParams(new RelativeLayout.LayoutParams(180, 200));
+
+                        //hardcoded
+                        newView.setX(280);
+                        newView.setY(60);
+
+
+                        newView.setVisibility(View.VISIBLE);
+                        layoutParent.addView(newView);
+                        ObjectAnimator animator = ObjectAnimator.ofFloat(newView, View.X, View.Y, path);
+                        //duration should be movementSpeed of enemy object
+                        animator.setDuration(2000);
+                        animator.start();
+                        i++;
+                        if (i < numOfEnemies){
+                            handler.postDelayed(this, 1500);
+                        }
+                    }
+                };
+                handler.post(task);
+
+
+                }
+
         });
 
 
