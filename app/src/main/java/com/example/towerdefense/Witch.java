@@ -1,6 +1,6 @@
 package com.example.towerdefense;
 
-public class Enemy1 extends Enemy {
+public class Witch extends Enemy {
 
     @Override
     public void attack() {

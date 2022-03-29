@@ -74,7 +74,6 @@ public class GameScreen extends AppCompatActivity {
         player = new Player(difficulty, nameInputted);
         img = (ImageView) findViewById(R.id.imageView5);
 
-
         //System.out.println(img.getDrawable().getIntrinsicWidth());
         //Difficulty difficultyObj = new Difficulty(player, img.getDrawable().getIntrinsicWidth(), img.getDrawable().getIntrinsicHeight());
         Difficulty difficultyObj = new Difficulty(player);
@@ -153,12 +152,15 @@ public class GameScreen extends AppCompatActivity {
                 startCombatButton.setVisibility(View.GONE);
                 //depends on level
                 int numOfEnemies = 10;
+                ArrayList<View> witches = new ArrayList<>();
 
                 final Handler handler = new Handler();
                 Runnable task = new Runnable() {
                     int i = 0;
                     @Override
                     public void run() {
+
+
                         newView = layoutInflater.inflate(R.layout.witch, null, false);
                         newView.setLayoutParams(new RelativeLayout.LayoutParams(180, 200));
 
@@ -169,13 +171,36 @@ public class GameScreen extends AppCompatActivity {
 
                         newView.setVisibility(View.VISIBLE);
                         layoutParent.addView(newView);
+                        witches.add(newView);
                         ObjectAnimator animator = ObjectAnimator.ofFloat(newView, View.X, View.Y, path);
                         //duration should be movementSpeed of enemy object
-                        animator.setDuration(2000);
+                        animator.setDuration(3000);
                         animator.start();
+                        // for each value in witches
+                        // check if witch.x and witch.y is equal to end coordinates
+                        // if code: delete witch from arraylist and reduce monument health
+                        if (player.getMonumentHealth() > 0) {
+                            for (View witch: witches) {
+                                System.out.println(witch.getX() + " " + witch.getY());
+                                if (witch.getX() == 1242.0 && witch.getY() == 1215.0) {
+                                    System.out.println("a");
+                                    //witches.remove(witch);
+
+                                    if (witch.getVisibility() == View.VISIBLE) {
+                                        player.setMonumentHealth(player.getMonumentHealth() - 10);
+                                        health.setText("Health: "+player.getMonumentHealth());
+                                    }
+                                    witch.setVisibility(View.GONE);
+                                }
+                            }
+                        } else {
+                            // game screen
+                        }
+
+
                         i++;
                         if (i < numOfEnemies){
-                            handler.postDelayed(this, 1500);
+                            handler.postDelayed(this, 3050);
                         }
                     }
                 };
@@ -346,6 +371,13 @@ public class GameScreen extends AppCompatActivity {
 
     private void updateMoney(int mon) {
         money.setText("Money: " + mon);
+    }
+
+    public static float pxFromDp(double d) {
+        float scale = 432f;
+        float dp = (float) d;
+        float px = dp * (scale/160);
+        return px;
     }
 
 

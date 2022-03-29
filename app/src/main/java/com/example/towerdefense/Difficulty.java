@@ -25,23 +25,21 @@ public class Difficulty {
             setLayout(R.layout.activity_hard_screen);
             //path.lineTo
 
-            int x = 0;
-            int y = 0;
-            int width = 553;
-            int height = 311;
+            int width = 650;
+            int height = 450;
+
             //path
             path = new Path();
-            path.moveTo((int)pxFromDp(0.183 * width) - 50, 0);
+            path.moveTo((int)pxFromDp(0.183 * width), 0);
 
 
-            path.lineTo((int) pxFromDp(0.183 * width) - 50, (int) pxFromDp(0.457 * height));
+            path.lineTo((int) pxFromDp(0.183 * width), (int) pxFromDp(0.457 * height));
 
-            x += 800;
             path.lineTo((int) pxFromDp(0.708 * width), (int) pxFromDp(0.457 * height));
 
-            y += 200;
             path.lineTo((int) pxFromDp(0.708 * width), (int) pxFromDp(height));
-            System.out.print("animated\n");
+
+
 //            int x = 0;
 //            int y = 0;
 //            //path
