@@ -180,7 +180,7 @@ public class GameScreen extends AppCompatActivity {
                         ObjectAnimator animator = ObjectAnimator.ofFloat(newView, View.X, View.Y, path);
 
                         //duration should be movementSpeed of enemy object
-                        animator.setDuration(4000);
+                        animator.setDuration(temp.getMovementSpeed());
                         animator.start();
                         // for each value in witches
                         // check if witch.x and witch.y is equal to end coordinates
@@ -195,8 +195,7 @@ public class GameScreen extends AppCompatActivity {
                                 if (enemyView.getX() == difficultyObj.getMonumentCoords()[0] && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
 
                                     if (enemyView.getVisibility() == View.VISIBLE) {
-                                        player.setMonumentHealth(player.getMonumentHealth() - 10);
-                                        health.setText("Health: "+player.getMonumentHealth());
+                                        enemy.attack();
                                     }
                                     enemyView.setVisibility(View.GONE);
                                 }
