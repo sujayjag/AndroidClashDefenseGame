@@ -133,12 +133,6 @@ public class GameScreen extends AppCompatActivity {
         places.add(place5);
 
 
-        witch = (ImageView) findViewById(R.id.witch);
-        witch.setVisibility(View.GONE);
-        wizard = (ImageView) findViewById(R.id.wizard);
-        wizard.setVisibility(View.GONE);
-        archer = (ImageView) findViewById(R.id.archer);
-        archer.setVisibility(View.GONE);
 
         layoutParent = (RelativeLayout) findViewById(R.id.RelativeLayout);
 

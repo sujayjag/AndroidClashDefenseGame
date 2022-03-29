@@ -18,9 +18,59 @@ public class Difficulty {
         if (difficulty.equals("easy")) {
             setLayout(R.layout.activity_easy_screen);
             //path.lineTo
+            int width = 650;
+            int height = 450;
+            path = new Path();
+
+            path.moveTo((int)pxFromDp(0.169 * width), 0);
+
+
+            path.lineTo(pxFromDp(0.169 * width), pxFromDp(0.376 * height));
+
+            path.lineTo((int) pxFromDp(0.287 * width), (int) pxFromDp(0.376 * height));
+
+            path.lineTo((int) pxFromDp(0.287 * width), (int) pxFromDp(0.644 * height));
+
+            path.lineTo((int) pxFromDp(0.169 * width), (int) pxFromDp(0.644 * height));
+
+            path.lineTo((int) pxFromDp(0.169 * width), (int) pxFromDp(.871 * height));
+
+            path.lineTo((int) pxFromDp(0.539 * width), (int) pxFromDp(.871 * height));
+
+            path.lineTo((int) pxFromDp(0.539 * width), (int) pxFromDp(.187 * height));
+
+            path.lineTo((int) pxFromDp(0.832 * width), (int) pxFromDp(.187 * height));
+
+            path.lineTo((int) pxFromDp(0.832 * width), (int) pxFromDp(.426 * height));
+
+            path.lineTo((int) pxFromDp(0.705 * width), (int) pxFromDp(.426 * height));
+
+            path.lineTo((int) pxFromDp(0.705 * width), (int) pxFromDp(.688 * height));
+
+            path.lineTo((int) pxFromDp(width), (int) pxFromDp(.688 * height));
+
         } else if (difficulty.equals("medium")) {
+            int width = 650;
+            int height = 450;
             setLayout(R.layout.activity_medium_screen);
             //path.lineTo
+            path = new Path();
+
+            path.moveTo((int)pxFromDp(0.170 * width), 0);
+
+
+            path.lineTo(pxFromDp(0.170 * width), pxFromDp(0.749 * height));
+
+            path.lineTo((int) pxFromDp(0.464 * width), (int) pxFromDp(0.749 * height));
+
+            path.lineTo((int) pxFromDp(0.464 * width), (int) pxFromDp(0.350 * height));
+
+            path.lineTo((int) pxFromDp(0.770 * width), (int) pxFromDp(0.350 * height));
+
+            path.lineTo((int) pxFromDp(0.770 * width), (int) pxFromDp(height));
+
+
+
         } else {
             setLayout(R.layout.activity_hard_screen);
             //path.lineTo
@@ -33,35 +83,21 @@ public class Difficulty {
             path.moveTo((int)pxFromDp(0.183 * width), 0);
 
 
-            path.lineTo((int) pxFromDp(0.183 * width), (int) pxFromDp(0.457 * height));
+            path.lineTo(pxFromDp(0.183 * width), pxFromDp(0.457 * height));
 
             path.lineTo((int) pxFromDp(0.708 * width), (int) pxFromDp(0.457 * height));
 
             path.lineTo((int) pxFromDp(0.708 * width), (int) pxFromDp(height));
 
 
-//            int x = 0;
-//            int y = 0;
-//            //path
-//            path = new Path();
-//            path.moveTo(x, y);
-//
-//            y += 200;
-//            path.lineTo(x, y);
-//
-//            x += 800;
-//            path.lineTo(x, y);
-//
-//            y += 200;
-//            path.lineTo(x, y);
         }
     }
 
-    public static float pxFromDp(double d) {
+    public static int pxFromDp(double d) {
         float scale = 432f;
         float dp = (float) d;
         float px = dp * (scale/160);
-        return px;
+        return (int) px;
     }
 
     public int getLayout() {
