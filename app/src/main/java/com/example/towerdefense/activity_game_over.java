@@ -13,6 +13,7 @@ public class activity_game_over extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //test
         setContentView(R.layout.activity_game_over);
 
         restartButton = (Button) findViewById(R.id.restart_button);
