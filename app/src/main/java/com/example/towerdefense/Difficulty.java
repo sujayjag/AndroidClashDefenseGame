@@ -9,6 +9,7 @@ public class Difficulty {
     private int numWitches;
     private int numWizards;
     private int numArchers;
+    private double[] monumentCoords;
 //    private int width = 553;
 //    private int height = 311;
 
@@ -19,6 +20,10 @@ public class Difficulty {
             setNumArchers(2);
             setNumWitches(2);
             setNumWizards(2);
+            setMonumentCoords(new double[2]);
+            getMonumentCoords()[0] = 1755.0;
+            getMonumentCoords()[1] = 835.0;
+
             //path.lineTo
             int width = 650;
             int height = 450;
@@ -58,6 +63,11 @@ public class Difficulty {
             setNumArchers(3);
             setNumWitches(3);
             setNumWizards(3);
+
+            setMonumentCoords(new double[2]);
+            getMonumentCoords()[0] = 1351.0;
+            getMonumentCoords()[1] = 1215.0;
+
             //path.lineTo
             path = new Path();
 
@@ -81,6 +91,12 @@ public class Difficulty {
             setNumArchers(3);
             setNumWitches(4);
             setNumWizards(4);
+
+            setMonumentCoords(new double[2]);
+            getMonumentCoords()[0] = 1242.0;
+            getMonumentCoords()[1] = 1215.0;
+
+
             //path.lineTo
 
             int width = 650;
@@ -146,5 +162,13 @@ public class Difficulty {
 
     public void setNumArchers(int numArchers) {
         this.numArchers = numArchers;
+    }
+
+    public double[] getMonumentCoords() {
+        return monumentCoords;
+    }
+
+    public void setMonumentCoords(double[] monumentCoords) {
+        this.monumentCoords = monumentCoords;
     }
 }

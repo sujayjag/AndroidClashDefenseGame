@@ -2,6 +2,8 @@ package com.example.towerdefense;
 
 import android.view.View;
 
+import java.lang.reflect.Array;
+
 public class Enemy {
     private int movementSpeed;
     private int damage;
@@ -21,18 +23,18 @@ public class Enemy {
         if (type.equals("witch")) {
             setLayout(R.layout.witch);
             movementSpeed = 1000;
-            damage = 10;
-            health = 80;
+            damage = 30;
+            health = 100;
         } else if (type.equals("wizard")) {
             setLayout(R.layout.wizard);
             movementSpeed = 1000;
-            damage = 10;
-            health = 80;
+            damage = 50;
+            health = 70;
         } else {
             setLayout(R.layout.archer);
             movementSpeed = 1000;
             damage = 10;
-            health = 80;
+            health = 50;
         }
     }
 

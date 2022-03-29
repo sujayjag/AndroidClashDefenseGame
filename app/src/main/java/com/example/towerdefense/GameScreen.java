@@ -180,7 +180,7 @@ public class GameScreen extends AppCompatActivity {
                         ObjectAnimator animator = ObjectAnimator.ofFloat(newView, View.X, View.Y, path);
 
                         //duration should be movementSpeed of enemy object
-                        animator.setDuration(1000);
+                        animator.setDuration(4000);
                         animator.start();
                         // for each value in witches
                         // check if witch.x and witch.y is equal to end coordinates
@@ -192,9 +192,7 @@ public class GameScreen extends AppCompatActivity {
                                 }
                                 View enemyView = enemy.getView();
                                 System.out.println(enemyView.getX() + " " + enemyView.getY());
-                                if (enemyView.getX() == 1242.0 && enemyView.getY() == 1215.0) {
-                                    System.out.println("a");
-                                    //witches.remove(witch);
+                                if (enemyView.getX() == difficultyObj.getMonumentCoords()[0] && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
 
                                     if (enemyView.getVisibility() == View.VISIBLE) {
                                         player.setMonumentHealth(player.getMonumentHealth() - 10);
@@ -210,7 +208,7 @@ public class GameScreen extends AppCompatActivity {
 
                         i++;
                         if (i < (difficultyObj.getNumArchers() + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())){
-                            handler.postDelayed(this, 2000);
+                            handler.postDelayed(this, 4050);
                         }
                     }
                 };
