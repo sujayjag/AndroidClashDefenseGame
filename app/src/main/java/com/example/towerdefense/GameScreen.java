@@ -1,6 +1,7 @@
 package com.example.towerdefense;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.media.Image;
@@ -11,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ public class GameScreen extends AppCompatActivity {
     private ImageButton cannon1;
     private ImageButton cannon2;
     private ImageButton cannon3;
+    private ImageView img;
     private ImageButton place1ImageButton;
     private ImageButton place2ImageButton;
     private ImageButton place3ImageButton;
@@ -60,7 +63,11 @@ public class GameScreen extends AppCompatActivity {
         );
 
         player = new Player(difficulty, nameInputted);
-        Difficulty difficultyObj = new Difficulty(player);
+        img = (ImageView) findViewById(R.id.imageView5);
+
+
+        //System.out.println(img.getHeight());
+        Difficulty difficultyObj = new Difficulty(player, img);
         layout = difficultyObj.getLayout();
         path = difficultyObj.getPath();
 
@@ -163,7 +170,7 @@ public class GameScreen extends AppCompatActivity {
                     return;
                 }
                 if (Shop.buyTower(cannon3Object, player)) {
-                    placement(R.drawable.cannon3new);
+                    placement(R.drawable.cannon3newnew);
                     updateMoney(player.getBalance());
                     cannonSelected = cannon3Object;
                 } else {
