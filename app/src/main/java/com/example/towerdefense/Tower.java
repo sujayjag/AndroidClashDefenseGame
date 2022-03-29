@@ -8,8 +8,7 @@ public abstract class Tower {
     private double upgradeMultiplier;
     private int attackSpeed;
     private int attackDamage;
-    private String location;
-    private String imageString;
+
     private ImageButton button;
 
     public Tower(int cost, int level, double upgradeMultiplier, int attackSpeed,
@@ -19,8 +18,6 @@ public abstract class Tower {
         this.setUpgradeMultiplier(upgradeMultiplier);
         this.setAttackSpeed(attackSpeed);
         this.setAttackDamage(attackDamage);
-        this.setLocation(location);
-        this.setImageString(imageString);
     }
 
     public Tower() {
@@ -67,21 +64,6 @@ public abstract class Tower {
         this.attackDamage = attackDamage;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getImageString() {
-        return imageString;
-    }
-
-    public void setImageString(String imageString) {
-        this.imageString = imageString;
-    }
 
     public ImageButton getButton() {
         return button;
