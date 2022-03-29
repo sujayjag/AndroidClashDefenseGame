@@ -1,6 +1,8 @@
 package com.example.towerdefense;
 
 import android.graphics.Path;
+import android.widget.ImageButton;
+
 
 public class Difficulty {
     private int layout;
@@ -16,6 +18,7 @@ public class Difficulty {
         } else {
             setLayout(R.layout.activity_hard_screen);
             //path.lineTo
+            
             int x = 0;
             int y = 0;
             //path

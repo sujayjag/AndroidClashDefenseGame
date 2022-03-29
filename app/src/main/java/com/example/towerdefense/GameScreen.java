@@ -137,6 +137,7 @@ public class GameScreen extends AppCompatActivity {
         });
 
 
+
         cannon1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (places.isEmpty()) {
