@@ -1,8 +1,7 @@
 package com.example.towerdefense;
 
 import android.view.View;
-
-import java.lang.reflect.Array;
+import android.widget.TextView;
 
 public class Enemy {
     private int movementSpeed;
@@ -22,26 +21,27 @@ public class Enemy {
     public Enemy(String type) {
         if (type.equals("witch")) {
             setLayout(R.layout.witch);
-            movementSpeed = 1000;
-            damage = 30;
-            health = 100;
+            setMovementSpeed(1000);
+            setDamage(30);
+            setHealth(100);
         } else if (type.equals("wizard")) {
             setLayout(R.layout.wizard);
-            movementSpeed = 1000;
-            damage = 50;
-            health = 70;
+            setMovementSpeed(1000);
+            setDamage(50);
+            setHealth(70);
         } else {
             setLayout(R.layout.archer);
-            movementSpeed = 1000;
-            damage = 10;
-            health = 50;
+            setMovementSpeed(1000);
+            setDamage(10);
+            setHealth(50);
         }
     }
 
 
 
-    public void attack(){
-
+    public void attack(Player player, TextView view){
+        player.setMonumentHealth(player.getMonumentHealth() - this.damage);
+        view.setText("Health: "+player.getMonumentHealth());
     }
     //use Player.setMonumentHealth based on tower's damage
     //Update text
@@ -66,5 +66,29 @@ public class Enemy {
 
     public void setLayout(int layout) {
         this.layout = layout;
+    }
+
+    public int getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    public void setMovementSpeed(int movementSpeed) {
+        this.movementSpeed = movementSpeed;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }
