@@ -1,25 +1,60 @@
 package com.example.towerdefense;
 
 public class Player {
-    public int balance;
-    public String name;
-    public String difficulty;
+    private int balance;
+    private String name;
+    private String difficulty;
+    private int monumentHealth;
 
     Player(String difficulty, String name) {
-        this.difficulty =  difficulty;
-        this.name = name;
+        this.setDifficulty(difficulty);
+        this.setName(name);
         if (difficulty.equals("easy")) {
-            balance = 500;
+            setBalance(500);
+            setMonumentHealth(100);
         } else if (difficulty.equals("medium")) {
-            balance = 750;
+            setBalance(750);
+            setMonumentHealth(90);
         } else if (difficulty.equals("hard")) {
-            balance = 1000;
+            setBalance(1000);
+            setMonumentHealth(80);
         }
     }
 
     public void updateBalance(int balance) {
-        this.balance += balance;
+        this.setBalance(this.getBalance() + balance);
     }
 
 
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public int getMonumentHealth() {
+        return monumentHealth;
+    }
+
+    public void setMonumentHealth(int monumentHealth) {
+        this.monumentHealth = monumentHealth;
+    }
 }

@@ -3,29 +3,34 @@ package com.example.towerdefense;
 import android.widget.ImageButton;
 
 public class Cannon1 extends Tower {
-    public Player player;
+    private Player player;
 
     public Cannon1(Player player, ImageButton button) {
-        this.player = player;
-        this.button = button;
+        this.setPlayer(player);
+        this.setButton(button);
         int cost = 50;
         double upgradeMultiplier = 1;
 
-        if(player.difficulty.equals("medium")) {
+        if (player.getDifficulty().equals("medium")) {
             cost = 75;
             upgradeMultiplier = 1.2;
-        }
-        else if(player.difficulty.equals("hard")) {
+        } else if (player.getDifficulty().equals("hard")) {
             cost = 100;
             upgradeMultiplier = 1.5;
         }
         //might need to fix imageString
         //super(cost, 1, upgradeMultiplier, 10, 3, "", "../../../../res/drawable/cannon1new.jpg");
-        this.cost = cost;
-        this.upgradeMultiplier = upgradeMultiplier;
-        this.attackSpeed = 10;
-        this.attackDamage = 3;
-        this.location = "";
-        this.imageString = "../../../../res/drawable/cannon1new.jpg";
+        this.setCost(cost);
+        this.setUpgradeMultiplier(upgradeMultiplier);
+        this.setAttackSpeed(10);
+        this.setAttackDamage(3);
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

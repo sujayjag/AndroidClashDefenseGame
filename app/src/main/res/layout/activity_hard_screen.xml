@@ -22,7 +22,7 @@
                 app:srcCompat="@drawable/hard" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="128dp"
                 android:layout_height="match_parent"
                 android:background="#FFFFFF"
                 android:orientation="vertical">
@@ -34,10 +34,10 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="25dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/you_blockhead"
-                    android:text="Monument Health:"
-                    android:textSize="15sp" />
+                    android:text="Health: "
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/money3"
@@ -48,7 +48,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/you_blockhead"
                     android:text="Money:"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
 
                 <ImageButton
                     android:id="@+id/cannon1"
@@ -60,6 +60,14 @@
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/cannon1new" />
 
+                <TextView
+                    android:id="@+id/cannon1cost"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:fontFamily="@font/you_blockhead"
+                    android:textSize="10dp"
+                    android:layout_height="20dp" />
+
                 <ImageButton
                     android:id="@+id/cannon2"
                     android:layout_width="90dp"
@@ -67,7 +75,15 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="0dp"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/cannon2new" />
+                    app:srcCompat="@drawable/cannon2newnew" />
+
+                <TextView
+                    android:id="@+id/cannon2cost"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:fontFamily="@font/you_blockhead"
+                    android:textSize="10dp"
+                    android:layout_height="20dp" />
 
                 <ImageButton
                     android:id="@+id/cannon3"
@@ -76,7 +92,14 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="0dp"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/cannon3new" />
+                    app:srcCompat="@drawable/cannon3newnew" />
+                <TextView
+                    android:id="@+id/cannon3cost"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:fontFamily="@font/you_blockhead"
+                    android:textSize="10dp"
+                    android:layout_height="20dp" />
 
             </LinearLayout>
 
@@ -95,16 +118,39 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginLeft="300dp"
-            android:layout_marginTop="230dp"
+            android:layout_marginTop="200dp"
             android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/place3"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginTop="105dp"
+            android:layout_marginLeft="125dp"
             android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/place4"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="105dp"
+            android:layout_marginLeft="300dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/place5"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="125dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 
