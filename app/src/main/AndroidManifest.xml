@@ -10,8 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ConfigScreen" />
-        <activity android:name=".EasyScreen" />
-        <activity android:name=".MediumScreen" />
         <activity android:name=".GameScreen" />
         <activity
             android:name=".MainActivity"
