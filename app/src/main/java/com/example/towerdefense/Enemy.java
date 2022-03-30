@@ -43,9 +43,8 @@ public class Enemy {
 
 
 
-    public void attack(Player player, TextView view){
+    public void attack(Player player){
         player.setMonumentHealth(player.getMonumentHealth() - this.damage);
-        view.setText("Health: "+player.getMonumentHealth());
     }
     //use Player.setMonumentHealth based on tower's damage
     //Update text
