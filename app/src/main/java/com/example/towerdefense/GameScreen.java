@@ -365,15 +365,15 @@ public class GameScreen extends AppCompatActivity {
                 // if code: delete witch from arraylist and reduce monument health
                 if (player.getMonumentHealth() > 0) {
                     for (Enemy enemy: enemies) {
+                        if (player.getMonumentHealth() == 0) {
+                            GameOver();
+                        }
                         View enemyView = enemy.getView();
                         System.out.println(enemyView.getX() + " " + enemyView.getY());
                         if (enemyView.getX() == difficultyObj.getMonumentCoords()[0] && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
 
                             if (enemyView.getVisibility() == View.VISIBLE) {
                                 enemy.attack(player, health);
-                                if (player.getMonumentHealth() <= 0) {
-                                    GameOver();
-                                }
                             }
                             enemyView.setVisibility(View.GONE);
                         }
