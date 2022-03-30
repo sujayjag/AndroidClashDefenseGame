@@ -31,6 +31,13 @@ public class TestingM4 {
     }
 
     @Test
+    public void diffTimeBetween() {
+        assertTrue(witch.getTimeBetween() != wizard.getTimeBetween()
+            && witch.getTimeBetween() != archer.getTimeBetween()
+            && wizard.getTimeBetween() != archer.getTimeBetween());
+    }
+
+    @Test
     public void diffEnemyHealth() {
         assertTrue(witch.getHealth() != wizard.getHealth()
             && witch.getHealth() != archer.getHealth()
@@ -75,7 +82,11 @@ public class TestingM4 {
             && (hardPlayer.getMonumentHealth() ==
             (dummyHardPlayer.getMonumentHealth() - archer.getDamage())));
     }
-    
+
+    @Test
+    public void testGameOver() {
+        easyPlayer.setMonumentHealth(0);
+    }
 
 
 }
