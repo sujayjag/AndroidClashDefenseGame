@@ -1,11 +1,9 @@
 package com.example.towerdefense;
 
 import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Path;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -317,20 +315,21 @@ public class GameScreen extends AppCompatActivity {
     }
 
     public void GameOver() {
-        Intent intent = new Intent(this, activity_game_over.class);
+        Intent intent = new Intent(this, GameOver.class);
         startActivity(intent);
     }
 
     public void deployEnemies(Difficulty difficultyObj) {
         startCombatButton.setVisibility(View.GONE);
         //depends on level
-        int numOfEnemies = 10;
+
         ArrayList<Enemy> enemies = new ArrayList<>();
 
         final Handler handler = new Handler();
         Runnable task = new Runnable() {
             int i = 0;
             String enemyType = "archer";
+
             @Override
             public void run() {
                 if (i >= 0 && i < difficultyObj.getNumArchers()) {
