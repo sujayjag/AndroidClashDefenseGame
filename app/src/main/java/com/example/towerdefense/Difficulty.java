@@ -10,10 +10,12 @@ public class Difficulty {
     private int numWizards;
     private int numArchers;
     private double[] monumentCoords;
+    private Player player;
 //    private int width = 553;
 //    private int height = 311;
 
     public Difficulty (Player player) {
+        this.player = player;
         String difficulty = player.getDifficulty();
         if (difficulty.equals("easy")) {
             setLayout(R.layout.activity_easy_screen);
@@ -24,6 +26,48 @@ public class Difficulty {
             getMonumentCoords()[0] = 1755.0;
             getMonumentCoords()[1] = 835.0;
 
+
+        } else if (difficulty.equals("medium")) {
+            int width = 650;
+            int height = 450;
+            setLayout(R.layout.activity_medium_screen);
+            setNumArchers(3);
+            setNumWitches(3);
+            setNumWizards(3);
+
+            setMonumentCoords(new double[2]);
+            getMonumentCoords()[0] = 1351.0;
+            getMonumentCoords()[1] = 1215.0;
+
+
+
+        } else {
+            setLayout(R.layout.activity_hard_screen);
+            setNumArchers(4);
+            setNumWitches(4);
+            setNumWizards(4);
+
+            setMonumentCoords(new double[2]);
+            getMonumentCoords()[0] = 1242.0;
+            getMonumentCoords()[1] = 1215.0;
+
+
+            //path.lineTo
+
+            //path
+        }
+    }
+
+    public static int pxFromDp(double d) {
+        float scale = 432f;
+        float dp = (float) d;
+        float px = dp * (scale/160);
+        return (int) px;
+    }
+
+    public void setPath() {
+        String difficulty = player.getDifficulty();
+        if (difficulty.equals("easy")) {
             //path.lineTo
             int width = 650;
             int height = 450;
@@ -55,20 +99,10 @@ public class Difficulty {
             path.lineTo((int) pxFromDp(0.705 * width), (int) pxFromDp(.688 * height));
 
             path.lineTo((int) pxFromDp(width), (int) pxFromDp(.688 * height));
-
         } else if (difficulty.equals("medium")) {
+            //path.lineTo
             int width = 650;
             int height = 450;
-            setLayout(R.layout.activity_medium_screen);
-            setNumArchers(3);
-            setNumWitches(3);
-            setNumWizards(3);
-
-            setMonumentCoords(new double[2]);
-            getMonumentCoords()[0] = 1351.0;
-            getMonumentCoords()[1] = 1215.0;
-
-            //path.lineTo
             path = new Path();
 
             path.moveTo((int)pxFromDp(0.170 * width), 0);
@@ -83,26 +117,9 @@ public class Difficulty {
             path.lineTo((int) pxFromDp(0.770 * width), (int) pxFromDp(0.350 * height));
 
             path.lineTo((int) pxFromDp(0.770 * width), (int) pxFromDp(height));
-
-
-
         } else {
-            setLayout(R.layout.activity_hard_screen);
-            setNumArchers(4);
-            setNumWitches(4);
-            setNumWizards(4);
-
-            setMonumentCoords(new double[2]);
-            getMonumentCoords()[0] = 1242.0;
-            getMonumentCoords()[1] = 1215.0;
-
-
-            //path.lineTo
-
             int width = 650;
             int height = 450;
-
-            //path
             path = new Path();
             path.moveTo((int)pxFromDp(0.183 * width), 0);
 
@@ -112,16 +129,7 @@ public class Difficulty {
             path.lineTo((int) pxFromDp(0.708 * width), (int) pxFromDp(0.457 * height));
 
             path.lineTo((int) pxFromDp(0.708 * width), (int) pxFromDp(height));
-
-
         }
-    }
-
-    public static int pxFromDp(double d) {
-        float scale = 432f;
-        float dp = (float) d;
-        float px = dp * (scale/160);
-        return (int) px;
     }
 
     public int getLayout() {

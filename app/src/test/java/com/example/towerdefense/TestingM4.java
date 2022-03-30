@@ -15,6 +15,9 @@ public class TestingM4 {
     private Enemy witch = new Enemy("witch");
     private Enemy wizard = new Enemy("wizard");
     private Enemy archer = new Enemy("archer");
+    private Difficulty easy = new Difficulty(easyPlayer);
+    private Difficulty medium = new Difficulty(mediumPlayer);
+    private Difficulty hard = new Difficulty(hardPlayer);
 
     @Test
     public void diffEnemyDamage() {
@@ -28,6 +31,13 @@ public class TestingM4 {
         assertTrue(witch.getMovementSpeed() != wizard.getMovementSpeed()
             && witch.getMovementSpeed() != archer.getMovementSpeed()
             && wizard.getMovementSpeed() != archer.getMovementSpeed());
+    }
+
+    @Test
+    public void diffTimeBetween() {
+        assertTrue(witch.getTimeBetween() != wizard.getTimeBetween()
+            && witch.getTimeBetween() != archer.getTimeBetween()
+            && wizard.getTimeBetween() != archer.getTimeBetween());
     }
 
     @Test
@@ -75,7 +85,26 @@ public class TestingM4 {
             && (hardPlayer.getMonumentHealth() ==
             (dummyHardPlayer.getMonumentHealth() - archer.getDamage())));
     }
-    
 
+    @Test
+    public void DiffNumWitches() {
+        assertTrue(easy.getNumWitches() != medium.getNumWitches()
+            && easy.getNumWitches() != hard.getNumWitches()
+            && medium.getNumWitches() != hard.getNumWitches());
+    }
+
+    @Test
+    public void DiffNumWizards() {
+        assertTrue(easy.getNumWizards() != medium.getNumWizards()
+            && easy.getNumWizards() != hard.getNumWizards()
+            && medium.getNumWizards() != hard.getNumWizards());
+    }
+
+    @Test
+    public void DiffNumArchers() {
+        assertTrue(easy.getNumArchers() != medium.getNumArchers()
+            && easy.getNumArchers() != hard.getNumArchers()
+            && medium.getNumArchers() != hard.getNumArchers());
+    }
 
 }
