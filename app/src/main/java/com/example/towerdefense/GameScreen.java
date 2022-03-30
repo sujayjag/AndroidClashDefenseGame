@@ -363,24 +363,25 @@ public class GameScreen extends AppCompatActivity {
                 // for each value in witches
                 // check if witch.x and witch.y is equal to end coordinates
                 // if code: delete witch from arraylist and reduce monument health
-                if (player.getMonumentHealth() > 0) {
+
                     for (Enemy enemy: enemies) {
-                        if (player.getMonumentHealth() == 0) {
-                            GameOver();
-                        }
+
                         View enemyView = enemy.getView();
                         System.out.println(enemyView.getX() + " " + enemyView.getY());
                         if (enemyView.getX() == difficultyObj.getMonumentCoords()[0] && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
 
                             if (enemyView.getVisibility() == View.VISIBLE) {
                                 enemy.attack(player, health);
+                                if (player.getMonumentHealth() <= 0) {
+                                    player.setMonumentHealth(100);
+                                    GameOver();
+                                    return;
+                                }
+
                             }
                             enemyView.setVisibility(View.GONE);
                         }
                     }
-                } else {
-                    GameOver();
-                }
 
 
                 i++;
