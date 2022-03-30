@@ -195,7 +195,7 @@ public class GameScreen extends AppCompatActivity {
                                 if (enemyView.getX() == difficultyObj.getMonumentCoords()[0] && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
 
                                     if (enemyView.getVisibility() == View.VISIBLE) {
-                                        enemy.attack();
+                                        enemy.attack(player, health);
                                     }
                                     enemyView.setVisibility(View.GONE);
                                 }
