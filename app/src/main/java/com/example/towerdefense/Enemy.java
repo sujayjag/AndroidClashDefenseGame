@@ -51,10 +51,6 @@ public class Enemy {
     //Check if momnument is below 0, if it is endGame()
     //Despawn the enemy object
 
-    public void deployEnemy() {
-        //Add enemy to screen and start moving
-    }
-
     public View getView() {
         return view;
     }

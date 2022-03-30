@@ -76,6 +76,7 @@ public class GameScreen extends AppCompatActivity {
         //System.out.println(img.getDrawable().getIntrinsicWidth());
         //Difficulty difficultyObj = new Difficulty(player, img.getDrawable().getIntrinsicWidth(), img.getDrawable().getIntrinsicHeight());
         Difficulty difficultyObj = new Difficulty(player);
+        difficultyObj.setPath();
 
         layout = difficultyObj.getLayout();
         path = difficultyObj.getPath();
