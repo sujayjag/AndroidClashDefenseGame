@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 public class Enemy {
     private int movementSpeed;
+    private int timeBetween;
     private int damage;
     private int health;
     private String type;
@@ -21,17 +22,20 @@ public class Enemy {
     public Enemy(String type) {
         if (type.equals("witch")) {
             setLayout(R.layout.witch);
-            setMovementSpeed(1000);
+            setMovementSpeed(1900);
+            setTimeBetween(1950);
             setDamage(30);
             setHealth(100);
         } else if (type.equals("wizard")) {
             setLayout(R.layout.wizard);
-            setMovementSpeed(1000);
+            setMovementSpeed(2100);
+            setTimeBetween(2150);
             setDamage(50);
             setHealth(70);
         } else {
             setLayout(R.layout.archer);
-            setMovementSpeed(1000);
+            setMovementSpeed(2500);
+            setTimeBetween(2550);
             setDamage(10);
             setHealth(50);
         }
@@ -90,5 +94,13 @@ public class Enemy {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public int getTimeBetween() {
+        return timeBetween;
+    }
+
+    public void setTimeBetween(int timeBetween) {
+        this.timeBetween = timeBetween;
     }
 }

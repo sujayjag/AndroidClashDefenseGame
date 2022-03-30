@@ -143,81 +143,10 @@ public class GameScreen extends AppCompatActivity {
         startCombatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startCombatButton.setVisibility(View.GONE);
-                //depends on level
-                int numOfEnemies = 10;
-                ArrayList<Enemy> enemies = new ArrayList<>();
-
-                final Handler handler = new Handler();
-                Runnable task = new Runnable() {
-                    int i = 0;
-                    String enemyType = "archer";
-                    @Override
-                    public void run() {
-
-                        if (i >= 0 && i < difficultyObj.getNumArchers()) {
-                            enemyType = "archer";
-                        } else if (i < difficultyObj.getNumArchers() + difficultyObj.getNumWitches()) {
-                            enemyType = "witch";
-                        } else {
-                            enemyType = "wizard";
-                        }
-
-                        Enemy temp = new Enemy(enemyType);
-
-                        newView = layoutInflater.inflate(temp.getLayout(), null, false);
-                        newView.setLayoutParams(new RelativeLayout.LayoutParams(180, 200));
-
-                        //hardcoded
-                        newView.setX(280);
-                        newView.setY(60);
-
-
-                        newView.setVisibility(View.VISIBLE);
-                        layoutParent.addView(newView);
-                        temp.setView(newView);
-                        enemies.add(temp);
-                        ObjectAnimator animator = ObjectAnimator.ofFloat(newView, View.X, View.Y, path);
-
-                        //duration should be movementSpeed of enemy object
-                        animator.setDuration(temp.getMovementSpeed());
-                        animator.start();
-                        // for each value in witches
-                        // check if witch.x and witch.y is equal to end coordinates
-                        // if code: delete witch from arraylist and reduce monument health
-                        if (player.getMonumentHealth() > 0) {
-                            for (Enemy enemy: enemies) {
-                                if (player.getMonumentHealth() == 0) {
-                                    GameOver();
-                                }
-                                View enemyView = enemy.getView();
-                                System.out.println(enemyView.getX() + " " + enemyView.getY());
-                                if (enemyView.getX() == difficultyObj.getMonumentCoords()[0] && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
-
-                                    if (enemyView.getVisibility() == View.VISIBLE) {
-                                        enemy.attack(player, health);
-                                    }
-                                    enemyView.setVisibility(View.GONE);
-                                }
-                            }
-                        } else {
-                            GameOver();
-                        }
-
-
-                        i++;
-                        if (i < (difficultyObj.getNumArchers() + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())){
-                            handler.postDelayed(this, 4050);
-                        }
-                    }
-                };
-                handler.post(task);
-
-
+                    deployEnemies(difficultyObj);
                 }
 
         });
-
 
 
         cannon1.setOnClickListener(new View.OnClickListener() {
@@ -390,6 +319,77 @@ public class GameScreen extends AppCompatActivity {
     public void GameOver() {
         Intent intent = new Intent(this, activity_game_over.class);
         startActivity(intent);
+    }
+
+    public void deployEnemies(Difficulty difficultyObj) {
+        startCombatButton.setVisibility(View.GONE);
+        //depends on level
+        int numOfEnemies = 10;
+        ArrayList<Enemy> enemies = new ArrayList<>();
+
+        final Handler handler = new Handler();
+        Runnable task = new Runnable() {
+            int i = 0;
+            String enemyType = "archer";
+            @Override
+            public void run() {
+                if (i >= 0 && i < difficultyObj.getNumArchers()) {
+                    enemyType = "archer";
+                } else if (i < difficultyObj.getNumArchers() + difficultyObj.getNumWitches()) {
+                    enemyType = "witch";
+                } else {
+                    enemyType = "wizard";
+                }
+
+                Enemy temp = new Enemy(enemyType);
+
+                newView = layoutInflater.inflate(temp.getLayout(), null, false);
+                newView.setLayoutParams(new RelativeLayout.LayoutParams(180, 200));
+
+                //hardcoded
+                newView.setX(280);
+                newView.setY(60);
+
+
+                newView.setVisibility(View.VISIBLE);
+                layoutParent.addView(newView);
+                temp.setView(newView);
+                enemies.add(temp);
+                ObjectAnimator animator = ObjectAnimator.ofFloat(newView, View.X, View.Y, path);
+
+                //duration should be movementSpeed of enemy object
+                animator.setDuration(temp.getMovementSpeed());
+                animator.start();
+                // for each value in witches
+                // check if witch.x and witch.y is equal to end coordinates
+                // if code: delete witch from arraylist and reduce monument health
+                if (player.getMonumentHealth() > 0) {
+                    for (Enemy enemy: enemies) {
+                        View enemyView = enemy.getView();
+                        System.out.println(enemyView.getX() + " " + enemyView.getY());
+                        if (enemyView.getX() == difficultyObj.getMonumentCoords()[0] && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
+
+                            if (enemyView.getVisibility() == View.VISIBLE) {
+                                enemy.attack(player, health);
+                                if (player.getMonumentHealth() <= 0) {
+                                    GameOver();
+                                }
+                            }
+                            enemyView.setVisibility(View.GONE);
+                        }
+                    }
+                } else {
+                    GameOver();
+                }
+
+
+                i++;
+                if (i < (difficultyObj.getNumArchers() + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())){
+                    handler.postDelayed(this, temp.getTimeBetween());
+                }
+            }
+        };
+        handler.post(task);
     }
 
 

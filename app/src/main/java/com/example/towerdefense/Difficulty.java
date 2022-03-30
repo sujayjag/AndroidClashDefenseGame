@@ -88,7 +88,7 @@ public class Difficulty {
 
         } else {
             setLayout(R.layout.activity_hard_screen);
-            setNumArchers(3);
+            setNumArchers(4);
             setNumWitches(4);
             setNumWizards(4);
 
