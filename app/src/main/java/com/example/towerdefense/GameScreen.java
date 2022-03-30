@@ -370,7 +370,8 @@ public class GameScreen extends AppCompatActivity {
                         if (enemyView.getX() == difficultyObj.getMonumentCoords()[0] && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
 
                             if (enemyView.getVisibility() == View.VISIBLE) {
-                                enemy.attack(player, health);
+                                enemy.attack(player);
+                                health.setText("Health: "+player.getMonumentHealth());
                                 if (player.getMonumentHealth() <= 0) {
                                     player.setMonumentHealth(100);
                                     GameOver();
