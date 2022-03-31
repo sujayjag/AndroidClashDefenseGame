@@ -111,7 +111,6 @@ public class GameScreen extends AppCompatActivity {
         layoutParent = (RelativeLayout) findViewById(R.id.RelativeLayout);
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         startCombatButton = (Button) findViewById(R.id.startCombat);
-
         startCombatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +125,6 @@ public class GameScreen extends AppCompatActivity {
                     private String enemyType = "archer";
                     @Override
                     public void run() {
-
                         if (i >= 0 && i < difficultyObj.getNumArchers()) {
                             enemyType = "archer";
                         } else if (i < difficultyObj.getNumArchers()
