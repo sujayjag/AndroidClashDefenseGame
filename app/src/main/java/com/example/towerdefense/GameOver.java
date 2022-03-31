@@ -9,7 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class activity_game_over extends AppCompatActivity {
+public class GameOver extends AppCompatActivity {
     private Button restartButton;
 
     @Override

@@ -1,11 +1,9 @@
 package com.example.towerdefense;
 
 import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Path;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -61,9 +59,7 @@ public class GameScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         String nameInputted = getIntent().getStringExtra("nameInputted");
         String difficulty = getIntent().getStringExtra("difficulty");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -71,40 +67,24 @@ public class GameScreen extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
-
         player = new Player(difficulty, nameInputted);
         img = (ImageView) findViewById(R.id.imageView5);
-
-        //System.out.println(img.getDrawable().getIntrinsicWidth());
-        //Difficulty difficultyObj = new Difficulty(player, img.getDrawable().getIntrinsicWidth(), img.getDrawable().getIntrinsicHeight());
         Difficulty difficultyObj = new Difficulty(player);
-
         layout = difficultyObj.getLayout();
         path = difficultyObj.getPath();
-
-
         setContentView(layout);
         money = findViewById(R.id.money3);
         health = findViewById(R.id.health3);
-
-
         money.setText("Money: " + player.getBalance());
         health.setText("Health: " + player.getMonumentHealth());
-
         cannon1 = (ImageButton) findViewById(R.id.cannon1);
         cannon2 = (ImageButton) findViewById(R.id.cannon2);
         cannon3 = (ImageButton) findViewById(R.id.cannon3);
-
-
-        //System.out.println(img.getDrawable().getIntrinsicWidth());
-
         cancelButton = (Button) findViewById(R.id.cancel);
         cancelButton.setVisibility(View.GONE);
-
         Cannon1 cannon1Object = new Cannon1(player, cannon1);
         Cannon2 cannon2Object = new Cannon2(player, cannon2);
         Cannon3 cannon3Object = new Cannon3(player, cannon3);
-
         cannon1Cost = (TextView) findViewById(R.id.cannon1cost);
         cannon2Cost = (TextView) findViewById(R.id.cannon2cost);
         cannon3Cost = (TextView) findViewById(R.id.cannon3cost);
@@ -131,12 +111,8 @@ public class GameScreen extends AppCompatActivity {
         places.add(place3);
         places.add(place4);
         places.add(place5);
-
-
         layoutParent = (RelativeLayout) findViewById(R.id.RelativeLayout);
-
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-
 
         startCombatButton = (Button) findViewById(R.id.startCombat);
 
@@ -150,14 +126,15 @@ public class GameScreen extends AppCompatActivity {
 
                 final Handler handler = new Handler();
                 Runnable task = new Runnable() {
-                    int i = 0;
-                    String enemyType = "archer";
+                    private int i = 0;
+                    private String enemyType = "archer";
                     @Override
                     public void run() {
 
                         if (i >= 0 && i < difficultyObj.getNumArchers()) {
                             enemyType = "archer";
-                        } else if (i < difficultyObj.getNumArchers() + difficultyObj.getNumWitches()) {
+                        } else if (i < difficultyObj.getNumArchers()
+                            + difficultyObj.getNumWitches()) {
                             enemyType = "witch";
                         } else {
                             enemyType = "wizard";
@@ -177,7 +154,8 @@ public class GameScreen extends AppCompatActivity {
                         layoutParent.addView(newView);
                         temp.setView(newView);
                         enemies.add(temp);
-                        ObjectAnimator animator = ObjectAnimator.ofFloat(newView, View.X, View.Y, path);
+                        ObjectAnimator animator = ObjectAnimator.ofFloat(newView,
+                            View.X, View.Y, path);
 
                         //duration should be movementSpeed of enemy object
                         animator.setDuration(temp.getMovementSpeed());
@@ -188,43 +166,55 @@ public class GameScreen extends AppCompatActivity {
                         if (player.getMonumentHealth() > 0) {
                             for (Enemy enemy: enemies) {
                                 if (player.getMonumentHealth() == 0) {
-                                    GameOver();
+                                    gameOver();
                                 }
                                 View enemyView = enemy.getView();
                                 System.out.println(enemyView.getX() + " " + enemyView.getY());
-                                if (enemyView.getX() == difficultyObj.getMonumentCoords()[0] && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
+                                if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
+                                    && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
 
                                     if (enemyView.getVisibility() == View.VISIBLE) {
-                                        enemy.attack();
+                                        enemy.attack(player, health);
                                     }
                                     enemyView.setVisibility(View.GONE);
                                 }
                             }
                         } else {
-                            GameOver();
+                            gameOver();
                         }
 
 
                         i++;
-                        if (i < (difficultyObj.getNumArchers() + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())){
+                        if (i < (difficultyObj.getNumArchers()
+                            + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())) {
                             handler.postDelayed(this, 4050);
                         }
                     }
                 };
                 handler.post(task);
-
-
                 }
-
         });
 
+        placeCannons(cannon1, cannon2, cannon3, cannon1Object, cannon2Object, cannon3Object);
 
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cannonSelected != null) {
+                    visibilityOff();
+                }
+                cancelButton.setVisibility(View.GONE);
+            }
+        });
+    }
 
+    private void placeCannons(ImageButton cannon1, ImageButton cannon2, ImageButton cannon3,
+                              Cannon1 cannon1Object, Cannon2 cannon2Object, Cannon3 cannon3Object) {
         cannon1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (places.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "All Places are Filled",
-                            Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (Shop.buyTower(cannon1Object, player)) {
@@ -241,7 +231,7 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 if (places.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "All Places are Filled",
-                            Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (Shop.buyTower(cannon2Object, player)) {
@@ -259,7 +249,7 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 if (places.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "All Places are Filled",
-                            Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (Shop.buyTower(cannon3Object, player)) {
@@ -269,17 +259,6 @@ public class GameScreen extends AppCompatActivity {
                 } else {
                     insufficientFunds();
                 }
-            }
-        });
-
-
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (cannonSelected != null) {
-                    visibilityOff();
-                }
-                cancelButton.setVisibility(View.GONE);
             }
         });
     }
@@ -383,12 +362,12 @@ public class GameScreen extends AppCompatActivity {
     public static float pxFromDp(double d) {
         float scale = 432f;
         float dp = (float) d;
-        float px = dp * (scale/160);
+        float px = dp * (scale / 160);
         return px;
     }
 
-    public void GameOver() {
-        Intent intent = new Intent(this, activity_game_over.class);
+    public void gameOver() {
+        Intent intent = new Intent(this, GameOver.class);
         startActivity(intent);
     }
 
