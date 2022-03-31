@@ -22,7 +22,6 @@ public class GameOver extends AppCompatActivity {
         );
         setContentView(R.layout.activity_game_over);
 
-
         restartButton = (Button) findViewById(R.id.restart_button);
 
         restartButton.setOnClickListener(new View.OnClickListener() {
@@ -34,7 +33,7 @@ public class GameOver extends AppCompatActivity {
     }
 
     public void restartActivity() {
-         Intent intent = new Intent(this, MainActivity.class);
-         startActivity(intent);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

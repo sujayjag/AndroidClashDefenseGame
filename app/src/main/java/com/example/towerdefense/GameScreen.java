@@ -88,23 +88,19 @@ public class GameScreen extends AppCompatActivity {
         cannon1Cost = (TextView) findViewById(R.id.cannon1cost);
         cannon2Cost = (TextView) findViewById(R.id.cannon2cost);
         cannon3Cost = (TextView) findViewById(R.id.cannon3cost);
-
         cannon1Cost.setText("Cost: " + cannon1Object.getCost());
         cannon2Cost.setText("Cost: " + cannon2Object.getCost());
         cannon3Cost.setText("Cost: " + cannon3Object.getCost());
-
         place1ImageButton = (ImageButton) findViewById(R.id.place1);
         place2ImageButton = (ImageButton) findViewById(R.id.place2);
         place3ImageButton = (ImageButton) findViewById(R.id.place3);
         place4ImageButton = (ImageButton) findViewById(R.id.place4);
         place5ImageButton = (ImageButton) findViewById(R.id.place5);
-
         place1 = new Place(place1ImageButton);
         place2 = new Place(place2ImageButton);
         place3 = new Place(place3ImageButton);
         place4 = new Place(place4ImageButton);
         place5 = new Place(place5ImageButton);
-
         places = new ArrayList<>();
         places.add(place1);
         places.add(place2);
@@ -113,7 +109,6 @@ public class GameScreen extends AppCompatActivity {
         places.add(place5);
         layoutParent = (RelativeLayout) findViewById(R.id.RelativeLayout);
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-
         startCombatButton = (Button) findViewById(R.id.startCombat);
 
         startCombatButton.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +169,13 @@ public class GameScreen extends AppCompatActivity {
                                     && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
 
                                     if (enemyView.getVisibility() == View.VISIBLE) {
-                                        enemy.attack(player, health);
+                                        enemy.attack(player);
+                                        health.setText("Health: " + player.getMonumentHealth());
+                                        if (player.getMonumentHealth() <= 0) {
+                                            player.setMonumentHealth(100);
+                                            gameOver();
+                                            return;
+                                        }
                                     }
                                     enemyView.setVisibility(View.GONE);
                                 }
@@ -243,7 +244,6 @@ public class GameScreen extends AppCompatActivity {
                 }
             }
         });
-
 
         cannon3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
