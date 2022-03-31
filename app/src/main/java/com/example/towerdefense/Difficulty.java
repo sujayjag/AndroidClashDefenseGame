@@ -54,7 +54,6 @@ public class Difficulty {
 
             //path
         }
-        setPath();
     }
 
     public static int pxFromDp(double d) {

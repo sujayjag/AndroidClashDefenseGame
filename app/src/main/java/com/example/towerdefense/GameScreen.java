@@ -70,6 +70,7 @@ public class GameScreen extends AppCompatActivity {
         player = new Player(difficulty, nameInputted);
         img = (ImageView) findViewById(R.id.imageView5);
         Difficulty difficultyObj = new Difficulty(player);
+        difficultyObj.setPath();
         layout = difficultyObj.getLayout();
         path = difficultyObj.getPath();
         setContentView(layout);
@@ -188,7 +189,7 @@ public class GameScreen extends AppCompatActivity {
                         i++;
                         if (i < (difficultyObj.getNumArchers()
                             + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())) {
-                            handler.postDelayed(this, 4050);
+                            handler.postDelayed(this, temp.getTimeBetween());
                         }
                     }
                 };
