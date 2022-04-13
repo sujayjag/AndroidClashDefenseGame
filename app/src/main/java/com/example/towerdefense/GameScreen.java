@@ -39,6 +39,7 @@ public class GameScreen extends AppCompatActivity {
     private Button cancelButton;
     private Button startCombatButton;
     private ArrayList<Place> places;
+    private ArrayList<Integer[]> placeCoords = new ArrayList<>();
     private Place place1;
     private Place place2;
     private Place place3;
@@ -108,6 +109,8 @@ public class GameScreen extends AppCompatActivity {
         places.add(place3);
         places.add(place4);
         places.add(place5);
+
+
         layoutParent = (RelativeLayout) findViewById(R.id.RelativeLayout);
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         startCombatButton = (Button) findViewById(R.id.startCombat);
@@ -280,11 +283,13 @@ public class GameScreen extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Select Location",
                 Toast.LENGTH_SHORT).show();
         for (Place b : places) {
+
             if (!b.isVisible()) {
                 b.getPlace().setVisibility(View.VISIBLE);
                 b.setVisible(true);
             }
         }
+
         cancelButton.setVisibility(View.VISIBLE);
 
         place1ImageButton.setOnClickListener(new View.OnClickListener() {
@@ -347,6 +352,13 @@ public class GameScreen extends AppCompatActivity {
             towerAlreadyExists();
             return false;
         }
+        System.out.println("x and y for place " + ": " + button.getX() + ", " + button.getY());
+
+        Integer[] buttonCoords = new Integer[2];
+        buttonCoords[0] = Math.round(button.getX());
+        buttonCoords[1] = Math.round(button.getY());
+        //System.out.println(buttonCoords);
+        placeCoords.add(buttonCoords);
 
         button.setBackgroundColor(Color.TRANSPARENT);
         button.setImageResource(imgRes);
@@ -355,6 +367,13 @@ public class GameScreen extends AppCompatActivity {
         cancelButton.setVisibility(View.GONE);
         player.updateBalance(-1 * cannonSelected.getCost());
         updateMoney(player.getBalance());
+
+        //display coords in console
+        int i = 0;
+        for (Integer[] place : placeCoords) {
+            System.out.println("x and y for place " + ++i + ": " + place[0] + ", " + place[1]);
+        }
+
         return true;
     }
 
