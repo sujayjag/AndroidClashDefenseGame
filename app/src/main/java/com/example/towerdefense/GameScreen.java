@@ -146,7 +146,9 @@ public class GameScreen extends AppCompatActivity {
                             // check if witch.x and witch.y is equal to end coordinates
                             // if code: delete witch from arraylist and reduce monument health
                             if (player.getMonumentHealth() > 0) {
+                                int enemyNumber = 0;
                                 for (Enemy enemy: enemies) {
+                                    enemyNumber++;
                                     if (player.getMonumentHealth() == 0) {
                                         gameOver();
                                     }
@@ -157,9 +159,9 @@ public class GameScreen extends AppCompatActivity {
                                     //System.out.println(enemyView.getX() + " " + enemyView.getY());
                                     int i = 1;
                                     for(Integer[] place: placeCoords) {
-                                        String msg = inRange(enemyX, place[0], enemyY, place[1], 20) ? "IN RANGE of place" : "NOT IN RANGE of place";
+                                        String msg = inRange(enemyX, place[0], enemyY, place[1], 600) ? "IN RANGE of place" : "NOT IN RANGE of place";
                                         double dist = getDistance(enemyX, place[0], enemyY, place[1]);
-                                        System.out.println(msg + i + "; DISTANCE from place " + i + ": " + dist);
+                                        System.out.println("Enemy" + enemyNumber + " " + msg + i + "; DISTANCE from place " + i + ": " + dist);
                                     }
                                     if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
                                         && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
@@ -388,7 +390,7 @@ public class GameScreen extends AppCompatActivity {
             towerAlreadyExists();
             return false;
         }
-        System.out.println("x and y for place " + ": " + button.getX() + ", " + button.getY());
+       // System.out.println("x and y for place " + ": " + button.getX() + ", " + button.getY());
 
         Integer[] buttonCoords = new Integer[2];
         buttonCoords[0] = Math.round(button.getX());
@@ -441,7 +443,7 @@ public class GameScreen extends AppCompatActivity {
     }
 
     public boolean inRange(int x1, int x2, int y1, int y2, int radius) {
-        return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2)) <= radius;
+        return getDistance(x1, x2, y1, y2) <= radius;
     }
 
     public double getDistance(int x1, int x2, int y1, int y2) {
