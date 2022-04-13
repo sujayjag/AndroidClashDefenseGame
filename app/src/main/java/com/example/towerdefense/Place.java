@@ -6,10 +6,14 @@ import android.widget.ImageButton;
 public class Place {
     private ImageButton place;
     private boolean visible;
+    private int x;
+    private int y;
     //add attribute of tower?
 
     Place(ImageButton place) {
         this.setPlace(place);
+        x = (int)place.getX();
+        y = (int)place.getY();
         setVisible(false);
         place.setVisibility(View.GONE);
     }
@@ -28,5 +32,13 @@ public class Place {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }
