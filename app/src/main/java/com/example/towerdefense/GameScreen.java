@@ -41,6 +41,8 @@ public class GameScreen extends AppCompatActivity {
     private Button startCombatButton;
     private ArrayList<Place> places;
     private ArrayList<Integer[]> placeCoords = new ArrayList<>();
+    private ArrayList<Place> cannonsPlaced;
+
     private Place place1;
     private Place place2;
     private Place place3;
@@ -105,6 +107,7 @@ public class GameScreen extends AppCompatActivity {
         place4 = new Place(place4ImageButton);
         place5 = new Place(place5ImageButton);
         places = new ArrayList<>();
+        cannonsPlaced = new ArrayList<>();
         places.add(place1);
         places.add(place2);
         places.add(place3);
@@ -120,6 +123,12 @@ public class GameScreen extends AppCompatActivity {
                 //depends on level
                 int numOfEnemies = 10;
                 ArrayList<Enemy> enemies = new ArrayList<>();
+
+                if (cannonsPlaced.size() != 0) {
+                    for (Place b: cannonsPlaced) {
+                        b.attackEnemy();
+                    }
+                }
 
                 final Handler handler = new Handler();
                 Runnable task = new Runnable() {
@@ -335,7 +344,8 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 places.remove(place1);
                 visibilityOff();
-                placeTower(place1ImageButton, imgRes);
+                placeTower(place1ImageButton, place1, imgRes);
+                cannonsPlaced.add(place1);
             }
         });
 
@@ -344,7 +354,8 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 places.remove(place2);
                 visibilityOff();
-                placeTower(place2ImageButton, imgRes);
+                placeTower(place2ImageButton, place2, imgRes);
+                cannonsPlaced.add(place2);
             }
         });
 
@@ -353,7 +364,8 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 places.remove(place3);
                 visibilityOff();
-                placeTower(place3ImageButton, imgRes);
+                placeTower(place3ImageButton, place3, imgRes);
+                cannonsPlaced.add(place3);
             }
         });
 
@@ -362,7 +374,8 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 places.remove(place4);
                 visibilityOff();
-                placeTower(place4ImageButton, imgRes);
+                placeTower(place4ImageButton, place4, imgRes);
+                cannonsPlaced.add(place4);
             }
         });
 
@@ -371,7 +384,8 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 places.remove(place5);
                 visibilityOff();
-                placeTower(place5ImageButton, imgRes);
+                placeTower(place5ImageButton, place5, imgRes);
+                cannonsPlaced.add(place5);
             }
         });
 
@@ -384,7 +398,7 @@ public class GameScreen extends AppCompatActivity {
         }
     }
 
-    private boolean placeTower(ImageButton button, int imgRes) {
+    private boolean placeTower(ImageButton button, Place place, int imgRes) {
         Integer resource = (Integer) button.getTag();
         if (resource != null) {
             towerAlreadyExists();
@@ -398,8 +412,17 @@ public class GameScreen extends AppCompatActivity {
         //System.out.println(buttonCoords);
         placeCoords.add(buttonCoords);
 
+
+
         button.setBackgroundColor(Color.TRANSPARENT);
         button.setImageResource(imgRes);
+        if (imgRes == R.drawable.cannon1new) {
+            place.setCannonType("Cannon1");
+        } else if (imgRes == R.drawable.cannon2newnew) {
+            place.setCannonType("Cannon2");
+        } else {
+            place.setCannonType("Cannon3");
+        }
         button.setScaleType(ImageView.ScaleType.FIT_START);
         button.setTag(imgRes);
         cancelButton.setVisibility(View.GONE);
