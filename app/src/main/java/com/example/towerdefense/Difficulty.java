@@ -11,10 +11,8 @@ public class Difficulty {
     private int numArchers;
     private double[] monumentCoords;
     private Player player;
-//    private int width = 553;
-//    private int height = 311;
 
-    public Difficulty (Player player) {
+    public Difficulty(Player player) {
         this.player = player;
         String difficulty = player.getDifficulty();
         if (difficulty.equals("easy")) {
@@ -61,7 +59,7 @@ public class Difficulty {
     public static int pxFromDp(double d) {
         float scale = 432f;
         float dp = (float) d;
-        float px = dp * (scale/160);
+        float px = dp * (scale / 160);
         return (int) px;
     }
 
@@ -73,7 +71,7 @@ public class Difficulty {
             int height = 450;
             path = new Path();
 
-            path.moveTo((int)pxFromDp(0.169 * width), 0);
+            path.moveTo((int) pxFromDp(0.169 * width), 0);
 
 
             path.lineTo(pxFromDp(0.169 * width), pxFromDp(0.376 * height));
@@ -105,7 +103,7 @@ public class Difficulty {
             int height = 450;
             path = new Path();
 
-            path.moveTo((int)pxFromDp(0.170 * width), 0);
+            path.moveTo((int) pxFromDp(0.170 * width), 0);
 
 
             path.lineTo(pxFromDp(0.170 * width), pxFromDp(0.749 * height));
@@ -121,7 +119,7 @@ public class Difficulty {
             int width = 650;
             int height = 450;
             path = new Path();
-            path.moveTo((int)pxFromDp(0.183 * width), 0);
+            path.moveTo((int) pxFromDp(0.183 * width), 0);
 
 
             path.lineTo(pxFromDp(0.183 * width), pxFromDp(0.457 * height));

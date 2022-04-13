@@ -1,7 +1,6 @@
 package com.example.towerdefense;
 
 import android.view.View;
-import android.widget.TextView;
 
 public class Enemy {
     private int movementSpeed;
@@ -43,7 +42,7 @@ public class Enemy {
 
 
 
-    public void attack(Player player){
+    public void attack(Player player) {
         player.setMonumentHealth(player.getMonumentHealth() - this.damage);
     }
     //use Player.setMonumentHealth based on tower's damage
