@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -16,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,6 +43,10 @@ public class GameScreen extends AppCompatActivity {
     private Button cancelButton;
     private Button startCombatButton;
     private ArrayList<Place> places;
+    private ArrayList<Integer[]> placeCoords = new ArrayList<>();
+    private ArrayList<Place> existingPlaces = new ArrayList<>();
+    private ArrayList<Place> cannonsPlaced;
+
     private Place place1;
     private Place place2;
     private Place place3;
@@ -56,16 +64,28 @@ public class GameScreen extends AppCompatActivity {
     private RelativeLayout layoutParent;
     private LayoutInflater layoutInflater;
     private View newView;
+    int milliSeconds = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run() {
+                milliSeconds++;
+            }
+        };
+        timer.scheduleAtFixedRate(task, 1, 1);
+
+
         super.onCreate(savedInstanceState);
         String nameInputted = getIntent().getStringExtra("nameInputted");
         String difficulty = getIntent().getStringExtra("difficulty");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         player = new Player(difficulty, nameInputted);
         img = (ImageView) findViewById(R.id.imageView5);
@@ -97,12 +117,13 @@ public class GameScreen extends AppCompatActivity {
         place3ImageButton = (ImageButton) findViewById(R.id.place3);
         place4ImageButton = (ImageButton) findViewById(R.id.place4);
         place5ImageButton = (ImageButton) findViewById(R.id.place5);
-        place1 = new Place(place1ImageButton);
-        place2 = new Place(place2ImageButton);
-        place3 = new Place(place3ImageButton);
-        place4 = new Place(place4ImageButton);
-        place5 = new Place(place5ImageButton);
+        place1 = new Place(place1ImageButton, player);
+        place2 = new Place(place2ImageButton, player);
+        place3 = new Place(place3ImageButton, player);
+        place4 = new Place(place4ImageButton, player);
+        place5 = new Place(place5ImageButton, player);
         places = new ArrayList<>();
+        cannonsPlaced = new ArrayList<>();
         places.add(place1);
         places.add(place2);
         places.add(place3);
@@ -119,94 +140,179 @@ public class GameScreen extends AppCompatActivity {
                 int numOfEnemies = 10;
                 ArrayList<Enemy> enemies = new ArrayList<>();
 
+//                if (cannonsPlaced.size() != 0) {
+//                    for (Place b: cannonsPlaced) {
+//                        b.attackEnemy();
+//                    }
+//                }
+
+                for(int i = 0; i < cannonsPlaced.size(); i++){
+                    cannonsPlaced.get(i).getCannon().startTimer();
+                }
+
                 final Handler handler = new Handler();
                 Runnable task = new Runnable() {
                     private int i = 0;
                     private int j = 0;
+                    private boolean flag = false;
+
                     private String enemyType = "archer";
+
                     @Override
                     public void run() {
-                        if (j == 0) {
-                            if (i >= 0 && i < difficultyObj.getNumArchers()) {
-                                enemyType = "archer";
-                            } else if (i < difficultyObj.getNumArchers()
-                                + difficultyObj.getNumWitches()) {
-                                enemyType = "witch";
-                            } else {
-                                enemyType = "wizard";
-                            }
+                        if (i >= 0 && i < difficultyObj.getNumArchers()) {
+                            enemyType = "archer";
+                        } else if (i < difficultyObj.getNumArchers()
+                            + difficultyObj.getNumWitches()) {
+                            enemyType = "witch";
                         } else {
-                            enemyType = "empty";
+                            enemyType = "wizard";
                         }
-
 
                         Enemy temp = new Enemy(enemyType);
 
-                        newView = layoutInflater.inflate(temp.getLayout(), null, false);
-                        newView.setLayoutParams(new RelativeLayout.LayoutParams(180, 200));
+                        if (j < temp.getTimeBetween()/100 || flag){
+                            // for each value in witches
+                            // check if witch.x and witch.y is equal to end coordinates
+                            // if code: delete witch from arraylist and reduce monument health
+                            if (player.getMonumentHealth() > 0) {
+                                int enemyNumber = 0;
 
-                        //hardcoded
-                        newView.setX(280);
-                        newView.setY(60);
-
-
-                        newView.setVisibility(View.VISIBLE);
-                        layoutParent.addView(newView);
-                        temp.setView(newView);
-                        enemies.add(temp);
-                        ObjectAnimator animator = ObjectAnimator.ofFloat(newView,
-                            View.X, View.Y, path);
-
-                        //duration should be movementSpeed of enemy object
-                        animator.setDuration(temp.getMovementSpeed());
-                        animator.start();
-                        // for each value in witches
-                        // check if witch.x and witch.y is equal to end coordinates
-                        // if code: delete witch from arraylist and reduce monument health
-                        if (player.getMonumentHealth() > 0) {
-                            for (Enemy enemy: enemies) {
-                                if (player.getMonumentHealth() == 0) {
-                                    gameOver();
-                                }
-                                View enemyView = enemy.getView();
-                                System.out.println(enemyView.getX() + " " + enemyView.getY());
-                                if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
-                                    && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
-
-                                    //Toast.makeText(getApplicationContext(), "Enemy Detected", Toast.LENGTH_LONG).show();
-
-                                    if (enemyView.getVisibility() == View.VISIBLE) {
-                                        enemy.attack(player);
-                                        health.setText("Health: " + player.getMonumentHealth());
-                                        if (player.getMonumentHealth() <= 0) {
-                                            player.setMonumentHealth(100);
-                                            gameOver();
-                                            return;
-                                        }
+                                for (Enemy enemy: enemies) {
+                                    enemyNumber++;
+                                    if (player.getMonumentHealth() == 0) {
+                                        gameOver();
                                     }
-                                    enemyView.setVisibility(View.GONE);
+                                    View enemyView = enemy.getView();
+                                    int enemyX = (int) enemyView.getX();
+                                    int enemyY = (int) enemyView.getY();
+                                    ((ImageView) enemyView).setColorFilter(Color.RED, PorterDuff.Mode.LIGHTEN);
+                                    //System.out.println(enemyView.getX() + " " + enemyView.getY());
+//                                    int i = 1;
+//                                    for(Integer[] place: placeCoords) {
+//                                        String msg = inRange(enemyX, place[0], enemyY, place[1], 600) ? "IN RANGE of place" : "NOT IN RANGE of place";
+//                                        double dist = getDistance(enemyX, place[0], enemyY, place[1]);
+//                                        System.out.println("Enemy" + enemyNumber + " " + msg + i + "; DISTANCE from place " + i + ": " + dist);
+//                                        i++;
+//                                    }
+
+
+                                    int i = 1;
+                                    int arrInd = 0;
+                                    for(Integer[] place: placeCoords) {
+                                        String msg = inRange(enemyX, place[0], enemyY, place[1], 600) ? "IN RANGE of place" : "NOT IN RANGE of place";
+                                        double dist = getDistance(enemyX, place[0], enemyY, place[1]);
+//                                        System.out.println("Enemy" + enemyNumber + " " + msg + i + "; DISTANCE from place " + i + ": " + dist);
+//                                        System.out.println("The cannon at place " + i + " is " + cannonsPlaced.get(arrInd).getCannonType());
+//                                        System.out.println("Cannon at place " + i + " damage value: " + cannonsPlaced.get(arrInd).getCannon().getAttackDamage());
+
+//&& cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed() > cannonsPlaced.get(arrInd).getCannon().getAttackSpeed()
+                                        if (inRange(enemyX, place[0], enemyY, place[1], 450)) {
+                                            System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, milliSeconds));
+
+                                            if(milliSeconds > cannonsPlaced.get(arrInd).getCannon().getAttackSpeed()) {
+
+                                                //System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed()));
+                                                if (milliSeconds % cannonsPlaced.get(arrInd).getCannon().getAttackSpeed() <= 200) {
+                                                    cannonsPlaced.get(arrInd).attackEnemy();
+                                                }
+
+
+                                            }
+
+
+                                        }
+                                        arrInd++;
+                                        i++;
+                                    }
+
+                                    if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
+                                        && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
+
+                                        if (enemyView.getVisibility() == View.VISIBLE) {
+                                            enemy.attack(player);
+                                            health.setText("Health: " + player.getMonumentHealth());
+                                            if (player.getMonumentHealth() <= 0) {
+                                                player.setMonumentHealth(100);
+                                                gameOver();
+                                                return;
+                                            }
+                                        }
+                                        enemyView.setVisibility(View.GONE);
+                                    }
                                 }
+                            } else {
+                                gameOver();
                             }
+                            j++;
+                            handler.postDelayed(this, 100);
                         } else {
-                            gameOver();
-                        }
+
+                            newView = layoutInflater.inflate(temp.getLayout(), null, false);
+                            newView.setLayoutParams(new RelativeLayout.LayoutParams(180, 200));
+
+                            //hardcoded
+                            newView.setX(280);
+                            newView.setY(60);
 
 
-                        if (j >= 20) {
+                            newView.setVisibility(View.VISIBLE);
+                            layoutParent.addView(newView);
+                            temp.setView(newView);
+                            enemies.add(temp);
+                            ObjectAnimator animator = ObjectAnimator.ofFloat(newView,
+                                View.X, View.Y, path);
+
+                            //duration should be movementSpeed of enemy object
+                            animator.setDuration(temp.getMovementSpeed());
+                            animator.start();
+
+                            // for each value in witches
+                            // check if witch.x and witch.y is equal to end coordinates
+                            // if code: delete witch from arraylist and reduce monument health
+                            if (player.getMonumentHealth() > 0) {
+                                for (Enemy enemy: enemies) {
+                                    if (player.getMonumentHealth() == 0) {
+                                        gameOver();
+                                    }
+                                    View enemyView = enemy.getView();
+                                    ((ImageView) enemyView).setColorFilter(Color.RED, PorterDuff.Mode.LIGHTEN);
+                                    System.out.println(enemyView.getX() + " " + enemyView.getY());
+                                    if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
+                                        && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
+
+                                        if (enemyView.getVisibility() == View.VISIBLE) {
+                                            enemy.attack(player);
+                                            health.setText("Health: " + player.getMonumentHealth());
+                                            if (player.getMonumentHealth() <= 0) {
+                                                player.setMonumentHealth(100);
+                                                gameOver();
+                                                return;
+                                            }
+                                        }
+                                        enemyView.setVisibility(View.GONE);
+                                    }
+                                }
+                            } else {
+                                gameOver();
+                            }
+
+
                             i++;
                             j = 0;
-                        } else {
-                            j++;
-                        }
-
-                        if (i < (difficultyObj.getNumArchers()
-                            + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())) {
-                            handler.postDelayed(this, temp.getTimeBetween());
+                            if (i < (difficultyObj.getNumArchers()
+                                + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())) {
+                                //handler.postDelayed(this, temp.getTimeBetween());
+                                handler.post(this);
+                            } else if (player.getMonumentHealth() > 0) {
+                                flag = true;
+                                handler.post(this);
+                            }
                         }
                     }
                 };
                 handler.post(task);
-                }
+            }
         });
 
         placeCannons(cannon1, cannon2, cannon3, cannon1Object, cannon2Object, cannon3Object);
@@ -278,7 +384,7 @@ public class GameScreen extends AppCompatActivity {
 
     public void placement(int imgRes) {
         Toast.makeText(getApplicationContext(), "Select Location",
-                Toast.LENGTH_SHORT).show();
+            Toast.LENGTH_SHORT).show();
         for (Place b : places) {
             if (!b.isVisible()) {
                 b.getPlace().setVisibility(View.VISIBLE);
@@ -292,7 +398,8 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 places.remove(place1);
                 visibilityOff();
-                placeTower(place1ImageButton, imgRes);
+                placeTower(place1ImageButton, place1, imgRes);
+                cannonsPlaced.add(place1);
             }
         });
 
@@ -301,7 +408,8 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 places.remove(place2);
                 visibilityOff();
-                placeTower(place2ImageButton, imgRes);
+                placeTower(place2ImageButton, place2, imgRes);
+                cannonsPlaced.add(place2);
             }
         });
 
@@ -310,7 +418,8 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 places.remove(place3);
                 visibilityOff();
-                placeTower(place3ImageButton, imgRes);
+                placeTower(place3ImageButton, place3, imgRes);
+                cannonsPlaced.add(place3);
             }
         });
 
@@ -319,7 +428,8 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 places.remove(place4);
                 visibilityOff();
-                placeTower(place4ImageButton, imgRes);
+                placeTower(place4ImageButton, place4, imgRes);
+                cannonsPlaced.add(place4);
             }
         });
 
@@ -328,7 +438,8 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View v) {
                 places.remove(place5);
                 visibilityOff();
-                placeTower(place5ImageButton, imgRes);
+                placeTower(place5ImageButton, place5, imgRes);
+                cannonsPlaced.add(place5);
             }
         });
 
@@ -341,31 +452,57 @@ public class GameScreen extends AppCompatActivity {
         }
     }
 
-    private boolean placeTower(ImageButton button, int imgRes) {
+    private boolean placeTower(ImageButton button, Place place, int imgRes) {
         Integer resource = (Integer) button.getTag();
         if (resource != null) {
             towerAlreadyExists();
             return false;
         }
+       // System.out.println("x and y for place " + ": " + button.getX() + ", " + button.getY());
+
+        Integer[] buttonCoords = new Integer[2];
+        buttonCoords[0] = Math.round(button.getX());
+        buttonCoords[1] = Math.round(button.getY());
+        //System.out.println(buttonCoords);
+        placeCoords.add(buttonCoords);
+
+        //existingPlaces.add(place);
+
+
 
         button.setBackgroundColor(Color.TRANSPARENT);
         button.setImageResource(imgRes);
+        if (imgRes == R.drawable.cannon1new) {
+            place.setCannonType("Cannon1");
+        } else if (imgRes == R.drawable.cannon2newnew) {
+            place.setCannonType("Cannon2");
+        } else {
+            place.setCannonType("Cannon3");
+        }
         button.setScaleType(ImageView.ScaleType.FIT_START);
         button.setTag(imgRes);
         cancelButton.setVisibility(View.GONE);
         player.updateBalance(-1 * cannonSelected.getCost());
         updateMoney(player.getBalance());
+
+        //display coords in console
+        int i = 0;
+        for (Integer[] p : placeCoords) {
+            System.out.println("x and y for place " + ++i + ": " + p[0] + ", " + p[1]);
+        }
+
         return true;
     }
 
+
     private void insufficientFunds() {
         Toast.makeText(getApplicationContext(), "Insufficient Funds to Buy Tower",
-                Toast.LENGTH_LONG).show();
+            Toast.LENGTH_LONG).show();
     }
 
     private void towerAlreadyExists() {
         Toast.makeText(getApplicationContext(), "Tower already exists in this place!",
-                Toast.LENGTH_LONG).show();
+            Toast.LENGTH_LONG).show();
     }
 
     private void updateMoney(int mon) {
@@ -384,5 +521,12 @@ public class GameScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public boolean inRange(int x1, int x2, int y1, int y2, int radius) {
+        return getDistance(x1, x2, y1, y2) <= radius;
+    }
+
+    public double getDistance(int x1, int x2, int y1, int y2) {
+        return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
+    }
 
 }

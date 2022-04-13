@@ -2,12 +2,17 @@ package com.example.towerdefense;
 
 import android.widget.ImageButton;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public abstract class Tower {
     private int cost;
     private int level;
     private double upgradeMultiplier;
     private int attackSpeed;
     private int attackDamage;
+    private Timer timer = new Timer();
+    private int millisecondsPassed;
 
     private ImageButton button;
 
@@ -71,6 +76,32 @@ public abstract class Tower {
 
     public void setButton(ImageButton button) {
         this.button = button;
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
+    }
+    
+    public void startTimer() {
+        setMillisecondsPassed(0);
+        TimerTask task = new TimerTask() {
+            public void run() {
+                setMillisecondsPassed(getMillisecondsPassed() + 1);
+            }
+        };
+        timer.scheduleAtFixedRate(task, 1, 1);
+    }
+
+    public int getMillisecondsPassed() {
+        return millisecondsPassed;
+    }
+
+    public void setMillisecondsPassed(int millisecondsPassed) {
+        this.millisecondsPassed = millisecondsPassed;
     }
 
     //abstract public void upgrade();
