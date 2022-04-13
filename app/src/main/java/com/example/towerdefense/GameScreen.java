@@ -18,6 +18,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -61,9 +64,21 @@ public class GameScreen extends AppCompatActivity {
     private RelativeLayout layoutParent;
     private LayoutInflater layoutInflater;
     private View newView;
+    int milliSeconds = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run() {
+                milliSeconds++;
+            }
+        };
+        timer.scheduleAtFixedRate(task, 1, 1);
+
+
         super.onCreate(savedInstanceState);
         String nameInputted = getIntent().getStringExtra("nameInputted");
         String difficulty = getIntent().getStringExtra("difficulty");
@@ -125,11 +140,11 @@ public class GameScreen extends AppCompatActivity {
                 int numOfEnemies = 10;
                 ArrayList<Enemy> enemies = new ArrayList<>();
 
-                if (cannonsPlaced.size() != 0) {
-                    for (Place b: cannonsPlaced) {
-                        b.attackEnemy();
-                    }
-                }
+//                if (cannonsPlaced.size() != 0) {
+//                    for (Place b: cannonsPlaced) {
+//                        b.attackEnemy();
+//                    }
+//                }
 
                 for(int i = 0; i < cannonsPlaced.size(); i++){
                     cannonsPlaced.get(i).getCannon().startTimer();
@@ -193,13 +208,16 @@ public class GameScreen extends AppCompatActivity {
 
 //&& cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed() > cannonsPlaced.get(arrInd).getCannon().getAttackSpeed()
                                         if (inRange(enemyX, place[0], enemyY, place[1], 450)) {
-                                            System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed()));
+                                            System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, milliSeconds));
 
-                                            if(cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed() > cannonsPlaced.get(arrInd).getCannon().getAttackSpeed()) {
+                                            if(milliSeconds > cannonsPlaced.get(arrInd).getCannon().getAttackSpeed()) {
 
                                                 //System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed()));
-                                                cannonsPlaced.get(arrInd).attackEnemy();
-                                                cannonsPlaced.get(arrInd).getCannon().startTimer();
+                                                if (milliSeconds % cannonsPlaced.get(arrInd).getCannon().getAttackSpeed() <= 200) {
+                                                    cannonsPlaced.get(arrInd).attackEnemy();
+                                                }
+
+
                                             }
 
 
