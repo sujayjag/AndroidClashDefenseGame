@@ -186,7 +186,7 @@ public class GameScreen extends AppCompatActivity {
                                     View enemyView = enemy.getView();
                                     int enemyX = (int) enemyView.getX();
                                     int enemyY = (int) enemyView.getY();
-                                    ((ImageView) enemyView).setColorFilter(Color.RED, PorterDuff.Mode.LIGHTEN);
+
                                     //System.out.println(enemyView.getX() + " " + enemyView.getY());
 //                                    int i = 1;
 //                                    for(Integer[] place: placeCoords) {
@@ -208,13 +208,25 @@ public class GameScreen extends AppCompatActivity {
 
 //&& cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed() > cannonsPlaced.get(arrInd).getCannon().getAttackSpeed()
                                         if (inRange(enemyX, place[0], enemyY, place[1], 450)) {
-                                            System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, milliSeconds));
+                                            //System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, milliSeconds));
 
                                             if(milliSeconds > cannonsPlaced.get(arrInd).getCannon().getAttackSpeed()) {
 
                                                 //System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed()));
-                                                if (milliSeconds % cannonsPlaced.get(arrInd).getCannon().getAttackSpeed() <= 200) {
+                                                if (milliSeconds % cannonsPlaced.get(arrInd).getCannon().getAttackSpeed() <= 200 && ((ImageView) enemyView).getAlpha() > 0) {
+                                                    System.out.println(((ImageView) enemyView).getAlpha());
                                                     cannonsPlaced.get(arrInd).attackEnemy();
+                                                    ((ImageView) enemyView).setAlpha(((ImageView) enemyView).getAlpha() - cannonsPlaced.get(arrInd).getCannon().getAttackDamage()); // should get attack damage from canon
+
+                                                    if ( ((ImageView) enemyView).getAlpha() <= 0 ) {
+                                                        //((ImageView) enemyView).setAlpha(1f);
+                                                        enemyView.setVisibility(View.GONE);
+                                                        player.setBalance(player.getBalance() + enemy.getValue());
+
+                                                        money.setText("Money: " + player.getBalance());
+                                                        //Toast.makeText(getApplicationContext(), "Enemy Killed", Toast.LENGTH_SHORT).show();
+                                                    }
+
                                                 }
 
 
@@ -276,7 +288,6 @@ public class GameScreen extends AppCompatActivity {
                                         gameOver();
                                     }
                                     View enemyView = enemy.getView();
-                                    ((ImageView) enemyView).setColorFilter(Color.RED, PorterDuff.Mode.LIGHTEN);
                                     System.out.println(enemyView.getX() + " " + enemyView.getY());
                                     if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
                                         && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {

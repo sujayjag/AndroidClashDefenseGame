@@ -60,10 +60,10 @@ public class Place {
                         place.setImageResource(R.drawable.cannon3newnew);
                     }
                 }
-                System.out.println(i);
+                //System.out.println(i);
                 i++;
                 if (i < 2) {
-                    handler.postDelayed(this, 1000);
+                    handler.postDelayed(this, 100);
                 }
             }
         };
@@ -88,6 +88,8 @@ public class Place {
     public Tower getCannon() {
         return cannon;
     }
+
+    public Player getPlayer() { return player;}
 
     public void setCannon(Tower cannon) {
         this.cannon = cannon;

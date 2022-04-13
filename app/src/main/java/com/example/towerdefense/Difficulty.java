@@ -65,12 +65,10 @@ public class Difficulty {
 
     public void setPath() {
         String difficulty = player.getDifficulty();
+        int width = 650;
+        int height = 450;
+        path = new Path();
         if (difficulty.equals("easy")) {
-            //path.lineTo
-            int width = 650;
-            int height = 450;
-            path = new Path();
-
             path.moveTo((int) pxFromDp(0.169 * width), 0);
 
 
@@ -98,11 +96,6 @@ public class Difficulty {
 
             path.lineTo((int) pxFromDp(width), (int) pxFromDp(.688 * height));
         } else if (difficulty.equals("medium")) {
-            //path.lineTo
-            int width = 650;
-            int height = 450;
-            path = new Path();
-
             path.moveTo((int) pxFromDp(0.170 * width), 0);
 
 
@@ -116,9 +109,6 @@ public class Difficulty {
 
             path.lineTo((int) pxFromDp(0.770 * width), (int) pxFromDp(height));
         } else {
-            int width = 650;
-            int height = 450;
-            path = new Path();
             path.moveTo((int) pxFromDp(0.183 * width), 0);
 
 
