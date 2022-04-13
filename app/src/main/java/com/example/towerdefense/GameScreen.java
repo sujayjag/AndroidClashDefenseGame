@@ -122,17 +122,23 @@ public class GameScreen extends AppCompatActivity {
                 final Handler handler = new Handler();
                 Runnable task = new Runnable() {
                     private int i = 0;
+                    private int j = 0;
                     private String enemyType = "archer";
                     @Override
                     public void run() {
-                        if (i >= 0 && i < difficultyObj.getNumArchers()) {
-                            enemyType = "archer";
-                        } else if (i < difficultyObj.getNumArchers()
-                            + difficultyObj.getNumWitches()) {
-                            enemyType = "witch";
+                        if (j == 0) {
+                            if (i >= 0 && i < difficultyObj.getNumArchers()) {
+                                enemyType = "archer";
+                            } else if (i < difficultyObj.getNumArchers()
+                                + difficultyObj.getNumWitches()) {
+                                enemyType = "witch";
+                            } else {
+                                enemyType = "wizard";
+                            }
                         } else {
-                            enemyType = "wizard";
+                            enemyType = "empty";
                         }
+
 
                         Enemy temp = new Enemy(enemyType);
 
@@ -167,6 +173,8 @@ public class GameScreen extends AppCompatActivity {
                                 if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
                                     && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
 
+                                    //Toast.makeText(getApplicationContext(), "Enemy Detected", Toast.LENGTH_LONG).show();
+
                                     if (enemyView.getVisibility() == View.VISIBLE) {
                                         enemy.attack(player);
                                         health.setText("Health: " + player.getMonumentHealth());
@@ -184,7 +192,13 @@ public class GameScreen extends AppCompatActivity {
                         }
 
 
-                        i++;
+                        if (j >= 20) {
+                            i++;
+                            j = 0;
+                        } else {
+                            j++;
+                        }
+
                         if (i < (difficultyObj.getNumArchers()
                             + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())) {
                             handler.postDelayed(this, temp.getTimeBetween());
