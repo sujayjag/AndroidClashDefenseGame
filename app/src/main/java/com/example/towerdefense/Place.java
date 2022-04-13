@@ -4,16 +4,16 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class Place {
     private ImageButton place;
     private boolean visible;
     private String cannonType;
+    private Tower cannon;
+    private Player player;
     //add attribute of tower?
 
-    Place(ImageButton place) {
+    Place(ImageButton place, Player player) {
+        this.player = player;
         this.setPlace(place);
         setVisible(false);
         place.setVisibility(View.GONE);
@@ -76,5 +76,20 @@ public class Place {
 
     public void setCannonType(String cannonType) {
         this.cannonType = cannonType;
+        if (cannonType.equals("Cannon1")) {
+            setCannon(new Cannon1(player, place));
+        } else if(cannonType.equals("Cannon2")) {
+            setCannon(new Cannon2(player, place));
+        } else {
+            setCannon(new Cannon3(player, place));
+        }
+    }
+
+    public Tower getCannon() {
+        return cannon;
+    }
+
+    public void setCannon(Tower cannon) {
+        this.cannon = cannon;
     }
 }

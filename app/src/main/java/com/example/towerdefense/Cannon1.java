@@ -1,9 +1,13 @@
 package com.example.towerdefense;
 
 import android.widget.ImageButton;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Cannon1 extends Tower {
     private Player player;
+
+
 
     public Cannon1(Player player, ImageButton button) {
         this.setPlayer(player);
@@ -22,7 +26,7 @@ public class Cannon1 extends Tower {
         //super(cost, 1, upgradeMultiplier, 10, 3, "", "../../../../res/drawable/cannon1new.jpg");
         this.setCost(cost);
         this.setUpgradeMultiplier(upgradeMultiplier);
-        this.setAttackSpeed(10);
+        this.setAttackSpeed(3000);
         this.setAttackDamage(3);
     }
 

@@ -22,7 +22,7 @@ public class Cannon2 extends Tower {
         //super(cost, 1, upgradeMultiplier, 10, 3, "", "../../../../res/drawable/cannon1new.jpg");
         this.setCost(cost);
         this.setUpgradeMultiplier(upgradeMultiplier);
-        this.setAttackSpeed(7);
+        this.setAttackSpeed(2000);
         this.setAttackDamage(5);
     }
 

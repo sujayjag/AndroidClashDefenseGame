@@ -41,6 +41,7 @@ public class GameScreen extends AppCompatActivity {
     private Button startCombatButton;
     private ArrayList<Place> places;
     private ArrayList<Integer[]> placeCoords = new ArrayList<>();
+    private ArrayList<Place> existingPlaces = new ArrayList<>();
     private ArrayList<Place> cannonsPlaced;
 
     private Place place1;
@@ -101,11 +102,11 @@ public class GameScreen extends AppCompatActivity {
         place3ImageButton = (ImageButton) findViewById(R.id.place3);
         place4ImageButton = (ImageButton) findViewById(R.id.place4);
         place5ImageButton = (ImageButton) findViewById(R.id.place5);
-        place1 = new Place(place1ImageButton);
-        place2 = new Place(place2ImageButton);
-        place3 = new Place(place3ImageButton);
-        place4 = new Place(place4ImageButton);
-        place5 = new Place(place5ImageButton);
+        place1 = new Place(place1ImageButton, player);
+        place2 = new Place(place2ImageButton, player);
+        place3 = new Place(place3ImageButton, player);
+        place4 = new Place(place4ImageButton, player);
+        place5 = new Place(place5ImageButton, player);
         places = new ArrayList<>();
         cannonsPlaced = new ArrayList<>();
         places.add(place1);
@@ -130,6 +131,10 @@ public class GameScreen extends AppCompatActivity {
                     }
                 }
 
+                for(int i = 0; i < cannonsPlaced.size(); i++){
+                    cannonsPlaced.get(i).getCannon().startTimer();
+                }
+
                 final Handler handler = new Handler();
                 Runnable task = new Runnable() {
                     private int i = 0;
@@ -150,12 +155,14 @@ public class GameScreen extends AppCompatActivity {
                         }
 
                         Enemy temp = new Enemy(enemyType);
+
                         if (j < temp.getTimeBetween()/100 || flag){
                             // for each value in witches
                             // check if witch.x and witch.y is equal to end coordinates
                             // if code: delete witch from arraylist and reduce monument health
                             if (player.getMonumentHealth() > 0) {
                                 int enemyNumber = 0;
+
                                 for (Enemy enemy: enemies) {
                                     enemyNumber++;
                                     if (player.getMonumentHealth() == 0) {
@@ -166,12 +173,41 @@ public class GameScreen extends AppCompatActivity {
                                     int enemyY = (int) enemyView.getY();
                                     ((ImageView) enemyView).setColorFilter(Color.RED, PorterDuff.Mode.LIGHTEN);
                                     //System.out.println(enemyView.getX() + " " + enemyView.getY());
+//                                    int i = 1;
+//                                    for(Integer[] place: placeCoords) {
+//                                        String msg = inRange(enemyX, place[0], enemyY, place[1], 600) ? "IN RANGE of place" : "NOT IN RANGE of place";
+//                                        double dist = getDistance(enemyX, place[0], enemyY, place[1]);
+//                                        System.out.println("Enemy" + enemyNumber + " " + msg + i + "; DISTANCE from place " + i + ": " + dist);
+//                                        i++;
+//                                    }
+
+
                                     int i = 1;
+                                    int arrInd = 0;
                                     for(Integer[] place: placeCoords) {
                                         String msg = inRange(enemyX, place[0], enemyY, place[1], 600) ? "IN RANGE of place" : "NOT IN RANGE of place";
                                         double dist = getDistance(enemyX, place[0], enemyY, place[1]);
-                                        System.out.println("Enemy" + enemyNumber + " " + msg + i + "; DISTANCE from place " + i + ": " + dist);
+//                                        System.out.println("Enemy" + enemyNumber + " " + msg + i + "; DISTANCE from place " + i + ": " + dist);
+//                                        System.out.println("The cannon at place " + i + " is " + cannonsPlaced.get(arrInd).getCannonType());
+//                                        System.out.println("Cannon at place " + i + " damage value: " + cannonsPlaced.get(arrInd).getCannon().getAttackDamage());
+
+//&& cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed() > cannonsPlaced.get(arrInd).getCannon().getAttackSpeed()
+                                        if (inRange(enemyX, place[0], enemyY, place[1], 450)) {
+                                            System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed()));
+
+                                            if(cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed() > cannonsPlaced.get(arrInd).getCannon().getAttackSpeed()) {
+
+                                                //System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed()));
+                                                cannonsPlaced.get(arrInd).attackEnemy();
+                                                cannonsPlaced.get(arrInd).getCannon().startTimer();
+                                            }
+
+
+                                        }
+                                        arrInd++;
+                                        i++;
                                     }
+
                                     if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
                                         && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
 
@@ -412,6 +448,8 @@ public class GameScreen extends AppCompatActivity {
         //System.out.println(buttonCoords);
         placeCoords.add(buttonCoords);
 
+        //existingPlaces.add(place);
+
 
 
         button.setBackgroundColor(Color.TRANSPARENT);
@@ -431,8 +469,8 @@ public class GameScreen extends AppCompatActivity {
 
         //display coords in console
         int i = 0;
-        for (Integer[] place : placeCoords) {
-            System.out.println("x and y for place " + ++i + ": " + place[0] + ", " + place[1]);
+        for (Integer[] p : placeCoords) {
+            System.out.println("x and y for place " + ++i + ": " + p[0] + ", " + p[1]);
         }
 
         return true;
