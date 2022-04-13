@@ -21,22 +21,22 @@ public class Enemy {
     public Enemy(String type) {
         if (type.equals("witch")) {
             setLayout(R.layout.witch);
-            setMovementSpeed(2000);
-            setTimeBetween(2050);
-            setDamage(30);
+            setMovementSpeed(10000);
+            setTimeBetween(3000);
+            setDamage(3);
             setHealth(100);
         } else if (type.equals("wizard")) {
             setLayout(R.layout.wizard);
-            setMovementSpeed(2200);
-            setTimeBetween(2250);
+            setMovementSpeed(10000);
+            setTimeBetween(3000);
             setDamage(50);
-            setHealth(70);
+            setHealth(2);
         } else {
             setLayout(R.layout.archer);
-            setMovementSpeed(2400);
-            setTimeBetween(2450);
+            setMovementSpeed(10000);
+            setTimeBetween(3000);
             setDamage(10);
-            setHealth(50);
+            setHealth(1);
         }
     }
 

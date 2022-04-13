@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -122,72 +123,117 @@ public class GameScreen extends AppCompatActivity {
                 final Handler handler = new Handler();
                 Runnable task = new Runnable() {
                     private int i = 0;
+                    private int j = 0;
+                    private boolean flag = false;
+
                     private String enemyType = "archer";
+
                     @Override
                     public void run() {
                         if (i >= 0 && i < difficultyObj.getNumArchers()) {
                             enemyType = "archer";
                         } else if (i < difficultyObj.getNumArchers()
-                            + difficultyObj.getNumWitches()) {
+                                + difficultyObj.getNumWitches()) {
                             enemyType = "witch";
                         } else {
                             enemyType = "wizard";
                         }
 
                         Enemy temp = new Enemy(enemyType);
-
-                        newView = layoutInflater.inflate(temp.getLayout(), null, false);
-                        newView.setLayoutParams(new RelativeLayout.LayoutParams(180, 200));
-
-                        //hardcoded
-                        newView.setX(280);
-                        newView.setY(60);
-
-
-                        newView.setVisibility(View.VISIBLE);
-                        layoutParent.addView(newView);
-                        temp.setView(newView);
-                        enemies.add(temp);
-                        ObjectAnimator animator = ObjectAnimator.ofFloat(newView,
-                            View.X, View.Y, path);
-
-                        //duration should be movementSpeed of enemy object
-                        animator.setDuration(temp.getMovementSpeed());
-                        animator.start();
-                        // for each value in witches
-                        // check if witch.x and witch.y is equal to end coordinates
-                        // if code: delete witch from arraylist and reduce monument health
-                        if (player.getMonumentHealth() > 0) {
-                            for (Enemy enemy: enemies) {
-                                if (player.getMonumentHealth() == 0) {
-                                    gameOver();
-                                }
-                                View enemyView = enemy.getView();
-                                System.out.println(enemyView.getX() + " " + enemyView.getY());
-                                if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
-                                    && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
-
-                                    if (enemyView.getVisibility() == View.VISIBLE) {
-                                        enemy.attack(player);
-                                        health.setText("Health: " + player.getMonumentHealth());
-                                        if (player.getMonumentHealth() <= 0) {
-                                            player.setMonumentHealth(100);
-                                            gameOver();
-                                            return;
-                                        }
+                        if (j < temp.getTimeBetween()/100 || flag){
+                            // for each value in witches
+                            // check if witch.x and witch.y is equal to end coordinates
+                            // if code: delete witch from arraylist and reduce monument health
+                            if (player.getMonumentHealth() > 0) {
+                                for (Enemy enemy: enemies) {
+                                    if (player.getMonumentHealth() == 0) {
+                                        gameOver();
                                     }
-                                    enemyView.setVisibility(View.GONE);
+                                    View enemyView = enemy.getView();
+                                    ((ImageView) enemyView).setColorFilter(Color.RED, PorterDuff.Mode.LIGHTEN);
+                                    System.out.println(enemyView.getX() + " " + enemyView.getY());
+                                    if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
+                                            && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
+
+                                        if (enemyView.getVisibility() == View.VISIBLE) {
+                                            enemy.attack(player);
+                                            health.setText("Health: " + player.getMonumentHealth());
+                                            if (player.getMonumentHealth() <= 0) {
+                                                player.setMonumentHealth(100);
+                                                gameOver();
+                                                return;
+                                            }
+                                        }
+                                        enemyView.setVisibility(View.GONE);
+                                    }
                                 }
+                            } else {
+                                gameOver();
                             }
+                            j++;
+                            handler.postDelayed(this, 100);
                         } else {
-                            gameOver();
-                        }
+
+                            newView = layoutInflater.inflate(temp.getLayout(), null, false);
+                            newView.setLayoutParams(new RelativeLayout.LayoutParams(180, 200));
+
+                            //hardcoded
+                            newView.setX(280);
+                            newView.setY(60);
 
 
-                        i++;
-                        if (i < (difficultyObj.getNumArchers()
-                            + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())) {
-                            handler.postDelayed(this, temp.getTimeBetween());
+                            newView.setVisibility(View.VISIBLE);
+                            layoutParent.addView(newView);
+                            temp.setView(newView);
+                            enemies.add(temp);
+                            ObjectAnimator animator = ObjectAnimator.ofFloat(newView,
+                                    View.X, View.Y, path);
+
+                            //duration should be movementSpeed of enemy object
+                            animator.setDuration(temp.getMovementSpeed());
+                            animator.start();
+
+                            // for each value in witches
+                            // check if witch.x and witch.y is equal to end coordinates
+                            // if code: delete witch from arraylist and reduce monument health
+                            if (player.getMonumentHealth() > 0) {
+                                for (Enemy enemy: enemies) {
+                                    if (player.getMonumentHealth() == 0) {
+                                        gameOver();
+                                    }
+                                    View enemyView = enemy.getView();
+                                    ((ImageView) enemyView).setColorFilter(Color.RED, PorterDuff.Mode.LIGHTEN);
+                                    System.out.println(enemyView.getX() + " " + enemyView.getY());
+                                    if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
+                                            && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
+
+                                        if (enemyView.getVisibility() == View.VISIBLE) {
+                                            enemy.attack(player);
+                                            health.setText("Health: " + player.getMonumentHealth());
+                                            if (player.getMonumentHealth() <= 0) {
+                                                player.setMonumentHealth(100);
+                                                gameOver();
+                                                return;
+                                            }
+                                        }
+                                        enemyView.setVisibility(View.GONE);
+                                    }
+                                }
+                            } else {
+                                gameOver();
+                            }
+
+
+                            i++;
+                            j = 0;
+                            if (i < (difficultyObj.getNumArchers()
+                                    + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())) {
+                                //handler.postDelayed(this, temp.getTimeBetween());
+                                handler.post(this);
+                            } else if (player.getMonumentHealth() > 0) {
+                                flag = true;
+                                handler.post(this);
+                            }
                         }
                     }
                 };
