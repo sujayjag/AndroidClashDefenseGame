@@ -3,6 +3,10 @@ package com.example.towerdefense;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class Place {
     private ImageButton place;
@@ -35,7 +39,7 @@ public class Place {
         this.visible = visible;
     }
 
-    public void attackEnemy() {
+    public void attackEnemyAnimation() {
 
         final Handler handler = new Handler();
         Runnable task = new Runnable() {
@@ -69,6 +73,29 @@ public class Place {
         };
         handler.post(task);
     }
+
+
+    public void attackEnemy(int milliSeconds, int arrInd, View enemyView, TextView money, Enemy enemy) {
+        if(milliSeconds > this.getCannon().getAttackSpeed()) {
+
+            //System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed()));
+            if (milliSeconds % this.getCannon().getAttackSpeed() <= 200 && ((ImageView) enemyView).getAlpha() > 0) {
+                //System.out.println(((ImageView) enemyView).getAlpha());
+                this.attackEnemyAnimation();
+                ((ImageView) enemyView).setAlpha(((ImageView) enemyView).getAlpha() - this.getCannon().getAttackDamage()); // should get attack damage from canon
+
+                if ( ((ImageView) enemyView).getAlpha() <= 0 ) {
+                    //((ImageView) enemyView).setAlpha(1f);
+                    enemyView.setVisibility(View.GONE);
+                    player.setBalance(player.getBalance() + enemy.getValue());
+
+                    money.setText("Money: " + player.getBalance());
+                }
+
+            }
+        }
+    }
+
 
     public String getCannonType() {
         return cannonType;

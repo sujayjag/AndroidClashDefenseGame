@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -209,26 +208,7 @@ public class GameScreen extends AppCompatActivity {
 //&& cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed() > cannonsPlaced.get(arrInd).getCannon().getAttackSpeed()
                                         if (inRange(enemyX, place[0], enemyY, place[1], 450)) {
                                             //System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, milliSeconds));
-
-                                            if(milliSeconds > cannonsPlaced.get(arrInd).getCannon().getAttackSpeed()) {
-
-                                                //System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed()));
-                                                if (milliSeconds % cannonsPlaced.get(arrInd).getCannon().getAttackSpeed() <= 200 && ((ImageView) enemyView).getAlpha() > 0) {
-                                                    System.out.println(((ImageView) enemyView).getAlpha());
-                                                    cannonsPlaced.get(arrInd).attackEnemy();
-                                                    ((ImageView) enemyView).setAlpha(((ImageView) enemyView).getAlpha() - cannonsPlaced.get(arrInd).getCannon().getAttackDamage()); // should get attack damage from canon
-
-                                                    if ( ((ImageView) enemyView).getAlpha() <= 0 ) {
-                                                        //((ImageView) enemyView).setAlpha(1f);
-                                                        enemyView.setVisibility(View.GONE);
-                                                        player.setBalance(player.getBalance() + enemy.getValue());
-
-                                                        money.setText("Money: " + player.getBalance());
-                                                        //Toast.makeText(getApplicationContext(), "Enemy Killed", Toast.LENGTH_SHORT).show();
-                                                    }
-
-                                                }
-                                            }
+                                            cannonsPlaced.get(arrInd).attackEnemy(milliSeconds, arrInd, enemyView, money, enemy);
                                         }
                                         arrInd++;
                                         i++;

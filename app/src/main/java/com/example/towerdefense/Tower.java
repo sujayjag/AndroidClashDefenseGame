@@ -104,5 +104,6 @@ public abstract class Tower {
         this.millisecondsPassed = millisecondsPassed;
     }
 
+
     //abstract public void upgrade();
 }
