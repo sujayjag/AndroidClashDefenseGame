@@ -124,5 +124,4 @@ public class TestingM4 {
             && medium.getNumArchers()
             != hard.getNumArchers());
     }
-
 }
