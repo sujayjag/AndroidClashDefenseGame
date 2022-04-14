@@ -460,11 +460,11 @@ public class GameScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public boolean inRange(int x1, int x2, int y1, int y2, int radius) {
+    public static boolean inRange(int x1, int x2, int y1, int y2, int radius) {
         return getDistance(x1, x2, y1, y2) <= radius;
     }
 
-    public double getDistance(int x1, int x2, int y1, int y2) {
+    public static double getDistance(int x1, int x2, int y1, int y2) {
         return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
     }
 
