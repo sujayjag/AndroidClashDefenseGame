@@ -87,8 +87,7 @@ public class Place {
                 if ( ((ImageView) enemyView).getAlpha() <= 0 ) {
                     //((ImageView) enemyView).setAlpha(1f);
                     enemyView.setVisibility(View.GONE);
-                    player.setBalance(player.getBalance() + enemy.getValue());
-
+                    player.addBalance(enemy);
                     money.setText("Money: " + player.getBalance());
                 }
 

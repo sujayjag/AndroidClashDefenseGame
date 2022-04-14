@@ -77,7 +77,6 @@ public class GameScreen extends AppCompatActivity {
         };
         timer.scheduleAtFixedRate(task, 1, 1);
 
-
         super.onCreate(savedInstanceState);
         String nameInputted = getIntent().getStringExtra("nameInputted");
         String difficulty = getIntent().getStringExtra("difficulty");
@@ -139,12 +138,6 @@ public class GameScreen extends AppCompatActivity {
                 int numOfEnemies = 10;
                 ArrayList<Enemy> enemies = new ArrayList<>();
 
-//                if (cannonsPlaced.size() != 0) {
-//                    for (Place b: cannonsPlaced) {
-//                        b.attackEnemy();
-//                    }
-//                }
-
                 for(int i = 0; i < cannonsPlaced.size(); i++){
                     cannonsPlaced.get(i).getCannon().startTimer();
                 }
@@ -154,7 +147,6 @@ public class GameScreen extends AppCompatActivity {
                     private int i = 0;
                     private int j = 0;
                     private boolean flag = false;
-
                     private String enemyType = "archer";
 
                     @Override
@@ -185,16 +177,6 @@ public class GameScreen extends AppCompatActivity {
                                     View enemyView = enemy.getView();
                                     int enemyX = (int) enemyView.getX();
                                     int enemyY = (int) enemyView.getY();
-
-                                    //System.out.println(enemyView.getX() + " " + enemyView.getY());
-//                                    int i = 1;
-//                                    for(Integer[] place: placeCoords) {
-//                                        String msg = inRange(enemyX, place[0], enemyY, place[1], 600) ? "IN RANGE of place" : "NOT IN RANGE of place";
-//                                        double dist = getDistance(enemyX, place[0], enemyY, place[1]);
-//                                        System.out.println("Enemy" + enemyNumber + " " + msg + i + "; DISTANCE from place " + i + ": " + dist);
-//                                        i++;
-//                                    }
-
 
                                     int i = 1;
                                     int arrInd = 0;
@@ -238,52 +220,18 @@ public class GameScreen extends AppCompatActivity {
 
                             newView = layoutInflater.inflate(temp.getLayout(), null, false);
                             newView.setLayoutParams(new RelativeLayout.LayoutParams(180, 200));
-
                             //hardcoded
                             newView.setX(280);
                             newView.setY(60);
-
-
                             newView.setVisibility(View.VISIBLE);
                             layoutParent.addView(newView);
                             temp.setView(newView);
                             enemies.add(temp);
                             ObjectAnimator animator = ObjectAnimator.ofFloat(newView,
                                 View.X, View.Y, path);
-
                             //duration should be movementSpeed of enemy object
                             animator.setDuration(temp.getMovementSpeed());
                             animator.start();
-
-                            // for each value in witches
-                            // check if witch.x and witch.y is equal to end coordinates
-                            // if code: delete witch from arraylist and reduce monument health
-//                            if (player.getMonumentHealth() > 0) {
-//                                for (Enemy enemy: enemies) {
-//                                    if (player.getMonumentHealth() == 0) {
-//                                        gameOver();
-//                                    }
-//                                    View enemyView = enemy.getView();
-//                                    System.out.println(enemyView.getX() + " " + enemyView.getY());
-//                                    if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
-//                                        && enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
-//
-//                                        if (enemyView.getVisibility() == View.VISIBLE) {
-//                                            enemy.attack(player);
-//                                            health.setText("Health: " + player.getMonumentHealth());
-//                                            if (player.getMonumentHealth() <= 0) {
-//                                                player.setMonumentHealth(100);
-//                                                gameOver();
-//                                                return;
-//                                            }
-//                                        }
-//                                        enemyView.setVisibility(View.GONE);
-//                                    }
-//                                }
-//                            } else {
-//                                gameOver();
-//                            }
-
 
                             i++;
                             j = 0;

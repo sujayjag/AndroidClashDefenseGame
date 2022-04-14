@@ -25,6 +25,9 @@ public class Player {
         this.setBalance(this.getBalance() + balance);
     }
 
+    public void addBalance(Enemy enemy) {
+        balance += enemy.getValue();
+    }
 
     public int getBalance() {
         return balance;
