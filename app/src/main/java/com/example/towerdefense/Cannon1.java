@@ -1,8 +1,6 @@
 package com.example.towerdefense;
 
 import android.widget.ImageButton;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Cannon1 extends Tower {
     private Player player;

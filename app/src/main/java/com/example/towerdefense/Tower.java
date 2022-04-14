@@ -85,7 +85,7 @@ public abstract class Tower {
     public void setTimer(Timer timer) {
         this.timer = timer;
     }
-    
+
     public void startTimer() {
         setMillisecondsPassed(0);
         TimerTask task = new TimerTask() {

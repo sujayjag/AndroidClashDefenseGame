@@ -10,7 +10,7 @@ public class Difficulty {
     private int numWizards;
     private int numArchers;
     private double[] monumentCoords;
-    private Player player;
+    private final Player player;
 
     public Difficulty(Player player) {
         this.player = player;
@@ -36,7 +36,6 @@ public class Difficulty {
             setMonumentCoords(new double[2]);
             getMonumentCoords()[0] = 1351.0;
             getMonumentCoords()[1] = 1215.0;
-
 
 
         } else {

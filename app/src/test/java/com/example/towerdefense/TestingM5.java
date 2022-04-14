@@ -3,8 +3,6 @@ package com.example.towerdefense;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import android.view.View;
-
 import org.junit.Test;
 
 public class TestingM5 {
@@ -72,7 +70,7 @@ public class TestingM5 {
         int enemyY = 0;
         int placeX = 0;
         int placeY = 0;
-        double distance = GameScreen.getDistance(enemyX,placeX,enemyY,placeY);
+        double distance = GameScreen.getDistance(enemyX, placeX, enemyY, placeY);
         assertTrue(distance == 5);
     }
 
@@ -83,7 +81,7 @@ public class TestingM5 {
         int placeX = 0;
         int placeY = 0;
         int placeRadius = 5;
-        boolean range = GameScreen.inRange(enemyX,placeX,enemyY,placeY, placeRadius);
+        boolean range = GameScreen.inRange(enemyX, placeX, enemyY, placeY, placeRadius);
         assertTrue(range);
     }
 
@@ -94,7 +92,7 @@ public class TestingM5 {
         int placeX = 0;
         int placeY = 0;
         int placeRadius = 3;
-        boolean range = GameScreen.inRange(enemyX,placeX,enemyY,placeY, placeRadius);
+        boolean range = GameScreen.inRange(enemyX, placeX, enemyY, placeY, placeRadius);
         assertFalse(range);
     }
 

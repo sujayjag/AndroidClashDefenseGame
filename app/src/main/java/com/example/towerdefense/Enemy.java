@@ -45,7 +45,6 @@ public class Enemy {
     }
 
 
-
     public void attack(Player player) {
         player.setMonumentHealth(player.getMonumentHealth() - this.damage);
     }
@@ -102,7 +101,11 @@ public class Enemy {
         this.timeBetween = timeBetween;
     }
 
-    public void setValue(int value) {this.value = value;}
+    public int getValue() {
+        return value;
+    }
 
-    public int getValue() {return value;}
+    public void setValue(int value) {
+        this.value = value;
+    }
 }

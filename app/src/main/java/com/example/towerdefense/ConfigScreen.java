@@ -25,8 +25,8 @@ public class ConfigScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_config_screen);
 
@@ -38,7 +38,7 @@ public class ConfigScreen extends AppCompatActivity {
         spinnerArray.add("Hard");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, spinnerArray);
+            android.R.layout.simple_spinner_item, spinnerArray);
         difficulty.setAdapter(adapter);
 
         EditText text = findViewById(R.id.nameInput);

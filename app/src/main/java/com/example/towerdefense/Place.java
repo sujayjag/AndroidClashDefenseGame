@@ -6,14 +6,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class Place {
+    private final Player player;
     private ImageButton place;
     private boolean visible;
     private String cannonType;
     private Tower cannon;
-    private Player player;
     //add attribute of tower?
 
     Place(ImageButton place, Player player) {
@@ -43,12 +41,25 @@ public class Place {
 
         final Handler handler = new Handler();
         Runnable task = new Runnable() {
-            boolean stop = false;
-            int i = 0;
+            public void setI(int i) {
+                this.i = i;
+            }
+
+            public int getI() {
+                return i;
+            }
+
+            public boolean isStop() {
+                return stop;
+            }
+
+            private final boolean stop = false;
+            private int i = 0;
+
             @Override
             public void run() {
-                if (i % 2 == 0) {
-                    if (cannonType.equals("Cannon1")){
+                if (getI() % 2 == 0) {
+                    if (cannonType.equals("Cannon1")) {
                         place.setImageResource(R.drawable.cannon1explosion);
                     } else if (cannonType.equals("Cannon2")) {
                         place.setImageResource(R.drawable.cannon2explosion);
@@ -56,7 +67,7 @@ public class Place {
                         place.setImageResource(R.drawable.cannon3explosion);
                     }
                 } else {
-                    if (cannonType.equals("Cannon1")){
+                    if (cannonType.equals("Cannon1")) {
                         place.setImageResource(R.drawable.cannon1new);
                     } else if (cannonType.equals("Cannon2")) {
                         place.setImageResource(R.drawable.cannon2newnew);
@@ -65,8 +76,8 @@ public class Place {
                     }
                 }
                 //System.out.println(i);
-                i++;
-                if (i < 2) {
+                setI(getI() + 1);
+                if (getI() < 2) {
                     handler.postDelayed(this, 100);
                 }
             }
@@ -75,16 +86,17 @@ public class Place {
     }
 
 
-    public void attackEnemy(int milliSeconds, int arrInd, View enemyView, TextView money, Enemy enemy) {
-        if(milliSeconds > this.getCannon().getAttackSpeed()) {
-
-            //System.out.println(String.format("Cannon %d has a timer value of %d", arrInd, cannonsPlaced.get(arrInd).getCannon().getMillisecondsPassed()));
-            if (milliSeconds % this.getCannon().getAttackSpeed() <= 200 && ((ImageView) enemyView).getAlpha() > 0) {
+    public void attackEnemy(int milliSeconds, int arrInd, View enemyView, TextView money,
+                            Enemy enemy) {
+        if (milliSeconds > this.getCannon().getAttackSpeed()) {
+            if (milliSeconds % this.getCannon().getAttackSpeed() <= 200
+                && ((ImageView) enemyView).getAlpha() > 0) {
                 //System.out.println(((ImageView) enemyView).getAlpha());
                 this.attackEnemyAnimation();
-                ((ImageView) enemyView).setAlpha(((ImageView) enemyView).getAlpha() - this.getCannon().getAttackDamage()); // should get attack damage from canon
+                ((ImageView) enemyView).setAlpha(((ImageView) enemyView).getAlpha()
+                    - this.getCannon().getAttackDamage()); // should get attack damage from canon
 
-                if ( ((ImageView) enemyView).getAlpha() <= 0 ) {
+                if (((ImageView) enemyView).getAlpha() <= 0) {
                     //((ImageView) enemyView).setAlpha(1f);
                     enemyView.setVisibility(View.GONE);
                     player.addBalance(enemy);
@@ -104,7 +116,7 @@ public class Place {
         this.cannonType = cannonType;
         if (cannonType.equals("Cannon1")) {
             setCannon(new Cannon1(player, place));
-        } else if(cannonType.equals("Cannon2")) {
+        } else if (cannonType.equals("Cannon2")) {
             setCannon(new Cannon2(player, place));
         } else {
             setCannon(new Cannon3(player, place));
@@ -115,9 +127,11 @@ public class Place {
         return cannon;
     }
 
-    public Player getPlayer() { return player;}
-
     public void setCannon(Tower cannon) {
         this.cannon = cannon;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }
