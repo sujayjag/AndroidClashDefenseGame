@@ -53,7 +53,7 @@ public class GameScreen extends AppCompatActivity {
     private Place place4;
     private Place place5;
     private Tower cannonSelected;
-    private Player player;
+    private static Player player;
     private int layout;
     private Path path;
 
@@ -156,20 +156,9 @@ public class GameScreen extends AppCompatActivity {
                     private int j = 0;
                     private boolean flag = false;
 
-                    private String enemyType = "archer";
-
                     @Override
                     public void run() {
-                        if (i >= 0 && i < difficultyObj.getNumArchers()) {
-                            enemyType = "archer";
-                        } else if (i < difficultyObj.getNumArchers()
-                            + difficultyObj.getNumWitches()) {
-                            enemyType = "witch";
-                        } else {
-                            enemyType = "wizard";
-                        }
-
-                        Enemy temp = new Enemy(enemyType);
+                        Enemy temp = new Enemy(deployRightEnemy(i, player));
 
                         if (j < temp.getTimeBetween()/100 || flag){
                             // for each value in witches
@@ -391,6 +380,20 @@ public class GameScreen extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public static String deployRightEnemy(int num, Player player) {
+        Difficulty difficultyObj = new Difficulty(player);
+        String enemyType = "";
+        if (num >= 0 && num < difficultyObj.getNumArchers()) {
+            enemyType = "archer";
+        } else if (num < difficultyObj.getNumArchers()
+                + difficultyObj.getNumWitches()) {
+            enemyType = "witch";
+        } else {
+            enemyType = "wizard";
+        }
+        return enemyType;
     }
 
     public void placement(int imgRes) {
