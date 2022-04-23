@@ -37,6 +37,7 @@ public class Place {
         this.visible = visible;
     }
 
+
     public void attackEnemyAnimation() {
 
         final Handler handler = new Handler();
@@ -106,7 +107,6 @@ public class Place {
             }
         }
     }
-
 
     public String getCannonType() {
         return cannonType;

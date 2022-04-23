@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 .idea/vcs.xml
+
+checkstyle-*.jar
+run_checkstyle.py
+cs2340_checks.xml
+app/.idea/checkstyle-idea.xml
