@@ -60,23 +60,10 @@ public class Place {
             @Override
             public void run() {
                 if (getI() % 2 == 0) {
-                    if (cannonType.equals("Cannon1")) {
-                        place.setImageResource(R.drawable.cannon1explosion);
-                    } else if (cannonType.equals("Cannon2")) {
-                        place.setImageResource(R.drawable.cannon2explosion);
-                    } else if (cannonType.equals("Cannon3")) {
-                        place.setImageResource(R.drawable.cannon3explosion);
-                    }
+                    place.setImageResource(cannon.getExplosionImgRes());
                 } else {
-                    if (cannonType.equals("Cannon1")) {
-                        place.setImageResource(R.drawable.cannon1new);
-                    } else if (cannonType.equals("Cannon2")) {
-                        place.setImageResource(R.drawable.cannon2newnew);
-                    } else if (cannonType.equals("Cannon3")) {
-                        place.setImageResource(R.drawable.cannon3newnew);
-                    }
+                    place.setImageResource(cannon.getImgRes());
                 }
-                //System.out.println(i);
                 setI(getI() + 1);
                 if (getI() < 2) {
                     handler.postDelayed(this, 100);

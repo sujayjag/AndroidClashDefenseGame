@@ -16,6 +16,8 @@ public abstract class Tower {
     private Timer timer = new Timer();
     private int millisecondsPassed;
     protected Player player;
+    private int imgRes;
+    private int explosionImgRes;
 
     private ImageButton button;
 
@@ -126,6 +128,22 @@ public abstract class Tower {
 
     public void setUpgradeCost(int upgradeCost) {
         this.upgradeCost = upgradeCost;
+    }
+
+    public int getImgRes() {
+        return imgRes;
+    }
+
+    public void setImgRes(int imgRes) {
+        this.imgRes = imgRes;
+    }
+
+    public int getExplosionImgRes() {
+        return explosionImgRes;
+    }
+
+    public void setExplosionImgRes(int explosionImgRes) {
+        this.explosionImgRes = explosionImgRes;
     }
 
 

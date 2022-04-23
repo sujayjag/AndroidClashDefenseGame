@@ -99,6 +99,7 @@ public class GameScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             public void run() {
@@ -326,7 +327,7 @@ public class GameScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (place1.getCannonType() != null) {
-                    showUpgradePopup(place1.getCannon());
+                    showUpgradePopup(place1);
                 } else {
                     places.remove(place1);
                     visibilityOff();
@@ -341,7 +342,7 @@ public class GameScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (place2.getCannonType() != null) {
-                    showUpgradePopup(place2.getCannon());
+                    showUpgradePopup(place2);
                 } else {
                     places.remove(place2);
                     visibilityOff();
@@ -355,7 +356,7 @@ public class GameScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (place3.getCannonType() != null) {
-                    showUpgradePopup(place3.getCannon());
+                    showUpgradePopup(place3);
                 } else {
                     places.remove(place3);
                     visibilityOff();
@@ -369,7 +370,7 @@ public class GameScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (place4.getCannonType() != null) {
-                    showUpgradePopup(place4.getCannon());
+                    showUpgradePopup(place4);
                 } else {
                     places.remove(place4);
                     visibilityOff();
@@ -383,7 +384,7 @@ public class GameScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (place5.getCannonType() != null) {
-                    showUpgradePopup(place5.getCannon());
+                    showUpgradePopup(place5);
                 } else {
                     places.remove(place5);
                     visibilityOff();
@@ -458,7 +459,8 @@ public class GameScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showUpgradePopup(Tower tower) {
+    public void showUpgradePopup(Place place) {
+        Tower tower = place.getCannon();
         if (tower.getLevel() < 3) {
             LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
             RelativeLayout layoutParent2 = (RelativeLayout) findViewById(R.id.RelativeLayout);
@@ -493,6 +495,7 @@ public class GameScreen extends AppCompatActivity {
                     try {
                         tower.upgrade();
                         updateMoney(player.getBalance());
+                        changeUpgradePicture(place);
                     } catch (IllegalArgumentException e) {
                         insufficientFunds();
                     }
@@ -500,6 +503,35 @@ public class GameScreen extends AppCompatActivity {
                     popupWindow.dismiss();
                 }
             });
+        }
+    }
+
+    public void changeUpgradePicture(Place place) {
+        if (place.getCannonType().equals("Cannon1")) {
+            if (place.getCannon().getLevel()-1 == 1) {
+                place.getPlace().setImageResource(R.drawable.cannon1star);
+                place.getCannon().setImgRes(R.drawable.cannon1star);
+            } else if (place.getCannon().getLevel()-1 == 2) {
+                place.getPlace().setImageResource(R.drawable.cannon1star2);
+                place.getCannon().setImgRes(R.drawable.cannon1star2);
+            }
+        } else if (place.getCannonType().equals("Cannon2")) {
+            if (place.getCannon().getLevel()-1 == 1) {
+                place.getPlace().setImageResource(R.drawable.cannon2star);
+                place.getCannon().setImgRes(R.drawable.cannon2star);
+            } else if (place.getCannon().getLevel()-1 == 2) {
+                place.getPlace().setImageResource(R.drawable.cannon2star2);
+                place.getCannon().setImgRes(R.drawable.cannon2star2);
+            }
+
+        } else if (place.getCannonType().equals("Cannon3")) {
+            if (place.getCannon().getLevel()-1 == 1) {
+                place.getPlace().setImageResource(R.drawable.cannon3star);
+                place.getCannon().setImgRes(R.drawable.cannon3star);
+            } else if (place.getCannon().getLevel()-1 == 2) {
+                place.getPlace().setImageResource(R.drawable.cannon3star2);
+                place.getCannon().setImgRes(R.drawable.cannon3star2);
+            }
         }
     }
 

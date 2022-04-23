@@ -6,6 +6,8 @@ public class Cannon2 extends Tower {
 
 
     public Cannon2(Player player, ImageButton button) {
+        this.setImgRes(R.drawable.cannon2newnew);
+        this.setExplosionImgRes(R.drawable.cannon2explosion);
         this.setPlayer(player);
         this.setButton(button);
         int cost = 75;

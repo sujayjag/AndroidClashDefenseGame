@@ -4,8 +4,9 @@ import android.widget.ImageButton;
 
 public class Cannon3 extends Tower {
 
-
     public Cannon3(Player player, ImageButton button) {
+        this.setImgRes(R.drawable.cannon3newnew);
+        this.setExplosionImgRes(R.drawable.cannon3explosion);
         this.setPlayer(player);
         this.setButton(button);
         int cost = 100;
