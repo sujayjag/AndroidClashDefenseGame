@@ -7,6 +7,7 @@ public class Player {
     private int monumentHealth;
     private int totalMoneyEarned;
     private int upgradesBought = 0;
+    private int enemyDefeated;
 
     Player(String difficulty, String name) {
         this.setDifficulty(difficulty);
@@ -35,9 +36,16 @@ public class Player {
     public void addBalance(Enemy enemy) {
         updateBalance(enemy.getValue());
     }
+    public void enemyDefeated() {
+        enemyDefeated++;
+    }
 
     public int getBalance() {
         return balance;
+    }
+
+    public int getEnemyDefeated() {
+        return enemyDefeated;
     }
 
     public void setBalance(int balance) {
