@@ -413,11 +413,7 @@ public class GameScreen extends AppCompatActivity {
         Integer[] buttonCoords = new Integer[2];
         buttonCoords[0] = Math.round(button.getX());
         buttonCoords[1] = Math.round(button.getY());
-        //System.out.println(buttonCoords);
         placeCoords.add(buttonCoords);
-
-        //existingPlaces.add(place);
-
 
         button.setBackgroundColor(Color.TRANSPARENT);
         button.setImageResource(imgRes);

@@ -5,6 +5,7 @@ public class Player {
     private String name;
     private String difficulty;
     private int monumentHealth;
+    private int totalMoneyEarned;
 
     Player(String difficulty, String name) {
         this.setDifficulty(difficulty);
@@ -19,14 +20,19 @@ public class Player {
             setBalance(1000);
             setMonumentHealth(80);
         }
+
+        totalMoneyEarned = balance;
     }
 
     public void updateBalance(int balance) {
-        this.setBalance(this.getBalance() + balance);
+        if (balance > 0) {
+            totalMoneyEarned += balance;
+        }
+        this.balance += balance;
     }
 
     public void addBalance(Enemy enemy) {
-        balance += enemy.getValue();
+        updateBalance(enemy.getValue());
     }
 
     public int getBalance() {
@@ -59,5 +65,13 @@ public class Player {
 
     public void setMonumentHealth(int monumentHealth) {
         this.monumentHealth = monumentHealth;
+    }
+
+    public int getTotalMoneyEarned() {
+        return totalMoneyEarned;
+    }
+
+    public void setTotalMoneyEarned(int totalMoneyEarned) {
+        this.totalMoneyEarned = totalMoneyEarned;
     }
 }
