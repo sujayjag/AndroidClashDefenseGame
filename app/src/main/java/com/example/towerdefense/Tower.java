@@ -32,6 +32,7 @@ public abstract class Tower {
         if (Shop.upgradeTower(this, player)) {
             this.setAttackDamage( (float) GameScreen.round((float) ((this.getAttackDamage() * upgradeMultiplier))));
             this.setAttackSpeed(GameScreen.round((this.getAttackSpeed() / upgradeMultiplier)));
+            player.setUpgradesBought(player.getUpgradesBought()+1);
             level++;
             player.setBalance(player.getBalance() - this.getUpgradeCost());
         } else {

@@ -6,6 +6,7 @@ public class Player {
     private String difficulty;
     private int monumentHealth;
     private int totalMoneyEarned;
+    private int upgradesBought = 0;
 
     Player(String difficulty, String name) {
         this.setDifficulty(difficulty);
@@ -73,5 +74,13 @@ public class Player {
 
     public void setTotalMoneyEarned(int totalMoneyEarned) {
         this.totalMoneyEarned = totalMoneyEarned;
+    }
+
+    public int getUpgradesBought() {
+        return upgradesBought;
+    }
+
+    public void setUpgradesBought(int upgradesBought) {
+        this.upgradesBought = upgradesBought;
     }
 }
