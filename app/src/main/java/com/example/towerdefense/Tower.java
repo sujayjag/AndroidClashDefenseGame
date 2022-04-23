@@ -7,9 +7,9 @@ import java.util.TimerTask;
 
 public abstract class Tower {
     private int cost;
-    private int level;
+    private int level = 1;
     private double upgradeMultiplier;
-    private int attackSpeed;
+    private double attackSpeed;
     private float attackDamage;
     private Timer timer = new Timer();
     private int millisecondsPassed;
@@ -23,6 +23,12 @@ public abstract class Tower {
         this.setUpgradeMultiplier(upgradeMultiplier);
         this.setAttackSpeed(attackSpeed);
         this.setAttackDamage(attackDamage);
+    }
+
+    public void upgrade() {
+        this.setAttackDamage( (float) ((this.getAttackDamage() * upgradeMultiplier)));
+        this.setAttackSpeed((this.getAttackSpeed() / upgradeMultiplier));
+        level++;
     }
 
     public Tower() {
@@ -53,11 +59,11 @@ public abstract class Tower {
         this.upgradeMultiplier = upgradeMultiplier;
     }
 
-    public int getAttackSpeed() {
+    public double getAttackSpeed() {
         return attackSpeed;
     }
 
-    public void setAttackSpeed(int attackSpeed) {
+    public void setAttackSpeed(double attackSpeed) {
         this.attackSpeed = attackSpeed;
     }
 

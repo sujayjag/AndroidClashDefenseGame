@@ -34,4 +34,5 @@ public class Cannon1 extends Tower {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
 }

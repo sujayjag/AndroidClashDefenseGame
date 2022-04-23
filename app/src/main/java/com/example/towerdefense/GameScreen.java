@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Path;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -13,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -322,10 +324,15 @@ public class GameScreen extends AppCompatActivity {
         place1ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                places.remove(place1);
-                visibilityOff();
-                placeTower(place1ImageButton, place1, imgRes);
-                cannonsPlaced.add(place1);
+                if (place1.getCannonType() != null) {
+                    showUpgradePopup(place1.getCannon());
+                } else {
+                    places.remove(place1);
+                    visibilityOff();
+                    placeTower(place1ImageButton, place1, imgRes);
+                    cannonsPlaced.add(place1);
+                }
+
             }
         });
 
@@ -436,6 +443,38 @@ public class GameScreen extends AppCompatActivity {
     public void gameOver() {
         Intent intent = new Intent(this, GameOver.class);
         startActivity(intent);
+    }
+
+    public void showUpgradePopup(Tower tower) {
+        if (tower.getLevel() < 3) {
+            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            RelativeLayout layoutParent2 = (RelativeLayout) findViewById(R.id.RelativeLayout);
+            View customView = layoutInflater.inflate(R.layout.popupwindow,null);
+
+            //instantiate popup window
+            PopupWindow popupWindow = new PopupWindow(customView, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+            //display the popup window
+            popupWindow.showAtLocation(layoutParent2, Gravity.CENTER, 0, 0);
+            Button closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
+            Button upgradeBtn = (Button) customView.findViewById(R.id.upgradeBtn);
+
+            //close the popup window on button click
+            closePopupBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popupWindow.dismiss();
+                }
+            });
+
+            upgradeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tower.upgrade();
+                    popupWindow.dismiss();
+                }
+            });
+        }
     }
 
     public int getMilliSeconds() {
