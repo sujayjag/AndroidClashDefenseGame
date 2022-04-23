@@ -62,6 +62,8 @@ public class GameScreen extends AppCompatActivity {
     private RelativeLayout layoutParent;
     private LayoutInflater layoutInflater;
     private View newView;
+    private int enemyMade;
+    private int enemyPassed;
 
     public static String deployRightEnemy(int num, Player player) {
         Difficulty difficultyObj = new Difficulty(player);
@@ -165,9 +167,8 @@ public class GameScreen extends AppCompatActivity {
                         Enemy temp = new Enemy(deployRightEnemy(i, player));
                         if (j < temp.getTimeBetween() / 100 || flag) {
                             if (player.getMonumentHealth() > 0) {
-                                int enemyNumber = 0;
+                                int enemyDead = 0;
                                 for (Enemy enemy : enemies) {
-                                    enemyNumber++;
                                     if (player.getMonumentHealth() == 0) {
                                         gameOver();
                                     }
@@ -186,11 +187,16 @@ public class GameScreen extends AppCompatActivity {
                                         arrInd++;
                                         i++;
                                     }
+                                    enemyDead = player.getEnemyDefeated();
+                                    System.out.println(enemyDead);
+                                    System.out.println(enemyPassed);
+                                    System.out.println(enemyMade);
                                     if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
                                         &&
                                         enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
                                         if (enemyView.getVisibility() == View.VISIBLE) {
                                             enemy.attack(player);
+                                            enemyPassed++;
                                             health.setText("Health: " + player.getMonumentHealth());
                                             if (player.getMonumentHealth() <= 0) {
                                                 player.setMonumentHealth(100);
@@ -200,6 +206,12 @@ public class GameScreen extends AppCompatActivity {
                                         }
                                         enemyView.setVisibility(View.GONE);
                                     }
+                                }
+                                if (enemyMade == (difficultyObj.getNumArchers() + difficultyObj.getNumWitches()
+                                        + difficultyObj.getNumWizards()) && enemyPassed + enemyDead  == (difficultyObj.getNumArchers()
+                                        + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())) {
+                                    win();
+                                    return;
                                 }
                             } else {
                                 gameOver();
@@ -215,6 +227,7 @@ public class GameScreen extends AppCompatActivity {
                             layoutParent.addView(newView);
                             temp.setView(newView);
                             enemies.add(temp);
+                            enemyMade++;
                             ObjectAnimator animator = ObjectAnimator.ofFloat(newView,
                                 View.X, View.Y, path);
                             animator.setDuration(temp.getMovementSpeed());
@@ -435,6 +448,11 @@ public class GameScreen extends AppCompatActivity {
 
     public void gameOver() {
         Intent intent = new Intent(this, GameOver.class);
+        startActivity(intent);
+    }
+
+    public void win() {
+        Intent intent = new Intent(this, Win.class);
         startActivity(intent);
     }
 

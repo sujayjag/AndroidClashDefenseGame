@@ -87,7 +87,8 @@ public class Place {
 
 
     public void attackEnemy(int milliSeconds, int arrInd, View enemyView, TextView money,
-                            Enemy enemy) {
+                           Enemy enemy) {
+        int enemyDead = 0;
         if (milliSeconds > this.getCannon().getAttackSpeed()) {
             if (milliSeconds % this.getCannon().getAttackSpeed() <= 200
                 && ((ImageView) enemyView).getAlpha() > 0) {
@@ -100,6 +101,7 @@ public class Place {
                     //((ImageView) enemyView).setAlpha(1f);
                     enemyView.setVisibility(View.GONE);
                     player.addBalance(enemy);
+                    player.enemyDefeated();
                     money.setText("Money: " + player.getBalance());
                 }
 
