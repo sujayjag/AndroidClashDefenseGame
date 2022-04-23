@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Path;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -339,40 +340,56 @@ public class GameScreen extends AppCompatActivity {
         place2ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                places.remove(place2);
-                visibilityOff();
-                placeTower(place2ImageButton, place2, imgRes);
-                cannonsPlaced.add(place2);
+                if (place2.getCannonType() != null) {
+                    showUpgradePopup(place2.getCannon());
+                } else {
+                    places.remove(place2);
+                    visibilityOff();
+                    placeTower(place2ImageButton, place2, imgRes);
+                    cannonsPlaced.add(place2);
+                }
             }
         });
 
         place3ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                places.remove(place3);
-                visibilityOff();
-                placeTower(place3ImageButton, place3, imgRes);
-                cannonsPlaced.add(place3);
+                if (place3.getCannonType() != null) {
+                    showUpgradePopup(place3.getCannon());
+                } else {
+                    places.remove(place3);
+                    visibilityOff();
+                    placeTower(place3ImageButton, place3, imgRes);
+                    cannonsPlaced.add(place3);
+                }
             }
         });
 
         place4ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                places.remove(place4);
-                visibilityOff();
-                placeTower(place4ImageButton, place4, imgRes);
-                cannonsPlaced.add(place4);
+                if (place4.getCannonType() != null) {
+                    showUpgradePopup(place4.getCannon());
+                } else {
+                    places.remove(place4);
+                    visibilityOff();
+                    placeTower(place4ImageButton, place4, imgRes);
+                    cannonsPlaced.add(place4);
+                }
             }
         });
 
         place5ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                places.remove(place5);
-                visibilityOff();
-                placeTower(place5ImageButton, place5, imgRes);
-                cannonsPlaced.add(place5);
+                if (place5.getCannonType() != null) {
+                    showUpgradePopup(place5.getCannon());
+                } else {
+                    places.remove(place5);
+                    visibilityOff();
+                    placeTower(place5ImageButton, place5, imgRes);
+                    cannonsPlaced.add(place5);
+                }
             }
         });
 
@@ -427,7 +444,7 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void insufficientFunds() {
-        Toast.makeText(getApplicationContext(), "Insufficient Funds to Buy Tower",
+        Toast.makeText(getApplicationContext(), "Insufficient Funds to Buy/Upgrade Tower",
             Toast.LENGTH_LONG).show();
     }
 
@@ -459,6 +476,13 @@ public class GameScreen extends AppCompatActivity {
             Button closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
             Button upgradeBtn = (Button) customView.findViewById(R.id.upgradeBtn);
 
+            TextView upgradeDetails = (TextView) customView.findViewById(R.id.upgradeDetails);
+            upgradeDetails.setText("Attack Damage: " + tower.getAttackDamage() + "--> " + round(tower.getUpgradeMultiplier() * (double) tower.getAttackDamage()) + "\n" +
+                "Attack Speed: " + tower.getAttackSpeed() + "-->" + round((double) tower.getAttackSpeed()/tower.getUpgradeMultiplier())
+             + "\n\n" + "Cost: " + tower.getUpgradeCost());
+
+            //upgradeDetails.setText(tower.getUpgradeMultiplier() + "");
+
             //close the popup window on button click
             closePopupBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -470,7 +494,13 @@ public class GameScreen extends AppCompatActivity {
             upgradeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    tower.upgrade();
+                    try {
+                        tower.upgrade();
+                        updateMoney(player.getBalance());
+                    } catch (IllegalArgumentException e) {
+                        insufficientFunds();
+                    }
+
                     popupWindow.dismiss();
                 }
             });
@@ -483,5 +513,10 @@ public class GameScreen extends AppCompatActivity {
 
     public void setMilliSeconds(int milliSeconds) {
         this.milliSeconds = milliSeconds;
+    }
+
+
+    public static double round(double a) {
+        return Math.round(a * 100.0) / 100.0;
     }
 }

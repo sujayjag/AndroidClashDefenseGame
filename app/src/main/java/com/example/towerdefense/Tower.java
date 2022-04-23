@@ -1,18 +1,21 @@
 package com.example.towerdefense;
 
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class Tower {
     private int cost;
+    private int upgradeCost;
     private int level = 1;
     private double upgradeMultiplier;
     private double attackSpeed;
     private float attackDamage;
     private Timer timer = new Timer();
     private int millisecondsPassed;
+    protected Player player;
 
     private ImageButton button;
 
@@ -26,9 +29,15 @@ public abstract class Tower {
     }
 
     public void upgrade() {
-        this.setAttackDamage( (float) ((this.getAttackDamage() * upgradeMultiplier)));
-        this.setAttackSpeed((this.getAttackSpeed() / upgradeMultiplier));
-        level++;
+        if (Shop.upgradeTower(this, player)) {
+            this.setAttackDamage( (float) GameScreen.round((float) ((this.getAttackDamage() * upgradeMultiplier))));
+            this.setAttackSpeed(GameScreen.round((this.getAttackSpeed() / upgradeMultiplier)));
+            level++;
+            player.setBalance(player.getBalance() - this.getUpgradeCost());
+        } else {
+            throw new IllegalArgumentException();
+        }
+
     }
 
     public Tower() {
@@ -108,6 +117,14 @@ public abstract class Tower {
 
     public void setMillisecondsPassed(int millisecondsPassed) {
         this.millisecondsPassed = millisecondsPassed;
+    }
+
+    public int getUpgradeCost() {
+        return upgradeCost;
+    }
+
+    public void setUpgradeCost(int upgradeCost) {
+        this.upgradeCost = upgradeCost;
     }
 
 

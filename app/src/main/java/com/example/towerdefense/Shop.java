@@ -6,4 +6,8 @@ public class Shop {
         return player.getBalance() >= tower.getCost();
     }
 
+    public static boolean upgradeTower(Tower tower, Player player) {
+        return player.getBalance() >= tower.getUpgradeCost();
+    }
+
 }
