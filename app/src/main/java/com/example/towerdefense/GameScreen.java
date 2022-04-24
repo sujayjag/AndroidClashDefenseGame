@@ -521,33 +521,35 @@ public class GameScreen extends AppCompatActivity {
 
     public void changeUpgradePicture(Place place) {
         if (place.getCannonType().equals("Cannon1")) {
-            if (place.getCannon().getLevel()-1 == 1) {
+            if (place.getCannon().getLevel() - 1 == 1) {
                 place.getPlace().setImageResource(R.drawable.cannon1star);
                 place.getCannon().setImgRes(R.drawable.cannon1star);
-            } else if (place.getCannon().getLevel()-1 == 2) {
+            } else if (place.getCannon().getLevel() - 1 == 2) {
                 place.getPlace().setImageResource(R.drawable.cannon1star2);
                 place.getCannon().setImgRes(R.drawable.cannon1star2);
             }
         } else if (place.getCannonType().equals("Cannon2")) {
-            if (place.getCannon().getLevel()-1 == 1) {
+            if (place.getCannon().getLevel() - 1 == 1) {
                 place.getPlace().setImageResource(R.drawable.cannon2star);
                 place.getCannon().setImgRes(R.drawable.cannon2star);
-            } else if (place.getCannon().getLevel()-1 == 2) {
+            } else if (place.getCannon().getLevel() - 1 == 2) {
                 place.getPlace().setImageResource(R.drawable.cannon2star2);
                 place.getCannon().setImgRes(R.drawable.cannon2star2);
             }
 
         } else if (place.getCannonType().equals("Cannon3")) {
-            if (place.getCannon().getLevel()-1 == 1) {
+            if (place.getCannon().getLevel() - 1 == 1) {
                 place.getPlace().setImageResource(R.drawable.cannon3star);
                 place.getCannon().setImgRes(R.drawable.cannon3star);
-            } else if (place.getCannon().getLevel()-1 == 2) {
+            } else if (place.getCannon().getLevel() - 1 == 2) {
                 place.getPlace().setImageResource(R.drawable.cannon3star2);
                 place.getCannon().setImgRes(R.drawable.cannon3star2);
             }
         }
+    }
     public void win() {
         Intent intent = new Intent(this, Win.class);
+        intent.putExtra("player", player);
         startActivity(intent);
     }
 
