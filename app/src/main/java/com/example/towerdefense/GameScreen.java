@@ -469,6 +469,7 @@ public class GameScreen extends AppCompatActivity {
 
     public void gameOver() {
         Intent intent = new Intent(this, GameOver.class);
+        intent.putExtra("player", player);
         startActivity(intent);
     }
 

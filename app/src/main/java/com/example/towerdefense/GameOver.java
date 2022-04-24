@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class GameOver extends AppCompatActivity {
     private Button restartButton;
@@ -21,6 +22,11 @@ public class GameOver extends AppCompatActivity {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_game_over);
+
+
+        Player player = (Player) getIntent().getSerializableExtra("player");
+        TextView statistics = (TextView) findViewById(R.id.statistics);
+        statistics.setText("Total Money Earned: " + player.getTotalMoneyEarned() + "\n" + "Upgrades Bought: " + player.getUpgradesBought() + "\n" + "Enemies Defeated: " + player.getEnemyDefeated());
 
         restartButton = (Button) findViewById(R.id.restart_button);
 
