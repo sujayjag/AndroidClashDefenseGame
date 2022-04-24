@@ -34,13 +34,20 @@ public class Enemy {
             setDamage(50);
             setHealth(70);
             setValue(75);
-        } else {
+        } else if (type.equals("archer")){
             setLayout(R.layout.archer);
             setMovementSpeed(10000);
             setTimeBetween(3000);
             setDamage(10);
             setHealth(50);
             setValue(25);
+        } else {
+            setLayout(R.layout.boss);
+            setMovementSpeed(25000);
+            setTimeBetween(2000);
+            setDamage(250);
+            setHealth(500000);
+            setValue(100);
         }
     }
 

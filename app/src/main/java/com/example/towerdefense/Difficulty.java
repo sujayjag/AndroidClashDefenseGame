@@ -9,6 +9,7 @@ public class Difficulty {
     private int numWitches;
     private int numWizards;
     private int numArchers;
+    private int numBoss = 1;
     private double[] monumentCoords;
     private final Player player;
 
@@ -165,5 +166,13 @@ public class Difficulty {
 
     public void setMonumentCoords(double[] monumentCoords) {
         this.monumentCoords = monumentCoords;
+    }
+
+    public int getNumBoss() {
+        return numBoss;
+    }
+
+    public void setNumBoss(int numBoss) {
+        this.numBoss = numBoss;
     }
 }

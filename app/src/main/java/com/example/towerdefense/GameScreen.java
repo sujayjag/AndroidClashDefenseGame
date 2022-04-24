@@ -76,8 +76,11 @@ public class GameScreen extends AppCompatActivity {
         } else if (num < difficultyObj.getNumArchers()
             + difficultyObj.getNumWitches()) {
             enemyType = "witch";
-        } else {
+        } else if (num < difficultyObj.getNumArchers()
+            + difficultyObj.getNumWitches() + difficultyObj.getNumWizards()){
             enemyType = "wizard";
+        } else {
+            enemyType = "boss";
         }
         return enemyType;
     }
@@ -212,8 +215,8 @@ public class GameScreen extends AppCompatActivity {
                                     }
                                 }
                                 if (enemyMade == (difficultyObj.getNumArchers() + difficultyObj.getNumWitches()
-                                        + difficultyObj.getNumWizards()) && enemyPassed + enemyDead  == (difficultyObj.getNumArchers()
-                                        + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())) {
+                                        + difficultyObj.getNumWizards() + difficultyObj.getNumBoss()) && enemyPassed + enemyDead  == (difficultyObj.getNumArchers()
+                                        + difficultyObj.getNumWitches() + difficultyObj.getNumWizards() + difficultyObj.getNumBoss())) {
                                     win();
                                     return;
                                 }
@@ -239,7 +242,8 @@ public class GameScreen extends AppCompatActivity {
                             i++;
                             j = 0;
                             if (i < (difficultyObj.getNumArchers()
-                                + difficultyObj.getNumWitches() + difficultyObj.getNumWizards())) {
+                                + difficultyObj.getNumWitches() + difficultyObj.getNumWizards() +
+                                difficultyObj.getNumBoss())) {
                                 handler.post(this);
                             } else if (player.getMonumentHealth() > 0) {
                                 flag = true;
