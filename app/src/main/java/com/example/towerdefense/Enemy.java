@@ -49,7 +49,7 @@ public class Enemy {
             setLayout(R.layout.boss);
             setMovementSpeed(25000);
             setTimeBetween(2000);
-            setDamage(250);
+            setDamage(99999);
             setHealth(700);
             setTotalHealth(500);
             setValue(100);
