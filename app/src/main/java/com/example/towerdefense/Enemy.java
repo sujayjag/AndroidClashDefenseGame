@@ -7,6 +7,7 @@ public class Enemy {
     private int timeBetween;
     private int damage;
     private int health;
+    private int totalHealth;
     private int value;
     private String type;
     private int layout;
@@ -25,28 +26,32 @@ public class Enemy {
             setMovementSpeed(10000);
             setTimeBetween(3000);
             setDamage(30);
-            setHealth(100);
+            setHealth(210);
+            setTotalHealth(this.getHealth());
             setValue(50);
         } else if (type.equals("wizard")) {
             setLayout(R.layout.wizard);
             setMovementSpeed(10000);
             setTimeBetween(3000);
             setDamage(50);
-            setHealth(70);
+            setHealth(360);
+            setTotalHealth(this.getHealth());
             setValue(75);
         } else if (type.equals("archer")){
             setLayout(R.layout.archer);
             setMovementSpeed(10000);
             setTimeBetween(3000);
             setDamage(10);
-            setHealth(50);
+            setHealth(120);
+            setTotalHealth(this.getHealth());
             setValue(25);
         } else {
             setLayout(R.layout.boss);
             setMovementSpeed(25000);
             setTimeBetween(2000);
             setDamage(250);
-            setHealth(500000);
+            setHealth(700);
+            setTotalHealth(500);
             setValue(100);
         }
     }
@@ -114,5 +119,13 @@ public class Enemy {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public int getTotalHealth() {
+        return totalHealth;
+    }
+
+    public void setTotalHealth(int totalHealth) {
+        this.totalHealth = totalHealth;
     }
 }

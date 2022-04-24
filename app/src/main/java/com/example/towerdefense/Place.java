@@ -82,8 +82,11 @@ public class Place {
                 && ((ImageView) enemyView).getAlpha() > 0) {
                 //System.out.println(((ImageView) enemyView).getAlpha());
                 this.attackEnemyAnimation();
-                ((ImageView) enemyView).setAlpha(((ImageView) enemyView).getAlpha()
-                    - this.getCannon().getAttackDamage()); // should get attack damage from canon
+                enemy.setHealth(enemy.getHealth() - this.getCannon().getAttackDamage());
+                float newAlpha = (float) enemy.getHealth() / enemy.getTotalHealth();
+                ((ImageView) enemyView).setAlpha(newAlpha);
+//                ((ImageView) enemyView).setAlpha(((ImageView) enemyView).getAlpha()
+//                    - this.getCannon().getAttackDamage()); // should get attack damage from canon
 
                 if (((ImageView) enemyView).getAlpha() <= 0) {
                     //((ImageView) enemyView).setAlpha(1f);

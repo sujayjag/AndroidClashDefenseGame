@@ -28,7 +28,7 @@ public class Cannon2 extends Tower {
         this.setUpgradeCost(upgradeCost);
         this.setUpgradeMultiplier(upgradeMultiplier);
         this.setAttackSpeed(2000);
-        this.setAttackDamage(0.2f);
+        this.setAttackDamage(25);
     }
 
     public Player getPlayer() {
