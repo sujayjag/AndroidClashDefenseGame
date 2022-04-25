@@ -67,6 +67,7 @@ public class GameScreen extends AppCompatActivity {
     private View newView;
     private int enemyMade;
     private int enemyPassed;
+    private boolean bossDead = false;
 
     public static String deployRightEnemy(int num, Player player) {
         Difficulty difficultyObj = new Difficulty(player);
@@ -194,10 +195,11 @@ public class GameScreen extends AppCompatActivity {
                                         arrInd++;
                                         i++;
                                     }
+                                    if (enemy.getType().equals("boss") && enemy.getHealth() <= 0){
+                                        bossDead = true;
+                                    }
+                                    System.out.println(bossDead);
                                     enemyDead = player.getEnemyDefeated();
-                                    System.out.println(enemyDead);
-                                    System.out.println(enemyPassed);
-                                    System.out.println(enemyMade);
                                     if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
                                         &&
                                         enemyView.getY() == difficultyObj.getMonumentCoords()[1]) {
@@ -216,7 +218,7 @@ public class GameScreen extends AppCompatActivity {
                                 }
                                 if (enemyMade == (difficultyObj.getNumArchers() + difficultyObj.getNumWitches()
                                         + difficultyObj.getNumWizards() + difficultyObj.getNumBoss()) && enemyPassed + enemyDead  == (difficultyObj.getNumArchers()
-                                        + difficultyObj.getNumWitches() + difficultyObj.getNumWizards() + difficultyObj.getNumBoss())) {
+                                        + difficultyObj.getNumWitches() + difficultyObj.getNumWizards() + difficultyObj.getNumBoss()) && bossDead) {
                                     win();
                                     return;
                                 }
@@ -426,7 +428,6 @@ public class GameScreen extends AppCompatActivity {
             towerAlreadyExists();
             return false;
         }
-        // System.out.println("x and y for place " + ": " + button.getX() + ", " + button.getY());
 
         Integer[] buttonCoords = new Integer[2];
         buttonCoords[0] = Math.round(button.getX());
@@ -447,13 +448,6 @@ public class GameScreen extends AppCompatActivity {
         cancelButton.setVisibility(View.GONE);
         player.updateBalance(-1 * cannonSelected.getCost());
         updateMoney(player.getBalance());
-
-        //display coords in console
-        int i = 0;
-        for (Integer[] p : placeCoords) {
-            System.out.println("x and y for place " + ++i + ": " + p[0] + ", " + p[1]);
-        }
-
         return true;
     }
 

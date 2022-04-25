@@ -18,9 +18,9 @@ public class Difficulty {
         String difficulty = player.getDifficulty();
         if (difficulty.equals("easy")) {
             setLayout(R.layout.activity_easy_screen);
-            setNumArchers(2);
-            setNumWitches(2);
-            setNumWizards(2);
+            setNumArchers(1);
+            setNumWitches(1);
+            setNumWizards(1);
             setMonumentCoords(new double[2]);
             getMonumentCoords()[0] = 1755.0;
             getMonumentCoords()[1] = 835.0;
@@ -30,9 +30,9 @@ public class Difficulty {
             int width = 650;
             int height = 450;
             setLayout(R.layout.activity_medium_screen);
-            setNumArchers(3);
-            setNumWitches(3);
-            setNumWizards(3);
+            setNumArchers(6);
+            setNumWitches(6);
+            setNumWizards(6);
 
             setMonumentCoords(new double[2]);
             getMonumentCoords()[0] = 1351.0;
@@ -41,18 +41,13 @@ public class Difficulty {
 
         } else {
             setLayout(R.layout.activity_hard_screen);
-            setNumArchers(4);
-            setNumWitches(4);
-            setNumWizards(4);
+            setNumArchers(7);
+            setNumWitches(7);
+            setNumWizards(7);
 
             setMonumentCoords(new double[2]);
             getMonumentCoords()[0] = 1242.0;
             getMonumentCoords()[1] = 1215.0;
-
-
-            //path.lineTo
-
-            //path
         }
     }
 

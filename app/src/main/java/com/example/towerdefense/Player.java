@@ -15,16 +15,15 @@ public class Player implements Serializable {
         this.setDifficulty(difficulty);
         this.setName(name);
         if (difficulty.equals("easy")) {
-            setBalance(500);
+            setBalance(100);
             setMonumentHealth(100);
         } else if (difficulty.equals("medium")) {
-            setBalance(750);
-            setMonumentHealth(90);
+            setBalance(150);
+            setMonumentHealth(75);
         } else if (difficulty.equals("hard")) {
-            setBalance(1000);
-            setMonumentHealth(80);
+            setBalance(200);
+            setMonumentHealth(50);
         }
-
         totalMoneyEarned = balance;
     }
 

@@ -4,13 +4,12 @@ import android.widget.ImageButton;
 
 public class Cannon2 extends Tower {
 
-
     public Cannon2(Player player, ImageButton button) {
         this.setImgRes(R.drawable.cannon2newnew);
         this.setExplosionImgRes(R.drawable.cannon2explosion);
         this.setPlayer(player);
         this.setButton(button);
-        int cost = 75;
+        int cost = 100;
         double upgradeMultiplier = 1.2;
 
         if (player.getDifficulty().equals("medium")) {
@@ -20,15 +19,13 @@ public class Cannon2 extends Tower {
             cost = 125;
             upgradeMultiplier = 1.5;
         }
-        //might need to fix imageString
-        //super(cost, 1, upgradeMultiplier, 10, 3, "", "../../../../res/drawable/cannon1new.jpg");
         int upgradeCost = (int) (cost * 0.60);
         this.setUpgradeCost(upgradeCost);
         this.setCost(cost);
         this.setUpgradeCost(upgradeCost);
         this.setUpgradeMultiplier(upgradeMultiplier);
-        this.setAttackSpeed(2000);
-        this.setAttackDamage(25);
+        this.setAttackSpeed(1500);
+        this.setAttackDamage(50);
     }
 
     public Player getPlayer() {
