@@ -198,7 +198,6 @@ public class GameScreen extends AppCompatActivity {
                                     if (enemy.getType().equals("boss") && enemy.getHealth() <= 0){
                                         bossDead = true;
                                     }
-                                    System.out.println(bossDead);
                                     enemyDead = player.getEnemyDefeated();
                                     if (enemyView.getX() == difficultyObj.getMonumentCoords()[0]
                                         &&

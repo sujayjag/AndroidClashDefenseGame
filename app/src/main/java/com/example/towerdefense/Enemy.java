@@ -49,7 +49,7 @@ public class Enemy {
             setMovementSpeed(40000);
             setTimeBetween(2000);
             setDamage(101);
-            setHealth(20);
+            setHealth(2500);
             setTotalHealth(2500);
             setValue(100);
         }

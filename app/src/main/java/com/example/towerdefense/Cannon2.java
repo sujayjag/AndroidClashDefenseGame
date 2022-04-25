@@ -13,10 +13,10 @@ public class Cannon2 extends Tower {
         double upgradeMultiplier = 1.2;
 
         if (player.getDifficulty().equals("medium")) {
-            cost = 100;
+            cost = 125;
             upgradeMultiplier = 1.4;
         } else if (player.getDifficulty().equals("hard")) {
-            cost = 125;
+            cost = 150;
             upgradeMultiplier = 1.5;
         }
         int upgradeCost = (int) (cost * 0.60);

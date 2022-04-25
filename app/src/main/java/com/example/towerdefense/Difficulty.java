@@ -18,9 +18,9 @@ public class Difficulty {
         String difficulty = player.getDifficulty();
         if (difficulty.equals("easy")) {
             setLayout(R.layout.activity_easy_screen);
-            setNumArchers(1);
-            setNumWitches(1);
-            setNumWizards(1);
+            setNumArchers(5);
+            setNumWitches(5);
+            setNumWizards(5);
             setMonumentCoords(new double[2]);
             getMonumentCoords()[0] = 1755.0;
             getMonumentCoords()[1] = 835.0;
