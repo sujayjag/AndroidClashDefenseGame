@@ -7,12 +7,11 @@ public class Enemy {
     private int timeBetween;
     private int damage;
     private int health;
+    private int totalHealth;
     private int value;
-    private String type;
+    private String type = "";
     private int layout;
     private View view;
-
-    //create view for the enemy (image)
 
     public Enemy(String type, View view) {
         this(type);
@@ -25,33 +24,40 @@ public class Enemy {
             setMovementSpeed(10000);
             setTimeBetween(3000);
             setDamage(30);
-            setHealth(100);
+            setHealth(210);
+            setTotalHealth(210);
             setValue(50);
         } else if (type.equals("wizard")) {
             setLayout(R.layout.wizard);
             setMovementSpeed(10000);
             setTimeBetween(3000);
             setDamage(50);
-            setHealth(70);
+            setHealth(360);
+            setTotalHealth(360);
             setValue(75);
-        } else {
+        } else if (type.equals("archer")){
             setLayout(R.layout.archer);
             setMovementSpeed(10000);
             setTimeBetween(3000);
             setDamage(10);
-            setHealth(50);
+            setHealth(120);
+            setTotalHealth(120);
             setValue(25);
+        } else {
+            setType("boss");
+            setLayout(R.layout.boss);
+            setMovementSpeed(40000);
+            setTimeBetween(2000);
+            setDamage(101);
+            setHealth(2500);
+            setTotalHealth(2500);
+            setValue(100);
         }
     }
-
 
     public void attack(Player player) {
         player.setMonumentHealth(player.getMonumentHealth() - this.damage);
     }
-    //use Player.setMonumentHealth based on tower's damage
-    //Update text
-    //Check if momnument is below 0, if it is endGame()
-    //Despawn the enemy object
 
     public View getView() {
         return view;
@@ -108,4 +114,16 @@ public class Enemy {
     public void setValue(int value) {
         this.value = value;
     }
+
+    public int getTotalHealth() {
+        return totalHealth;
+    }
+
+    public void setTotalHealth(int totalHealth) {
+        this.totalHealth = totalHealth;
+    }
+
+    public String getType() { return type;}
+
+    public void setType(String type) { this.type = type;}
 }

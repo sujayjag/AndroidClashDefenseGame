@@ -9,24 +9,22 @@ public class Cannon3 extends Tower {
         this.setExplosionImgRes(R.drawable.cannon3explosion);
         this.setPlayer(player);
         this.setButton(button);
-        int cost = 100;
+        int cost = 150;
         double upgradeMultiplier = 1.2;
 
         if (player.getDifficulty().equals("medium")) {
-            cost = 125;
+            cost = 175;
             upgradeMultiplier = 1.4;
         } else if (player.getDifficulty().equals("hard")) {
-            cost = 150;
+            cost = 200;
             upgradeMultiplier = 1.5;
         }
-        //might need to fix imageString
-        //super(cost, 1, upgradeMultiplier, 10, 3, "", "../../../../res/drawable/cannon1new.jpg");
         int upgradeCost = (int) (cost * 0.60);
         this.setUpgradeCost(upgradeCost);
         this.setCost(cost);
         this.setUpgradeMultiplier(upgradeMultiplier);
         this.setAttackSpeed(1000);
-        this.setAttackDamage(0.3f);
+        this.setAttackDamage(60);
     }
 
     public Player getPlayer() {

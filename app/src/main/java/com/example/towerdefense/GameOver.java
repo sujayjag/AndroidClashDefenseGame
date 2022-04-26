@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class GameOver extends AppCompatActivity {
     private Button restartButton;
 
@@ -22,7 +24,6 @@ public class GameOver extends AppCompatActivity {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_game_over);
-
 
         Player player = (Player) getIntent().getSerializableExtra("player");
         TextView statistics = (TextView) findViewById(R.id.statistics);

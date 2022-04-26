@@ -12,7 +12,7 @@ public abstract class Tower {
     private int level = 1;
     private double upgradeMultiplier;
     private double attackSpeed;
-    private float attackDamage;
+    private int attackDamage;
     private Timer timer = new Timer();
     private int millisecondsPassed;
     protected Player player;
@@ -22,7 +22,7 @@ public abstract class Tower {
     private ImageButton button;
 
     public Tower(int cost, int level, double upgradeMultiplier, int attackSpeed,
-                 float attackDamage, String location, String imageString) {
+                 int attackDamage, String location, String imageString) {
         this.setCost(cost);
         this.setLevel(level);
         this.setUpgradeMultiplier(upgradeMultiplier);
@@ -32,7 +32,7 @@ public abstract class Tower {
 
     public void upgrade() {
         if (Shop.upgradeTower(this, player)) {
-            this.setAttackDamage( (float) GameScreen.round((float) ((this.getAttackDamage() * upgradeMultiplier))));
+            this.setAttackDamage((int) GameScreen.round(this.getAttackDamage() * upgradeMultiplier));
             this.setAttackSpeed(GameScreen.round((this.getAttackSpeed() / upgradeMultiplier)));
             player.setUpgradesBought(player.getUpgradesBought()+1);
             level++;
@@ -79,11 +79,11 @@ public abstract class Tower {
         this.attackSpeed = attackSpeed;
     }
 
-    public float getAttackDamage() {
+    public int getAttackDamage() {
         return attackDamage;
     }
 
-    public void setAttackDamage(float attackDamage) {
+    public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
     }
 

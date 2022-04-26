@@ -12,7 +12,6 @@ public class Place {
     private boolean visible;
     private String cannonType;
     private Tower cannon;
-    //add attribute of tower?
 
     Place(ImageButton place, Player player) {
         this.player = player;
@@ -76,23 +75,20 @@ public class Place {
 
     public void attackEnemy(int milliSeconds, int arrInd, View enemyView, TextView money,
                            Enemy enemy) {
-        int enemyDead = 0;
         if (milliSeconds > this.getCannon().getAttackSpeed()) {
             if (milliSeconds % this.getCannon().getAttackSpeed() <= 200
                 && ((ImageView) enemyView).getAlpha() > 0) {
-                //System.out.println(((ImageView) enemyView).getAlpha());
                 this.attackEnemyAnimation();
-                ((ImageView) enemyView).setAlpha(((ImageView) enemyView).getAlpha()
-                    - this.getCannon().getAttackDamage()); // should get attack damage from canon
-
+                enemy.setHealth(enemy.getHealth() - this.getCannon().getAttackDamage());
+                float newAlpha = (float) enemy.getHealth() / enemy.getTotalHealth();
+                ((ImageView) enemyView).setAlpha(newAlpha);
                 if (((ImageView) enemyView).getAlpha() <= 0) {
-                    //((ImageView) enemyView).setAlpha(1f);
                     enemyView.setVisibility(View.GONE);
                     player.addBalance(enemy);
                     player.enemyDefeated();
                     money.setText("Money: " + player.getBalance());
-                }
 
+                }
             }
         }
     }
